@@ -12,7 +12,7 @@ const links = [
 const Header = async () => {
   const { userId } = await auth();
   return(
-    <div className='flex px-6 py-7 gap-11 items-center justify-center bg-app'>
+    <div className='flex h-20 px-6 py-7 gap-11 items-center justify-center bg-app'>
       <div className="max-[500px]:hidden">
         <Link href='/'> Logo </Link>
       </div>
