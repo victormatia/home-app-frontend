@@ -1,6 +1,7 @@
-
 export default function Home() {
-  <h1>home</h1>;
+  return (
+    <div>
+      <h1>Home</h1>
+    </div>
+  );
 }
-
-// creates branch dev-main
