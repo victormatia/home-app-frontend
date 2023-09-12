@@ -11,6 +11,8 @@ const config: Config = {
       colors: {
         app: '#EBEBEB',
         placeholder: '#878787',
+        info: '#404040',
+        buttonText: '#4A4A4A',
       },
     },
   },
