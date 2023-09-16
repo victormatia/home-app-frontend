@@ -3,6 +3,7 @@ import { UserProvider } from '@auth0/nextjs-auth0/client';
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import './globals.css';
+import GlobalProvider from '@/context/GlobalProvider';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -18,12 +19,14 @@ export default function RootLayout({
 }) {
   return (
     <UserProvider>
-      <html lang="en">
-        <body className={inter.className}>
-          <Header />
-          {children}
-        </body>
-      </html>
+      <GlobalProvider>
+        <html lang="en">
+          <body className={inter.className}>
+            <Header />
+            {children}
+          </body>
+        </html>
+      </GlobalProvider>
     </UserProvider>
   );
 }
