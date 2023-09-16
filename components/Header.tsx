@@ -15,7 +15,6 @@ const links = [
 ];
 const Header = () => {
   const { user, isLoading } = useUser();
-  console.log(user);
   return(
     <div className='flex h-20 px-6 py-7 gap-11 items-center justify-center bg-app'>
       <div className="max-[500px]:hidden">
