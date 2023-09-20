@@ -12,7 +12,6 @@ const links = [
 ];
 
 const Header = () => {
-  
   return(
     <>
       <div className='flex h-20 px-6 py-7 gap-11 items-center justify-center bg-app'>
