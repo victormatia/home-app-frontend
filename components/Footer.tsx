@@ -10,7 +10,7 @@ import {
 export function Footer() {
   const { user, isLoading } = useUser();
   return(
-    <div className='min-[500px]:hidden fixed grid grid-cols-4 gap-1 mx-auto w-full h-14 bg-app'>
+    <div className='min-[500px]:hidden z-10 fixed bottom-0 grid grid-cols-4 gap-1 mx-auto w-full h-14 bg-app'>
       <div
         className='text-buttonText flex items-center justify-center font-semibold rounded-md bg-white  py-3 h-full'
       >
