@@ -1,31 +1,38 @@
 'use client';
 
-import { ReactNode, useMemo } from 'react';
+import { ReactNode, useCallback, useMemo } from 'react';
 import globalContext from './context';
 import { useUser } from '@auth0/nextjs-auth0/client';
 import axios from 'axios';
+import getAuthUsers from '@/utils/getAuthUsers';
 
 export default function GlobalProvider({ children }: { children: ReactNode }) {
   const { user } = useUser();
 
-  useMemo(async () => {
+  (useCallback(async () => {
     if (user) {
-      const { data } = await axios.get('http://localhost:3000/api/get-all-users');
+      const [{ user_id, name, email, created_at, updated_at }] = await getAuthUsers(user.email as string);
       
-      const userAlreadyRegistered = data.some((e: {email: string}) => e.email === user?.email);
+      const URL = 'http://localhost:3001/user/sign-up';
 
-      console.log(userAlreadyRegistered);
+      const userData = {
+        id:user_id,
+        name:name,
+        email: email,
+        createdAt:created_at,
+        updatedAt:updated_at,
+      };
 
-      if (userAlreadyRegistered) {
-        console.log('entrou no if');
-        const URL = 'http://localhost:3001/user/sign-up';
-        const userData = {
-          name: user?.name,
-          email: user?.email,
-        };
+      const { data } = await axios.get('http://localhost:3001/user/list');
 
+      const userAlreadyRegistered = data.some(({ id }: {id: string}) => id === user_id);
+
+      if (!userAlreadyRegistered) {
+        
         axios.post(URL, userData)
           .then((response) => {
+            sessionStorage.setItem('token', response.data.token);
+            localStorage.setItem('token', response.data.token);
             console.log(response.data.token);
           })
           .catch((e) => {
@@ -33,7 +40,7 @@ export default function GlobalProvider({ children }: { children: ReactNode }) {
           });
       }
     }
-  }, [user]);
+  }, [user]))();
 
   return (
     <globalContext.Provider value={ {} }>
