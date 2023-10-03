@@ -1,11 +1,20 @@
 import * as Select from '@radix-ui/react-select';
 import { CaretDown } from 'phosphor-react';
-import React, { ReactNode } from 'react';
+import React from 'react';
 import classnames from 'classnames';
 
-export function SelectComponent() {
+interface SelectComponentProps{
+  immobliType: Function
+}
+
+export function SelectComponent(props: SelectComponentProps) {
+
+  function selectImmobliType(data: string){
+    props.immobliType(data);
+  }
+  
   return(
-    <Select.Root>
+    <Select.Root onValueChange={selectImmobliType}>
       <Select.Trigger 
         className='w-80 h-16 border-borderColor border 
                     inline-flex items-center justify-between px-3 rounded-md outline-none'
@@ -17,7 +26,7 @@ export function SelectComponent() {
       </Select.Trigger>
 
       <Select.Portal>
-        <Select.Content className='overflow-hidden bg-white rounded-md'>
+        <Select.Content className='overflow-hidden bg-white rounded-md z-30'>
           <Select.Viewport className='px-2 py-3'>
             <Select.Group>
               <SelectItem value="Apartament">Apartamento</SelectItem>
