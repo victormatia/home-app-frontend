@@ -1,10 +1,20 @@
 import * as ToggleGroup from '@radix-ui/react-toggle-group';
 
-export function QuantitySelector(){
+interface QuantitySelectorComponentProps{
+  quantitySelect: Function
+}
+
+export function QuantitySelector(props: QuantitySelectorComponentProps){
+
+  function SelectQuantity(data: string){
+    props.quantitySelect(data);
+  }
+
   return(
     <ToggleGroup.Root 
       type="single"
       defaultValue="1"
+      onValueChange={SelectQuantity}
       className='flex gap-3 text-black text-2xl'
     >
       <ToggleGroup.Item 
