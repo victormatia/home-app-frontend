@@ -17,13 +17,19 @@ const config: Config = {
       },
 
       animation: {
-        openfilter: 'openfilter 0.5s ease-in',
+        openfilter: 'openfilter 0.2s ease-in',
       },
 
       keyframes:{
         openfilter:{
-          '0%': { top: '100vh' },
-          '100%': { top: '0px' } ,
+          'from': {
+            opacity: '0',
+            transform: 'translateX(100vw)',
+          },
+          'to': {
+            opacity: '1',
+            transform: 'translateX(0)',
+          },
         },
 
       },
