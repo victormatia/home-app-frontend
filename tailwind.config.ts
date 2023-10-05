@@ -13,6 +13,19 @@ const config: Config = {
         placeholder: '#878787',
         info: '#404040',
         buttonText: '#4A4A4A',
+        borderColor: '#949494',
+      },
+
+      animation: {
+        openfilter: 'openfilter 0.5s ease-in',
+      },
+
+      keyframes:{
+        openfilter:{
+          '0%': { top: '100vh' },
+          '100%': { top: '0px' } ,
+        },
+
       },
     },
   },
