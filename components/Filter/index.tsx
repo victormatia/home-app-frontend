@@ -37,7 +37,7 @@ export function Filter(props: FilterProps){
     <>
       {isFilterOpen && (
         <div
-          className="z-20 h-screen w-full bg-app absolute top-0 animate-openfilter"
+          className="z-20 h-screen w-full bg-app absolute top-0 animate-openfilter transition-all"
         >
           <div className='flex justify-between p-6 shadow-md'>
             <button onClick={handleCloseFilter}>
