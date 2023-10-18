@@ -5,24 +5,13 @@ import globalContext from './context';
 import { useUser } from '@auth0/nextjs-auth0/client';
 import axios from 'axios';
 import getAuthUsers from '@/utils/getAuthUsers';
-import { TImmobile } from '@/types';
+import { TImmobile, TRankedImmobile } from '@/types';
 
 export default function GlobalProvider({ children }: { children: ReactNode }) {
   const { user } = useUser();
   const [immobiles, setImmobiles] = useState<TImmobile[]>([]);
-  const [searchedImmobiles, setSearchedImmobiles] = useState<TImmobile[]>([]);
+  const [searchedImmobiles, setSearchedImmobiles] = useState<TRankedImmobile[]>([]);
   const [search, setSearch] = useState<string>('');
-
-  useMemo(() => {
-    if(search.length) {
-
-      setSearchedImmobiles(immobiles.filter(({ address }) => (
-        address?.street.toLocaleLowerCase().includes(search.toLocaleLowerCase())
-        || address?.city.toLocaleLowerCase().includes(search.toLocaleLowerCase())
-      )));
-    } 
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [search]);
   
   (useCallback(async () => {
     if (user) {
@@ -60,7 +49,7 @@ export default function GlobalProvider({ children }: { children: ReactNode }) {
   useEffect(() => {
     (async () => {
       axios.get('http://localhost:3001/immobile/list')
-        .then((response) => {setImmobiles(response.data); setSearchedImmobiles(response.data);})
+        .then((response) => setImmobiles(response.data))
         .catch((e) => console.error(e));
     })();
   }, []);
