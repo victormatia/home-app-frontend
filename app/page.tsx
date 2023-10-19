@@ -10,7 +10,7 @@ export default function Home() {
     <main className='flex flex-col gap-4 items-center w-full h-screen overflow-scroll pb-36'>
       {
         searchedImmobiles.length 
-          ? searchedImmobiles.map((immobile) => (<Card key={ immobile.id } immobile={ immobile } />))
+          ? searchedImmobiles.map((immobile) => (<Card key={ immobile.immobileId } />))
           : <span>Ops, nenhum imóvel encontrado</span>
       }
     </main>
