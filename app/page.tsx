@@ -7,7 +7,7 @@ import { useContext } from 'react';
 export default function Home() {
   const { immobiles, searchedImmobiles } = useContext(globalContext);
   return (
-    <main className='flex flex-col justify-normal'>
+    <main className='flex flex-col gap-4 items-center w-full h-screen overflow-scroll pb-36'>
       {
         searchedImmobiles.length 
           ? searchedImmobiles.map((immobile) => (<Card key={ immobile.immobileId } />))
