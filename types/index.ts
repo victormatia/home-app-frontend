@@ -53,3 +53,7 @@ export type TConext = {
   searchedImmobiles: TImmobile[],
   setSearchedImmobiles: Dispatch<SetStateAction<TImmobile[]>>
 }
+
+export type TCard = {
+  immobile: TImmobile,
+}
