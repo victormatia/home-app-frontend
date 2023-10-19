@@ -1,3 +1,4 @@
+/* eslint-disable linebreak-style */
 import type { Config } from 'tailwindcss';
 
 const config: Config = {
@@ -14,6 +15,11 @@ const config: Config = {
         info: '#404040',
         buttonText: '#4A4A4A',
         borderColor: '#949494',
+        
+      },
+
+      backgroundImage: {
+        paymentButton: 'linear-gradient(107deg, #367ADF 13.1%, #36A5C8 68.23%);',
       },
 
       animation: {
