@@ -22,7 +22,7 @@ export default function RootLayout({
     <UserProvider>
       <GlobalProvider>
         <html lang="en">
-          <body className={inter.className}>
+          <body className={`${inter.className} bg-app overflow-clip`}>
             <Header />
             {children}
             <Footer />
