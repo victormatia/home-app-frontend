@@ -1,12 +1,12 @@
 import GlobalProvider from '@/context/GlobalProvider';
 import { UserProvider } from '@auth0/nextjs-auth0/client';
 import type { Metadata } from 'next';
-import { Inter } from 'next/font/google';
+import { Jost } from 'next/font/google';
 import{ Header }from '@/components/Header';
 import { Footer } from '@/components/Footer';
 import './globals.css';
 
-const inter = Inter({ subsets: ['latin'] });
+const jost = Jost({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
   title: 'Create Next App',
@@ -22,7 +22,7 @@ export default function RootLayout({
     <UserProvider>
       <GlobalProvider>
         <html lang="en">
-          <body className={`${inter.className} bg-app overflow-clip`}>
+          <body className={`${jost.className} bg-app overflow-clip`}>
             <Header />
             {children}
             <Footer />
