@@ -45,13 +45,19 @@ export type TImmobile = {
   type?: TType,
 }
 
+export type TRankedImmobile = {
+  immobileId: string,
+  immobile: TImmobile,
+  rank: number,
+};
+
 export type TConext = {
   immobiles: TImmobile[],
   setImmobiles: Dispatch<SetStateAction<TImmobile[]>>
   search: string,
   setSearch: Dispatch<SetStateAction<string>>,
-  searchedImmobiles: TImmobile[],
-  setSearchedImmobiles: Dispatch<SetStateAction<TImmobile[]>>
+  searchedImmobiles: TRankedImmobile[],
+  setSearchedImmobiles: Dispatch<SetStateAction<TRankedImmobile[]>>
 }
 
 export type TCard = {
