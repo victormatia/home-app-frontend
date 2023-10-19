@@ -60,7 +60,7 @@ export type TConext = {
   setSearchedImmobiles: Dispatch<SetStateAction<TRankedImmobile[]>>
 }
 
-export type DefaultDiacriticalMapItem = {
+export type TDefaultDiacriticalMapItem = {
   base: string;
   diacriticals: string;
 }
