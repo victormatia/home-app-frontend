@@ -15,7 +15,8 @@ const config: Config = {
         info: '#404040',
         buttonText: '#4A4A4A',
         borderColor: '#949494',
-        
+        darkGray: '#2B2B2B',
+        blue: '#367ADF',
       },
 
       backgroundImage: {
@@ -37,7 +38,6 @@ const config: Config = {
             transform: 'translateX(0)',
           },
         },
-
       },
     },
   },

@@ -1,3 +1,19 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
+.sidebar__span:hover:before {
+  font-size: 1rem;
+  color: white;
+  position: absolute;
+  top: calc(50% - 20px);
+  right: -120px ;
+  content: attr(data-value);
+  padding: 5px 10px;
+  background-color: #2B2B2B;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
+}

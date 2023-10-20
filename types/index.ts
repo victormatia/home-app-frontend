@@ -58,6 +58,8 @@ export type TConext = {
   setSearch: Dispatch<SetStateAction<string>>,
   searchedImmobiles: TRankedImmobile[],
   setSearchedImmobiles: Dispatch<SetStateAction<TRankedImmobile[]>>
+  currPage: string,
+  setCurrPage: Dispatch<SetStateAction<string>>
 }
 
 export type TDefaultDiacriticalMapItem = {
