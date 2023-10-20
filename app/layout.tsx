@@ -5,6 +5,7 @@ import { Jost } from 'next/font/google';
 import{ Header }from '@/components/Header';
 import { Footer } from '@/components/Footer';
 import './globals.css';
+import Sidebar from '@/components/Sidebar';
 
 const jost = Jost({ subsets: ['latin'] });
 
@@ -24,6 +25,7 @@ export default function RootLayout({
         <html lang="en">
           <body className={`${jost.className} bg-app overflow-clip`}>
             <Header />
+            <Sidebar />
             {children}
             <Footer />
           </body>
