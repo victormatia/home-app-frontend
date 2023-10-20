@@ -12,7 +12,7 @@ export default function GlobalProvider({ children }: { children: ReactNode }) {
   const [immobiles, setImmobiles] = useState<TImmobile[]>([]);
   const [searchedImmobiles, setSearchedImmobiles] = useState<TRankedImmobile[]>([]);
   const [search, setSearch] = useState<string>('');
-  const [currPage, setCurrPage] = useState<string>('');
+  const [currPage, setCurrPage] = useState<string>('home');
   
   (useCallback(async () => {
     if (user) {
