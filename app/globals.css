@@ -5,10 +5,11 @@
 
 .sidebar__span:hover:before {
   font-size: 1rem;
+  font-weight: 600;
   color: white;
   position: absolute;
   top: calc(50% - 20px);
-  right: -120px ;
+  left: 85px;
   content: attr(data-value);
   padding: 5px 10px;
   background-color: #2B2B2B;
