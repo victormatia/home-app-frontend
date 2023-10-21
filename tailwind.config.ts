@@ -19,6 +19,10 @@ const config: Config = {
         blue: '#367ADF',
       },
 
+      gridTemplateColumns: {
+        homePageGrid: 'minmax(30rem , 89rem) minmax(12.5rem ,1fr)',
+      },
+
       backgroundImage: {
         paymentButton: 'linear-gradient(107deg, #367ADF 13.1%, #36A5C8 68.23%);',
       },

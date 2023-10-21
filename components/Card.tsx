@@ -10,9 +10,9 @@ import 'keen-slider/keen-slider.min.css';
 
 export function Card({ immobile }: TCard){
   const [isSaved, setIsSaved] = useState(false);
-  const RandomImage1 = 'https://picsum.photos/344/181?random=1';
-  const RandomImage2 = 'https://picsum.photos/344/181?random=2';
-  const RandomImage3 = 'https://picsum.photos/344/181?random=3';
+  const RandomImage1 = 'https://picsum.photos/344/230?random=1';
+  const RandomImage2 = 'https://picsum.photos/344/230?random=2';
+  const RandomImage3 = 'https://picsum.photos/344/230?random=3';
 
   const imgArray = [RandomImage1, RandomImage2, RandomImage3];
   const [sliderRef] = useKeenSlider({
@@ -23,8 +23,8 @@ export function Card({ immobile }: TCard){
   });
 
   return(
-    <div className='flex flex-col rounded-md shadow-lg bg-white w-[360px]'>
-      <div ref={sliderRef} className="keen-slider mx-2 mt-2">
+    <div className='flex flex-col rounded-md shadow-lg bg-white w-[360px] h-[345px]'>
+      <div ref={sliderRef} className="keen-slider px-2 mt-2">
         {
           imgArray.map((image, index) => {
             return(
@@ -37,7 +37,7 @@ export function Card({ immobile }: TCard){
 
       </div>
       <div className='p-2'>
-        <div className='flex justify-between'>
+        <div className='flex justify-between pt-2'>
           <strong className='text-black text-sm font-medium'>
             {`${immobile.type?.type}, ${immobile.address?.city}`}
           </strong>
@@ -54,7 +54,7 @@ export function Card({ immobile }: TCard){
           }
         </div>
 
-        <div className='flex gap-2 items-end'>
+        <div className='flex gap-2 pt-2 items-end'>
           <div className='w-52'>
             <span  className='text-xs text-info'>
             Kitnet de 35m² com sala, quarto e cozinha integrados e um banheiro...
