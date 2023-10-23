@@ -34,7 +34,7 @@ export function Header(){
           </button>
         </div>
 
-        <div className='max-[700px]:hidden justify-self-end mr-3'>
+        <div className='max-[700px]:hidden justify-self-end pr-3'>
           {isLoading && (
             <div className="h-full  flex items-center justify-center rounded-md bg-paymentButton p-2 text-white ">
           Loading...
