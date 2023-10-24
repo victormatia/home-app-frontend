@@ -50,7 +50,10 @@ export default function GlobalProvider({ children }: { children: ReactNode }) {
   useEffect(() => {
     (async () => {
       axios.get('http://localhost:3001/immobile/list')
-        .then((response) => setImmobiles(response.data))
+        .then(({ data }) => {
+          setImmobiles(data);
+          setSearchedImmobiles(data.map((i: TImmobile) => ({ immobileId: i.id,  immobile: i, rank: 0 })));
+        })
         .catch((e) => console.error(e));
     })();
   }, []);
