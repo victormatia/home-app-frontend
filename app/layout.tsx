@@ -23,7 +23,7 @@ export default function RootLayout({
     <UserProvider>
       <GlobalProvider>
         <html lang="en">
-          <body className={`${jost.className} bg-app max-[700px]:overflow-clip`}>
+          <body className={`${jost.className} bg-app`}>
             <Header />
             <Sidebar />
             {children}

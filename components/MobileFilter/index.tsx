@@ -12,7 +12,7 @@ interface FilterProps{
   closeFilter: Function
 }
 
-export function Filter(props: FilterProps){
+export default function MobileFilter(props: FilterProps){
 
   const isFilterOpen = props.openFilter === true;
 

@@ -2,11 +2,13 @@
 
 import Image from 'next/image';
 import { Sliders } from 'phosphor-react';
-import { Filter } from './Filter';
+import MobileFilter from './MobileFilter';
 import { useState } from 'react';
 import Search from './Search';
 import { Nav, NavItem } from 'reactstrap';
 import { useUser } from '@auth0/nextjs-auth0/client';
+import { FiLogOut } from 'react-icons/fi';
+import Link from 'next/link';
 
 export function Header(){
   const [isFilterOpen, setIsFilterOpen] = useState(false);
@@ -42,7 +44,7 @@ export function Header(){
           )}
 
           {!isLoading && !user && (
-            <Nav className="h-full  flex items-center justify-center rounded-md bg-paymentButton p-2 text-white " navbar>
+            <Nav className="h-full flex items-center justify-center rounded-md bg-paymentButton p-2 text-white " navbar>
               <a
                 href="/api/auth/login"
                 className="btn btn-primary btn-block"
@@ -72,19 +74,17 @@ export function Header(){
                   />
                 </span>
               </NavItem>
-              <NavItem id="qsLogoutBtn">
-                <a
-                  href="/api/auth/logout"
-                  className="p-0">
-                Log out
-                </a>
+              <NavItem id="qsLogoutBtn" className='ml-4'>
+                <Link href="/api/auth/logout" >
+                  <FiLogOut  className="text-xl text-info"/>
+                </Link>
               </NavItem>
             </Nav>
           )}
         </div>
       </div>
 
-      <Filter openFilter={isFilterOpen} closeFilter={setIsFilterOpen}/>       
+      <MobileFilter openFilter={isFilterOpen} closeFilter={setIsFilterOpen}/>       
     </>
   );
 };

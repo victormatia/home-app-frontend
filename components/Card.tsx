@@ -23,7 +23,9 @@ export function Card({ immobile }: TCard){
   });
 
   return(
-    <div className='flex flex-col rounded-md shadow-lg bg-white w-[360px] h-[345px]'>
+    <div className='flex flex-col rounded-md shadow-lg bg-white w-[360px] h-[345px]
+    hover:scale-105 transition-all cursor-pointer
+    '>
       <div ref={sliderRef} className="keen-slider px-2 mt-2">
         {
           imgArray.map((image, index) => {
@@ -87,6 +89,7 @@ export function Card({ immobile }: TCard){
               por:
             </span> 
             <span className='whitespace-nowrap flex-grow mt-3'>
+              {/*toFixed not work*/}
               {`R$ ${immobile.price},00`} 
             </span>
           </button>
