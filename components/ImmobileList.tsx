@@ -7,20 +7,20 @@ import { Card } from './Card';
 export default function ImmobileList() {
   const { searchedImmobiles } = useContext(globalContext);
   return (
-    <ul className="h-full overflow-scroll overflow-x-hidden p-2">
+    <section className="h-full overflow-hidden min-[700px]:overflow-clip overflow-x-hidden p-2">
       {
         searchedImmobiles.length ? (
-          <div className='flex flex-col pb-20 gap-4 items-center w-full 
+          <ul className='flex flex-col pb-20 gap-4 items-center w-full overflow-hidden 
             min-[700px]:p-2 min-[700px]:flex-wrap min-[700px]:flex-row 
-            min-[700px]:h-[calc(100%-50px)]
-            min-[700px]:gap-6 min-[700px]:items-start
+            min-[700px]:h-full min-[700px]:gap-6 
+            min-[700px]:overflow-scroll min-[700px]:overflow-x-hidden
             '>
             {
               searchedImmobiles.map(({ immobileId, immobile }) => (<Card key={immobileId} immobile={immobile} />))
             }
-          </div>
+          </ul>
         ) : <p className='text-center w-full'>Ops, nenhum imóvel encontrado</p>
       }
-    </ul>
+    </section>
   );
 }
