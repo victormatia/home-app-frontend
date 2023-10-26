@@ -17,7 +17,7 @@ export function SelectComponent(props: SelectComponentProps) {
     <Select.Root onValueChange={selectImmobliType}>
       <Select.Trigger 
         className='w-80 h-16 border-borderColor border 
-                    inline-flex items-center justify-between px-3 rounded-md outline-none'
+        inline-flex items-center justify-between px-3 rounded-md outline-none min-[700px]:w-full'
       >
         <Select.Value placeholder="Selecione o típo de imóvel" />
         <Select.Icon >

@@ -60,6 +60,8 @@ export type TConext = {
   setSearchedImmobiles: Dispatch<SetStateAction<TRankedImmobile[]>>
   currPage: string,
   setCurrPage: Dispatch<SetStateAction<string>>
+  toggleOpenFilter: boolean,
+  setToggleOpenFilter: Dispatch<SetStateAction<boolean>>
 }
 
 export type TDefaultDiacriticalMapItem = {
