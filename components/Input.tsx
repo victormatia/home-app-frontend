@@ -11,7 +11,7 @@ type InputControlProps = ComponentProps<'input'>
 export function InputControl(props: InputControlProps) {
   return (
     <input
-      className="flex-1 border-0 bg-transparent p-0 text-zinc-900 placeholder-zinc-600 w-full"
+      className="flex-1 border-0 bg-transparent p-0 text-zinc-900 placeholder-zinc-600 w-full outline-none"
       {...props}
     />
   );
@@ -23,7 +23,8 @@ export function InputRoot(props: InputRootPorps) {
   return (
     <div
       className="flex w-full items-center gap-2 
-      border border-borderColor bg-transparent rounded-md px-3 py-2 shadow-sm"
+      border border-borderColor bg-transparent rounded-md px-3 py-2 shadow-sm 
+      focus-within:ring-1 focus-within:border-appBlue"
       {...props}
     ></div>
   );
