@@ -13,6 +13,7 @@ export default function GlobalProvider({ children }: { children: ReactNode }) {
   const [searchedImmobiles, setSearchedImmobiles] = useState<TRankedImmobile[]>([]);
   const [search, setSearch] = useState<string>('');
   const [currPage, setCurrPage] = useState<string>('home');
+  const [toggleOpenFilter, setToggleOpenFilter] = useState<boolean>(false);
   
   (useCallback(async () => {
     if (user) {
@@ -62,8 +63,8 @@ export default function GlobalProvider({ children }: { children: ReactNode }) {
     immobiles, setImmobiles,
     search, setSearch,
     searchedImmobiles, setSearchedImmobiles,
-    currPage, setCurrPage,
-  }), [immobiles, searchedImmobiles, search, currPage]);
+    currPage, setCurrPage, toggleOpenFilter, setToggleOpenFilter,
+  }), [immobiles, searchedImmobiles, search, currPage, toggleOpenFilter]);
   return (
     <globalContext.Provider value={ states }>
       { children }

@@ -6,6 +6,7 @@ import{ Header }from '@/components/Header';
 import { Footer } from '@/components/Footer';
 import './globals.css';
 import Sidebar from '@/components/Sidebar';
+import MobileFilter from '@/components/FIlters/MobileFilter';
 
 const jost = Jost({ subsets: ['latin'] });
 
@@ -23,9 +24,10 @@ export default function RootLayout({
     <UserProvider>
       <GlobalProvider>
         <html lang="en">
-          <body className={`${jost.className} bg-app`}>
-            <Header />
+          <body className={`${jost.className} bg-app min-[700px]:overflow-clip`}>
             <Sidebar />
+            <Header />
+            <MobileFilter />
             {children}
             <Footer />
           </body>

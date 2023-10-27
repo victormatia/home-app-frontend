@@ -9,7 +9,7 @@ export default function Search() {
   const { search, setSearch, setSearchedImmobiles, immobiles } = useContext(globalContext);
 
   return (
-    <label htmlFor="search" className='flex gap-2 items-center w-[285px] px-2 h-8 rounded bg-white focus-within:ring-1 focus-within:border-blue shadow-2xl min-[700px]:w-80 '>
+    <label htmlFor="search" className='flex gap-2 items-center w-[285px] px-2 h-8 rounded bg-white focus-within:ring-1 focus-within:border-appBlue shadow-2xl min-[700px]:w-80 '>
       <input
         type="text"
         name="search"

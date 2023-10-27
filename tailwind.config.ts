@@ -16,7 +16,7 @@ const config: Config = {
         buttonText: '#4A4A4A',
         borderColor: '#949494',
         darkGray: '#2B2B2B',
-        blue: '#367ADF',
+        appBlue: '#367ADF',
       },
 
       backgroundImage: {
