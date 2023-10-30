@@ -20,6 +20,12 @@ const nextConfig = {
         port: '',
         pathname: '/avatar/**',
       },
+      {
+        protocol: 'https',
+        hostname: 'images.unsplash.com',
+        port: '',
+        pathname: '/*',
+      },
     ],
   },
 };
