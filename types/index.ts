@@ -26,6 +26,11 @@ export type TType = {
   type: string,
 }
 
+export type TPhoto = {
+  id?: string,
+  url: string,
+}
+
 export type TImmobile = {
   id: string,
   ownerId: string,
@@ -40,9 +45,11 @@ export type TImmobile = {
   createdAt: Date,
   updatedAt: Date
   typeId: string,
+  description: string,
   address?: TAddress,
   images?: string[]
   type?: TType,
+  photos?: { photo: TPhoto }[]
 }
 
 export type TRankedImmobile = {
