@@ -15,25 +15,27 @@ export function Footer() {
   const { user, isLoading } = useUser();
   const { currPage, setCurrPage } = useContext(globalContext);
   return(
-    <div className='w-full flex items-center justify-center'>
-      <div className='min-[700px]:hidden z-10 fixed bottom-2 flex justify-center items-center w-96 h-14 rounded-md
-       bg-white'>
+    <div className='w-full flex items-center justify-center min-[700px]:hidden'>
+      <div className=' z-10 fixed bottom-2 flex justify-center items-center w-96 h-14 rounded-md
+       bg-white shadow-lg'>
         <Link
           className='text-buttonText flex items-center justify-center font-semibold 
-          rounded-l-md py-3 h-14 w-full bg-white'
+          rounded-l-md py-3 h-14 w-full bg-white '
           href='/'
           onClick={() => setCurrPage('home')}
           data-value='Pesquisar'
         >
           {
             currPage === 'home'
-            &&  <div className='absolute top-0 w-16 h-1 bg-paymentButton rounded-md' />
+            &&  <div className='absolute top-0 w-16 h-1 bg-paymentButton rounded-b-md' />
           }
-          <button className='flex flex-col items-center justify-center '>
+          <button className='flex flex-col items-center justify-center gap-1'>
             <SlMagnifier
-              className="hover:text-zinc-200"
+              className="hover:text-zinc-200 text-lg text-zinc-500"
             />
-          Buscar
+            <span className='text-xs text-zinc-500'>
+              Buscar
+            </span>
           </button>
         </Link>
 
@@ -47,11 +49,13 @@ export function Footer() {
         >
           {
             currPage === 'advertise' 
-            &&  <div className='absolute top-0 w-16 h-1 bg-paymentButton rounded-md' />
+            &&  <div className='absolute top-0 w-16 h-1 bg-paymentButton rounded-b-md' />
           }
-          <button className='flex flex-col items-center justify-center'>
-            <BsHouseAdd className="hover:text-zinc-200" />
+          <button className='flex flex-col items-center justify-center gap-1'>
+            <BsHouseAdd className="hover:text-zinc-200 text-lg text-zinc-500" />
+            <span className='text-xs text-zinc-500'>
             Anunciar
+            </span>
           </button>
         </Link>
 
@@ -65,18 +69,20 @@ export function Footer() {
         >
           {
             currPage === 'saved'
-            &&  <div className='absolute top-0 w-16 h-1 bg-paymentButton rounded-md' />
+            &&  <div className='absolute top-0 w-16 h-1 bg-paymentButton rounded-b-md' />
           }
-          <button className='flex flex-col items-center justify-center '>
-            <BsBookmarkFill className="hover:text-zinc-200" />
+          <button className='flex flex-col items-center justify-center gap-1'>
+            <BsBookmarkFill className="hover:text-zinc-200 text-lg text-zinc-500" />
+            <span className=' text-xs text-zinc-500'>  
             Favoritos
+            </span>
           </button>
         </Link>
 
         <div className='w-[2px] h-5 bg-placeholder'></div>
 
         {isLoading && (
-          <div className="h-14 w-full  flex items-center justify-center  bg-white rounded-r-md">
+          <div className="h-14 w-full  flex items-center justify-center bg-white rounded-r-md">
           Loading...
           </div>
         )}
@@ -94,7 +100,7 @@ export function Footer() {
         {user && (
           <Nav
             id="nav-mobile"
-            className="h-14 w-full flex items-center justify-center  bg-white rounded-r-md"
+            className="w-full flex flex-col items-center justify-center bg-white rounded-r-md"
             navbar
             data-testid="navbar-menu-mobile">
             <NavItem>
@@ -102,9 +108,9 @@ export function Footer() {
                 <Image
                   src={user.picture as string}
                   alt="Profile"
-                  className="nav-user-profile"
-                  width={50}
-                  height={50}
+                  className="nav-user-profile rounded-full border border-appBlue"
+                  width={24}
+                  height={24}
                   data-testid="navbar-picture-mobile"
                 />
               </span>
@@ -112,7 +118,7 @@ export function Footer() {
             <NavItem id="qsLogoutBtn">
               <a
                 href="/api/auth/logout"
-                className="p-0">
+                className="text-xs text-zinc-500">
                 Log out
               </a>
             </NavItem>
