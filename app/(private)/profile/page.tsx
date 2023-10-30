@@ -1,3 +1,9 @@
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'Home | Perfil',
+};
+
 export default function Profile() {
   return (
     <section className="text-center">
