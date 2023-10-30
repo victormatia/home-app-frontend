@@ -5,6 +5,7 @@ import { SelectComponent } from './MobileFilter/Select';
 import { Check } from 'phosphor-react';
 import { useState } from 'react';
 
+
 export function FilterForm(){
   const [immobiliType, setImmobileType] = useState('');
   const [minPrice, setMinPrice] = useState('');
@@ -15,15 +16,15 @@ export function FilterForm(){
   const [propertyCaracteristics, setPropertyCaracteristics] = useState<string[]>([]);
 
   return(
-    <form action="" className='w-full p-4 min-[700px]:overflow-y-scroll'>
-      <div className='flex flex-col mb-4'>
+    <form action="" className='w-full flex flex-col gap-4 p-4 min-[700px]:overflow-y-scroll'>
+      <div className='flex flex-col '>
         <label htmlFor="immoblie-type" className='text-info font-semibold mb-2'>
                    Tipo de imóvel
         </label>
         <SelectComponent immobliType={setImmobileType}/>
       </div>
 
-      <div className='flex flex-col mb-4'>
+      <div className='flex flex-col '>
         <label htmlFor="price-range" className='text-info font-semibold mb-2'>
                    Preço
         </label>
@@ -64,14 +65,14 @@ export function FilterForm(){
         </div>
       </div>
 
-      <div className='flex flex-col mb-4'>
+      <div className='flex flex-col '>
         <label htmlFor="bathrooms" className='text-info font-semibold mb-2'>
                   Banheiros
           <QuantitySelector quantitySelect={setBathroomsQuantity}/>
         </label>
       </div>
 
-      <div className='flex flex-col mb-4'>
+      <div className='flex flex-col'>
         <label htmlFor="bedrooms" className='text-info font-semibold mb-2'>
                   Quartos
           <QuantitySelector quantitySelect={setBedroomsQuantity}/>
@@ -85,7 +86,7 @@ export function FilterForm(){
         </label>
       </div>
 
-      <div className='flex flex-col mb-4 border-b-2'>
+      <div className='flex flex-col'>
         <label htmlFor="area-range" className='text-info font-semibold mb-2'>
                    Área do imóvel
         </label>
@@ -120,7 +121,7 @@ export function FilterForm(){
         </div>
       </div>
 
-      <div className='border border-borderColor w-11/12 mb-3'></div>
+      <div className='border border-borderColor w-11/12'></div>
 
       <div className='flex flex-col gap-2 text-info font-semibold'>
         <span>Caracteristicas do imóvel</span>
@@ -148,6 +149,16 @@ export function FilterForm(){
           </Checkbox.Root>
           <label htmlFor='Mobiliado'>Mobiliado</label>
         </div>
+      </div>
+
+      <div className='w-full flex items-end justify-end'>
+        <button
+          type='submit' 
+          className='bg-paymentButton p-3 text-white rounded-md'
+
+        >
+         Aplicar filtros
+        </button>
       </div>
     </form>
   );
