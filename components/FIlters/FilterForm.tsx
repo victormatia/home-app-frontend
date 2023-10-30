@@ -15,7 +15,7 @@ export function FilterForm(){
   const [propertyCaracteristics, setPropertyCaracteristics] = useState<string[]>([]);
 
   return(
-    <form action="" className='w-full p-4 min-[700px]:overflow-scroll overflow-x-hidden '>
+    <form action="" className='w-full p-4 min-[700px]:overflow-y-scroll'>
       <div className='flex flex-col mb-4'>
         <label htmlFor="immoblie-type" className='text-info font-semibold mb-2'>
                    Tipo de imóvel
