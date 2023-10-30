@@ -25,13 +25,11 @@ export default function OverlaidFilter(props : OverlaidFilterProps) {
               <X size={15}/>
             </button>
 
-            <button 
-              type='submit' 
+            <span 
               className='text-red-600 font-semibold'
-              onClick={handleCloseFilter}
             >
-              Aplicar filtro
-            </button>
+              Filtros
+            </span>
           </div>
 
           <FilterForm />

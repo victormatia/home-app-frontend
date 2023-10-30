@@ -26,7 +26,12 @@ export function SelectComponent(props: SelectComponentProps) {
       </Select.Trigger>
 
       <Select.Portal>
-        <Select.Content className='overflow-hidden bg-white rounded-md z-30'>
+        <Select.Content 
+          side='bottom'
+          position='popper'
+          sideOffset={8}
+          className='overflow-hidden bg-white rounded-md z-30 w-[--radix-select-trigger-width]'
+        >
           <Select.Viewport className='px-2 py-3'>
             <Select.Group>
               <SelectItem value="Apartament">Apartamento</SelectItem>
