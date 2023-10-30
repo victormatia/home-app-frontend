@@ -7,14 +7,12 @@ import { MdPets } from 'react-icons/md';
 import { useState } from 'react';
 import { useKeenSlider } from 'keen-slider/react';
 import 'keen-slider/keen-slider.min.css';
+import Image from 'next/image';
 
 export function Card({ immobile }: TCard){
   const [isSaved, setIsSaved] = useState(false);
-  const RandomImage1 = 'https://picsum.photos/344/230?random=1';
-  const RandomImage2 = 'https://picsum.photos/344/230?random=2';
-  const RandomImage3 = 'https://picsum.photos/344/230?random=3';
+  const { photos } = immobile;
 
-  const imgArray = [RandomImage1, RandomImage2, RandomImage3];
   const [sliderRef] = useKeenSlider({
     slides: {
       perView: 1,
@@ -24,21 +22,31 @@ export function Card({ immobile }: TCard){
 
   return(
     <div className='flex flex-col rounded-md shadow-lg bg-white w-[360px] h-[345px]
-    hover:scale-105 transition-all cursor-pointer
+    hover:scale-105 transition-all cursor-pointer p-2
     '>
-      <div ref={sliderRef} className="keen-slider px-2 mt-2">
+      <div ref={sliderRef} className="keen-slider">
         {
-          imgArray.map((image, index) => {
+          photos?.map(({ photo }, index) => {
             return(
-              <div key={index} className={`keen-slider__slide number-slide${index} w-full rounded-md`} >
-                <img src={image} alt=""/>
-              </div>
+              <Image
+                key={ index }
+                src={ photo.url }
+                alt='immobile photo'
+                width={344}
+                height={222}
+                className={
+                  `keen-slider__slide
+                  number-slide${index}
+                  w-full
+                  rounded-md`
+                }
+              />
             );
           })
         }
 
       </div>
-      <div className='p-2'>
+      <div>
         <div className='flex justify-between pt-2'>
           <strong className='text-black text-sm font-medium'>
             {`${immobile.type?.type}, ${immobile.address?.city}`}
@@ -58,20 +66,20 @@ export function Card({ immobile }: TCard){
 
         <div className='flex gap-2 pt-2 items-end'>
           <div className='w-52'>
-            <span  className='text-xs text-info'>
-            Kitnet de 35m² com sala, quarto e cozinha integrados e um banheiro...
+            <span  className='text-xs text-info line-clamp-2'>
+              { immobile.description }
             </span>
 
             <div className='flex items-center gap-2 mt-4 text-placeholder'>
-              <span className='flex items-center gap-1'>
+              <span className='flex items-center gap-1 border-r-[1px] border-zinc-300 pr-1'>
                 <IoBedOutline />
                 {immobile.bedroomsQty} 
               </span>
-              <span className='flex items-center gap-1'>
+              <span className='flex items-center gap-1 border-r-[1px] border-zinc-300 pr-1'>
                 <FaCar />
                 {immobile.parkingQty} 
               </span>
-              <span className='flex items-center gap-1'>
+              <span className='flex items-center gap-1 border-r-[1px] border-zinc-300 pr-1'>
                 <FaShower />
                 {immobile.bathroomsQty} 
               </span>
@@ -81,7 +89,8 @@ export function Card({ immobile }: TCard){
             </div>
           </div>
 
-          <button className='flex  gap-2  w-32 h-10  bg-paymentButton rounded-md text-white shadow-xl'>
+          <button className='flex  gap-2  w-32 h-10  bg-paymentButton rounded-md text-white shadow-xl
+          hover:opacity-80 transition-all'>
             <span className=' pl-1 pt-1 text-[10px] text-left'>
               Alugar 
               {' '}
@@ -89,8 +98,7 @@ export function Card({ immobile }: TCard){
               por:
             </span> 
             <span className='whitespace-nowrap flex-grow mt-3'>
-              {/*toFixed not work*/}
-              {`R$ ${immobile.price},00`} 
+              {`R$ ${Number(immobile.price).toFixed(2)}`} 
             </span>
           </button>
         </div>

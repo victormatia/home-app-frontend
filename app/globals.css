@@ -18,3 +18,24 @@
   align-items: center;
   border-radius: 10px;
 }
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #DEDEDE; 
+  border-radius: 10px;
+  opacity: 0.8;
+}
+ 
+::-webkit-scrollbar-thumb {
+  background: #ACACAC; 
+  border-radius: 8px;
+  border-color: #ACACAC;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #8a8a8a; 
+  opacity: 1;
+}

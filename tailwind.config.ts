@@ -10,7 +10,7 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        app: '#EBEBEB',
+        app: '#F5F5F5',
         placeholder: '#878787',
         info: '#404040',
         buttonText: '#4A4A4A',
@@ -41,6 +41,6 @@ const config: Config = {
       },
     },
   },
-  plugins: [],
+  plugins: [require('@tailwindcss/line-clamp')],
 };
 export default config;
