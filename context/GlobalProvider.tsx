@@ -5,7 +5,7 @@ import globalContext from './context';
 import { useUser } from '@auth0/nextjs-auth0/client';
 import axios from 'axios';
 import getAuthUsers from '@/utils/getAuthUsers';
-import { TImmobile, TRankedImmobile } from '@/types';
+import { TFiltredPropertys, TImmobile, TRankedImmobile } from '@/types';
 
 export default function GlobalProvider({ children }: { children: ReactNode }) {
   const { user } = useUser();
@@ -14,6 +14,7 @@ export default function GlobalProvider({ children }: { children: ReactNode }) {
   const [search, setSearch] = useState<string>('');
   const [currPage, setCurrPage] = useState<string>('home');
   const [toggleOpenFilter, setToggleOpenFilter] = useState<boolean>(false);
+  const [propertyCaracteristics, setPropertyCaracteristics] = useState<TFiltredPropertys>({} as TFiltredPropertys);
   
   (useCallback(async () => {
     if (user) {
@@ -63,8 +64,8 @@ export default function GlobalProvider({ children }: { children: ReactNode }) {
     immobiles, setImmobiles,
     search, setSearch,
     searchedImmobiles, setSearchedImmobiles,
-    currPage, setCurrPage, toggleOpenFilter, setToggleOpenFilter,
-  }), [immobiles, searchedImmobiles, search, currPage, toggleOpenFilter]);
+    currPage, setCurrPage, toggleOpenFilter, setToggleOpenFilter, propertyCaracteristics, setPropertyCaracteristics,
+  }), [immobiles, searchedImmobiles, search, currPage, toggleOpenFilter, propertyCaracteristics]);
   return (
     <globalContext.Provider value={ states }>
       { children }

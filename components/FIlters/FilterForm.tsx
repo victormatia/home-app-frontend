@@ -3,20 +3,76 @@ import { InputControl, InputPrefix, InputRoot } from '../Input';
 import { QuantitySelector } from './MobileFilter/QuantitySelector';
 import { SelectComponent } from './MobileFilter/Select';
 import { Check } from 'phosphor-react';
-import { useState } from 'react';
-
+import { useContext, useMemo, useState } from 'react';
+import globalContext from '@/context/context';
+import { TImmobile } from '@/types';
 
 export function FilterForm(){
-  const [immobiliType, setImmobileType] = useState('');
-  const [minPrice, setMinPrice] = useState('');
-  const [maxPrice, setMaxPrice] = useState('');
+  const { 
+    setToggleOpenFilter, 
+    searchedImmobiles, 
+    setSearchedImmobiles, 
+    immobiles, 
+    setPropertyCaracteristics, 
+    propertyCaracteristics, 
+  } = useContext(globalContext);
+  const [immobiliType, setImmobileType] = useState('todos');
+  const [minPrice, setMinPrice] = useState(0);
+  const [maxPrice, setMaxPrice] = useState(9999);
+  const [minArea, setMinArea] = useState(0);
+  const [maxArea, setMaxArea] = useState(9999);
   const [bathroomsQuantity, setBathroomsQuantity] = useState('1');
   const [bedroomsQuantity, setBedroomsQuantity] = useState('1');
   const [parkingQantity, setParkingQuantity] = useState('1');
-  const [propertyCaracteristics, setPropertyCaracteristics] = useState<string[]>([]);
+  const [isPetFrendly, setIsPetFrendly] = useState(false);
+  const [isFurnished, setIsFurnished] = useState(false);
+
+  const propetyKeys = Object.keys(propertyCaracteristics);
+  useMemo(
+    () => { 
+      const bla = propetyKeys.reduce((acc, key) => {
+        console.log(acc);
+        switch(key){
+        case 'immobiliType':
+          return propertyCaracteristics[key] === 'todos' ? acc :
+            acc = (searchedImmobiles.filter(({ immobile }) => 
+              immobile.type?.type === propertyCaracteristics[key]));
+        // case 'minPrice':
+        //   acc = (searchedImmobiles.filter(({ immobile }) => 
+        //     immobile.price >= propertyCaracteristics[key]));
+        // return acc;
+        default:
+          return acc;
+        }
+      }
+      , immobiles.map((i: TImmobile) => ({ immobileId: i.id,  immobile: i, rank: 0 })));
+
+      setSearchedImmobiles(bla);
+    }, [propertyCaracteristics]
+  );
+
+  function handleApplyFilter(event: React.ChangeEvent<HTMLInputElement>) {
+    event.preventDefault();
+
+    setPropertyCaracteristics({
+      bathrooms: bathroomsQuantity,
+      bedrooms: bedroomsQuantity,
+      parking: parkingQantity,
+      minPrice,
+      maxPrice,
+      minArea,
+      maxArea,
+      immobiliType,
+      isPetFrendly ,
+      isFurnished,
+    }
+    );
+
+    setToggleOpenFilter(false);
+  };
 
   return(
-    <form action="" className='w-full flex flex-col gap-4 p-4 min-[700px]:overflow-y-scroll'>
+    <form onSubmit={handleApplyFilter} className='w-full flex flex-col gap-4 p-4 min-[700px]:overflow-y-scroll'>
       <div className='flex flex-col '>
         <label htmlFor="immoblie-type" className='text-info font-semibold mb-2'>
                    Tipo de imóvel
@@ -101,6 +157,7 @@ export function FilterForm(){
                 min="0"
                 max="9999"
                 placeholder='0 m²'
+                onChange={(e) => setMinArea(e.target.value)}
               />
             </InputRoot>
           </label>
@@ -115,6 +172,7 @@ export function FilterForm(){
                 min="0"
                 max="9999"
                 placeholder='9999 m²'
+                onChange={(e) => setMaxArea(e.target.value)}
               />
             </InputRoot>
           </label>
@@ -130,6 +188,7 @@ export function FilterForm(){
           <Checkbox.Root 
             className='bg-white w-6 h-6 rounded border-borderColor data-[state=checked]:bg-blue-700'
             id='Aceita pet'
+            onCheckedChange={(data : boolean) => {setIsPetFrendly(data);}}
           >
             <Checkbox.Indicator className='flex items-center justify-center text-white'>
               <Check size={16} />
@@ -142,6 +201,7 @@ export function FilterForm(){
           <Checkbox.Root 
             className='bg-white w-6 h-6 rounded border-borderColor data-[state=checked]:bg-blue-700'
             id='Mobiliado'
+            onCheckedChange={(data : boolean) => {setIsFurnished(data);}}
           >
             <Checkbox.Indicator className='flex items-center justify-center text-white'>
               <Check size={16} />
@@ -151,15 +211,12 @@ export function FilterForm(){
         </div>
       </div>
 
-      <div className='w-full flex items-end justify-end'>
-        <button
-          type='submit' 
-          className='bg-paymentButton p-3 text-white rounded-md'
-
-        >
+      <button
+        type='submit' 
+        className='bg-paymentButton font-semibold text-lg p-3 text-white rounded-md w-full'
+      >
          Aplicar filtros
-        </button>
-      </div>
+      </button>
     </form>
   );
 }
