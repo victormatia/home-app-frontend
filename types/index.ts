@@ -69,6 +69,21 @@ export type TConext = {
   setCurrPage: Dispatch<SetStateAction<string>>
   toggleOpenFilter: boolean,
   setToggleOpenFilter: Dispatch<SetStateAction<boolean>>
+  propertyCaracteristics: TFiltredPropertys
+  setPropertyCaracteristics: Dispatch<SetStateAction<TFiltredPropertys>>
+}
+
+export type TFiltredPropertys = {
+  immobiliType: string
+  minPrice: number
+  maxPrice: number
+  minArea: number
+  maxArea: number
+  bathrooms: string
+  bedrooms: string
+  parking: string
+  isPetFrendly: boolean
+  isFurnished: boolean
 }
 
 export type TDefaultDiacriticalMapItem = {
@@ -79,3 +94,4 @@ export type TDefaultDiacriticalMapItem = {
 export type TCard = {
   immobile: TImmobile,
 }
+
