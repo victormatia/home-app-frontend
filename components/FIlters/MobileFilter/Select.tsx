@@ -14,7 +14,7 @@ export function SelectComponent(props: SelectComponentProps) {
   }
   
   return(
-    <Select.Root onValueChange={selectImmobliType}>
+    <Select.Root onValueChange={selectImmobliType} defaultValue='todos'>
       <Select.Trigger 
         className='w-80 h-16 border-borderColor border 
         inline-flex items-center justify-between px-3 rounded-md outline-none min-[700px]:w-full'
@@ -34,19 +34,9 @@ export function SelectComponent(props: SelectComponentProps) {
         >
           <Select.Viewport className='px-2 py-3'>
             <Select.Group>
-              <SelectItem value="Apartament">Apartamento</SelectItem>
-              <SelectItem value="House">Casa</SelectItem>
-              <SelectItem value="1">Casa</SelectItem>
-              <SelectItem value="2">Casa</SelectItem>
-              <SelectItem value="3">Casa</SelectItem>
-              <SelectItem value="4">Casa</SelectItem>
-              <SelectItem value="5">Casa</SelectItem>
-              <SelectItem value="6">Casa</SelectItem>
-              <SelectItem value="7">Casa</SelectItem>
-              <SelectItem value="8">Casa</SelectItem>
-              <SelectItem value="10">Casa</SelectItem>
-              <SelectItem value="9">Casa</SelectItem>
-              <SelectItem value="11">Casa</SelectItem>
+              <SelectItem value="todos">Todos</SelectItem>
+              <SelectItem value="apartamento">Apartamento</SelectItem>
+              <SelectItem value="casa">Casa</SelectItem>
             </Select.Group>
           </Select.Viewport>
         </Select.Content>
