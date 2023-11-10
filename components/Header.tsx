@@ -37,8 +37,11 @@ export function Header(){
 
       <div className='max-[700px]:hidden justify-self-end pr-3'>
         {isLoading && (
-          <div className="h-full  flex items-center justify-center rounded-md bg-paymentButton p-2 text-white ">
-          Loading...
+          <div className="h-14 w-full  flex items-center justify-center gap-1 bg-white rounded-r-md">
+            <div 
+              className='h-6 w-6 border-2 border-[#c3c3c373] rounded-full 
+              border-t-[#2be4a0] animate-spin'
+            />
           </div>
         )}
 

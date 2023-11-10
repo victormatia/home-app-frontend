@@ -82,8 +82,11 @@ export function Footer() {
         <div className='w-[2px] h-5 bg-placeholder'></div>
 
         {isLoading && (
-          <div className="h-14 w-full  flex items-center justify-center bg-white rounded-r-md">
-          Loading...
+          <div className="h-14 w-full  flex items-center justify-center gap-1 bg-white rounded-r-md">
+            <div 
+              className='h-6 w-6 border-2 border-[#c3c3c373] rounded-full 
+              border-t-[#2be4a0] animate-spin'
+            />
           </div>
         )}
 
