@@ -1,6 +1,6 @@
 'use client';
 import { X } from 'phosphor-react';
-import { useContext, useState } from 'react';
+import { useContext } from 'react';
 import globalContext from '@/context/context';
 import { FilterForm } from '../FilterForm';
 
