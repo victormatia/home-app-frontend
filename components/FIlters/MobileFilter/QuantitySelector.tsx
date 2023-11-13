@@ -7,13 +7,13 @@ interface QuantitySelectorComponentProps{
 export function QuantitySelector(props: QuantitySelectorComponentProps){
 
   function SelectQuantity(data: string){
-    props.quantitySelect(data);
+    props.quantitySelect(Number(data));
   }
 
   return(
     <ToggleGroup.Root 
       type="single"
-      defaultValue="1"
+      defaultValue="todos"
       onValueChange={SelectQuantity}
       className='flex gap-3 text-black text-2xl'
     >
