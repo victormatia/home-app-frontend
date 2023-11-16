@@ -10,69 +10,111 @@ import { TImmobile } from '@/types';
 export function FilterForm(){
   const { 
     setToggleOpenFilter, 
-    searchedImmobiles, 
     setSearchedImmobiles, 
     immobiles, 
     setPropertyCaracteristics, 
     propertyCaracteristics, 
   } = useContext(globalContext);
-  const [immobiliType, setImmobileType] = useState('todos');
-  const [minPrice, setMinPrice] = useState(0);
-  const [maxPrice, setMaxPrice] = useState(9999);
-  const [minArea, setMinArea] = useState(0);
-  const [maxArea, setMaxArea] = useState(9999);
-  const [bathroomsQuantity, setBathroomsQuantity] = useState('1');
-  const [bedroomsQuantity, setBedroomsQuantity] = useState('1');
-  const [parkingQantity, setParkingQuantity] = useState('1');
-  const [isPetFrendly, setIsPetFrendly] = useState(false);
-  const [isFurnished, setIsFurnished] = useState(false);
+  const [immobileType, setImmobileType] = useState<string>('todos');
+  const [minPrice, setMinPrice] = useState<number>(0);
+  const [maxPrice, setMaxPrice] = useState<number>(999999);
+  const [minArea, setMinArea] = useState<number>(0);
+  const [maxArea, setMaxArea] = useState<number>(9999);
+  const [bathroomsQty, setBathroomsQty] = useState<number| string>('todos');
+  const [bedroomsQty, setBedroomsQty] = useState<number| string>('todos');
+  const [parkingQty, setParkingQty] = useState<number| string>('todos');
+  const [petFriendly, setPetFriendly] = useState<boolean | string>('todos');
+  const [isFurnished, setIsFurnished] = useState<boolean | string>('todos');
 
   const propetyKeys = Object.keys(propertyCaracteristics);
+  const immobileList = immobiles.map((i: TImmobile) => ({ immobileId: i.id,  immobile: i, rank: 0 }));
   useMemo(
     () => { 
-      const bla = propetyKeys.reduce((acc, key) => {
-        console.log(acc);
+      const filtredImmobiles = propetyKeys.reduce((acc, key) => {
         switch(key){
-        case 'immobiliType':
+        case 'immobileType':
           return propertyCaracteristics[key] === 'todos' ? acc :
-            acc = (searchedImmobiles.filter(({ immobile }) => 
-              immobile.type?.type === propertyCaracteristics[key]));
-        // case 'minPrice':
-        //   acc = (searchedImmobiles.filter(({ immobile }) => 
-        //     immobile.price >= propertyCaracteristics[key]));
-        // return acc;
+            acc.filter(({ immobile }) => 
+              immobile.type?.type === propertyCaracteristics[key]);
+        case 'minPrice':
+          return acc.filter(({ immobile }) => 
+            propertyCaracteristics.maxPrice >=  immobile.price && immobile.price >= propertyCaracteristics.minPrice);
+        case 'bedroomsQty':
+        case 'bathroomsQty':
+        case 'parkingQty':
+          if(propertyCaracteristics[key] === 'todos'){
+            return acc;
+          }else if(propertyCaracteristics[key] === 4){
+            return acc.filter(({ immobile }) => 
+              immobile[key] >= +propertyCaracteristics[key]);
+          } 
+          return acc.filter(({ immobile }) => 
+            immobile[key] === propertyCaracteristics[key]);
+            
+        case 'petFriendly':
+        //case 'isFurnished':
+          return propertyCaracteristics[key] === 'todos' ? acc : 
+            acc.filter(({ immobile }) => 
+              immobile[key] === propertyCaracteristics[key]);
+        case 'minArea':
+          return acc.filter(({ immobile }) => 
+            propertyCaracteristics.maxArea >=  immobile.sqrFootage && 
+            immobile.sqrFootage >= propertyCaracteristics.minArea);
+   
         default:
           return acc;
         }
       }
-      , immobiles.map((i: TImmobile) => ({ immobileId: i.id,  immobile: i, rank: 0 })));
+      , immobileList);
 
-      setSearchedImmobiles(bla);
+      setSearchedImmobiles(filtredImmobiles);
     }, [propertyCaracteristics]
   );
 
-  function handleApplyFilter(event: React.ChangeEvent<HTMLInputElement>) {
+  function handleApplyFilter(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
 
-    setPropertyCaracteristics({
-      bathrooms: bathroomsQuantity,
-      bedrooms: bedroomsQuantity,
-      parking: parkingQantity,
+    const filter = {
+      bedroomsQty,
+      bathroomsQty,
+      parkingQty,
       minPrice,
       maxPrice,
       minArea,
       maxArea,
-      immobiliType,
-      isPetFrendly ,
+      immobileType,
+      petFriendly ,
       isFurnished,
-    }
-    );
+    };
+
+    setPropertyCaracteristics(filter);
 
     setToggleOpenFilter(false);
   };
 
+  function handleCleanFilters(){
+
+    const cleanFilter = {
+      bedroomsQty: 'todos',
+      bathroomsQty: 'todos',
+      parkingQty: 'todos',
+      minPrice: 0,
+      maxPrice: 999999,
+      minArea: 0,
+      maxArea: 9999,
+      immobileType: 'todos',
+      petFriendly: 'todos',
+      isFurnished: 'todos',
+    };
+
+    setPropertyCaracteristics(cleanFilter);
+
+    setToggleOpenFilter(false);
+  }
+
   return(
-    <form onSubmit={handleApplyFilter} className='w-full flex flex-col gap-4 p-4 min-[700px]:overflow-y-scroll'>
+    <form onSubmit={handleApplyFilter} 
+      className='w-full flex flex-col gap-4 p-4 min-[700px]:overflow-y-scroll'>
       <div className='flex flex-col '>
         <label htmlFor="immoblie-type" className='text-info font-semibold mb-2'>
                    Tipo de imóvel
@@ -97,7 +139,7 @@ export function FilterForm(){
                 id="min-price"
                 min="0"
                 max="999999"
-                onChange={(e) => setMinPrice(e.target.value)}
+                onChange={(e) => setMinPrice(Number(e.target.value))}
               />
             </InputRoot>
           </label>
@@ -114,7 +156,7 @@ export function FilterForm(){
                 id="max-price"
                 min="0"
                 max="999999"
-                onChange={(e) => setMaxPrice(e.target.value)}
+                onChange={(e) => setMaxPrice(Number(e.target.value))}
               />
             </InputRoot>
           </label>
@@ -124,21 +166,21 @@ export function FilterForm(){
       <div className='flex flex-col '>
         <label htmlFor="bathrooms" className='text-info font-semibold mb-2'>
                   Banheiros
-          <QuantitySelector quantitySelect={setBathroomsQuantity}/>
+          <QuantitySelector quantitySelect={setBathroomsQty}/>
         </label>
       </div>
 
       <div className='flex flex-col'>
         <label htmlFor="bedrooms" className='text-info font-semibold mb-2'>
                   Quartos
-          <QuantitySelector quantitySelect={setBedroomsQuantity}/>
+          <QuantitySelector quantitySelect={setBedroomsQty}/>
         </label>
       </div>
 
       <div className='flex flex-col mb-4'>
         <label htmlFor="parking" className='text-info font-semibold mb-2'>
                   Vagas
-          <QuantitySelector quantitySelect={setParkingQuantity}/>
+          <QuantitySelector quantitySelect={setParkingQty}/>
         </label>
       </div>
 
@@ -157,22 +199,22 @@ export function FilterForm(){
                 min="0"
                 max="9999"
                 placeholder='0 m²'
-                onChange={(e) => setMinArea(e.target.value)}
+                onChange={(e) => setMinArea(Number(e.target.value))}
               />
             </InputRoot>
           </label>
 
           <label htmlFor="max-area" className='flex flex-col font-semibold text-xs'>
-                    Máximo
+                    Mínimo
             <InputRoot>
               <InputControl
-                type='number' 
+                type="number" 
                 name="max-area" 
                 id="max-area"
                 min="0"
                 max="9999"
                 placeholder='9999 m²'
-                onChange={(e) => setMaxArea(e.target.value)}
+                onChange={(e) => setMaxArea(Number(e.target.value))}
               />
             </InputRoot>
           </label>
@@ -188,7 +230,7 @@ export function FilterForm(){
           <Checkbox.Root 
             className='bg-white w-6 h-6 rounded border-borderColor data-[state=checked]:bg-blue-700'
             id='Aceita pet'
-            onCheckedChange={(data : boolean) => {setIsPetFrendly(data);}}
+            onCheckedChange={(data : boolean) => {setPetFriendly(data);}}
           >
             <Checkbox.Indicator className='flex items-center justify-center text-white'>
               <Check size={16} />
@@ -211,12 +253,23 @@ export function FilterForm(){
         </div>
       </div>
 
-      <button
-        type='submit' 
-        className='bg-paymentButton font-semibold text-lg p-3 text-white rounded-md w-full'
-      >
-         Aplicar filtros
-      </button>
+      <div className='flex gap-1'>
+        <button
+          onClick={handleCleanFilters}
+          type='button' 
+          className='font-semibold text-lg p-3 rounded-md w-full hover:bg-gray-200'
+        >
+          Limpar
+        </button>
+
+        <button
+          type='submit' 
+          className='bg-gradientBlue font-semibold text-lg p-3 text-white rounded-md w-full'
+        >
+         Aplicar
+        </button>
+      </div>
+
     </form>
   );
 }

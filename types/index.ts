@@ -40,7 +40,7 @@ export type TImmobile = {
   bedroomsQty: number,
   bathroomsQty: number,
   parkingQty: number,
-  sqrFoota: number,
+  sqrFootage: number,
   petFriendly: boolean,
   createdAt: Date,
   updatedAt: Date
@@ -74,16 +74,16 @@ export type TConext = {
 }
 
 export type TFiltredPropertys = {
-  immobiliType: string
+  immobileType: string
   minPrice: number
   maxPrice: number
   minArea: number
   maxArea: number
-  bathrooms: string
-  bedrooms: string
-  parking: string
-  isPetFrendly: boolean
-  isFurnished: boolean
+  bedroomsQty: number | string
+  bathroomsQty: number | string
+  parkingQty: number | string
+  petFriendly: boolean | string
+  isFurnished: boolean | string
 }
 
 export type TDefaultDiacriticalMapItem = {

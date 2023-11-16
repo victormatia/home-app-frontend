@@ -10,17 +10,19 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        app: '#F5F5F5',
-        placeholder: '#878787',
-        info: '#404040',
+        grayBase: '#F5F5F5',
+        grayIcon: '#878787',
+        grayLegend: '#424242',
+        grayTitle: '#202020',
+        darkGray: '#2B2B2B',
         buttonText: '#4A4A4A',
         borderColor: '#949494',
-        darkGray: '#2B2B2B',
-        appBlue: '#367ADF',
+        primaryBlue: '#367ADF',
+        secondaryBlue: '#367ADF',
       },
 
       backgroundImage: {
-        paymentButton: 'linear-gradient(107deg, #367ADF 13.1%, #36A5C8 68.23%);',
+        gradientBlue: 'linear-gradient(107deg, #367ADF 13.1%, #36A5C8 68.23%);',
       },
 
       animation: {

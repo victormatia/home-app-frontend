@@ -1,13 +1,23 @@
 import * as Select from '@radix-ui/react-select';
 import { CaretDown } from 'phosphor-react';
-import React from 'react';
+import React, { useContext } from 'react';
 import classnames from 'classnames';
+import globalContext from '@/context/context';
 
 interface SelectComponentProps{
   immobliType: Function
 }
 
 export function SelectComponent(props: SelectComponentProps) {
+
+  const { immobiles } = useContext(globalContext);
+
+  const immobileType : string[] = [];
+  immobiles.forEach((immobile) => {
+    if(!immobileType.includes(immobile.type?.type!)){
+      immobileType.push(immobile.type?.type!);
+    }
+  });
 
   function selectImmobliType(data: string){
     props.immobliType(data);
@@ -35,8 +45,11 @@ export function SelectComponent(props: SelectComponentProps) {
           <Select.Viewport className='px-2 py-3'>
             <Select.Group>
               <SelectItem value="todos">Todos</SelectItem>
-              <SelectItem value="apartamento">Apartamento</SelectItem>
-              <SelectItem value="casa">Casa</SelectItem>
+              {immobileType.map((type) => {
+                return(
+                  <SelectItem key={type} value={type}>{type.charAt(0).toUpperCase() + type.slice(1)}</SelectItem>
+                );
+              })}
             </Select.Group>
           </Select.Viewport>
         </Select.Content>
@@ -51,7 +64,7 @@ const SelectItem = React.forwardRef(({ children, className, ...props }: any, for
     <Select.Item
       className={classnames(
         // eslint-disable-next-line max-len
-        'flex leading-none text-placeholder items-center h-6 relative select-none data-[disabled]:pointer-events-none data-[highlighted]:outline-none data-[highlighted]:bg-app',
+        'flex leading-none text-placeholder items-center h-6 relative select-none data-[disabled]:pointer-events-none data-[highlighted]:outline-none data-[highlighted]:bg-grayBase',
         className
       )}
       {...props}
