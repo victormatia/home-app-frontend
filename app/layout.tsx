@@ -7,6 +7,7 @@ import { Footer } from '@/components/Footer';
 import './globals.css';
 import Sidebar from '@/components/Sidebar';
 import MobileFilter from '@/components/FIlters/MobileFilter';
+import TanStackProvider from '@/tanstack/TanStackProvider';
 
 const jost = Jost({ subsets: ['latin'] });
 
@@ -21,18 +22,20 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <UserProvider>
-      <GlobalProvider>
-        <html lang="en">
-          <body className={`${jost.className} bg-app min-[700px]:overflow-clip`}>
-            <Sidebar />
-            <Header />
-            <MobileFilter />
-            {children}
-            <Footer />
-          </body>
-        </html>
-      </GlobalProvider>
-    </UserProvider>
+    <TanStackProvider>
+      <UserProvider>
+        <GlobalProvider>
+          <html lang="en">
+            <body className={`${jost.className} bg-app min-[700px]:overflow-clip`}>
+              <Sidebar />
+              <Header />
+              <MobileFilter />
+              {children}
+              <Footer />
+            </body>
+          </html>
+        </GlobalProvider>
+      </UserProvider>
+    </TanStackProvider>
   );
 }
