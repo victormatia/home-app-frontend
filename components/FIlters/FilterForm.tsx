@@ -264,7 +264,7 @@ export function FilterForm(){
 
         <button
           type='submit' 
-          className='bg-paymentButton font-semibold text-lg p-3 text-white rounded-md w-full'
+          className='bg-gradientBlue font-semibold text-lg p-3 text-white rounded-md w-full'
         >
          Aplicar
         </button>

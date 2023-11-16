@@ -64,7 +64,7 @@ const SelectItem = React.forwardRef(({ children, className, ...props }: any, for
     <Select.Item
       className={classnames(
         // eslint-disable-next-line max-len
-        'flex leading-none text-placeholder items-center h-6 relative select-none data-[disabled]:pointer-events-none data-[highlighted]:outline-none data-[highlighted]:bg-app',
+        'flex leading-none text-placeholder items-center h-6 relative select-none data-[disabled]:pointer-events-none data-[highlighted]:outline-none data-[highlighted]:bg-grayBase',
         className
       )}
       {...props}

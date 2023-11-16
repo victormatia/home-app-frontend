@@ -20,7 +20,7 @@ export default function Sidebar() {
         <Image src={homeIcon} width={32} height={32} alt={''} />
       </section>
 
-      <section className='h-64 w-full flex flex-col items-center justify-center gap-6 text-zinc-500 text-2xl'>
+      <section className='h-64 w-full flex flex-col items-center justify-center gap-6 text-grayIcon text-2xl'>
         <Link
           className='relative w-full h-12 flex justify-center items-center sidebar__span'
           href='/'
@@ -29,7 +29,7 @@ export default function Sidebar() {
         >
           {
             currPage === 'home'
-            &&  <div className='absolute top-0 left-0 h-full w-1 bg-paymentButton rounded-r-md' />
+            &&  <div className='absolute top-0 left-0 h-full w-1 bg-gradientBlue rounded-r-md' />
           }
           
           <SlMagnifier
@@ -45,7 +45,7 @@ export default function Sidebar() {
         >
           {
             currPage === 'saved'
-            &&  <div className='absolute top-0 left-0 h-full w-1 bg-paymentButton rounded-r-md' />
+            &&  <div className='absolute top-0 left-0 h-full w-1 bg-gradientBlue rounded-r-md' />
           }
 
           <BsBookmarkFill className="hover:text-zinc-200" />
@@ -59,14 +59,14 @@ export default function Sidebar() {
         >
           {
             currPage === 'advertise' 
-            &&  <div className='absolute top-0 left-0 h-full w-1 bg-paymentButton rounded-r-md' />
+            &&  <div className='absolute top-0 left-0 h-full w-1 bg-gradientBlue rounded-r-md' />
           }
 
           <BsHouseAdd className="hover:text-zinc-200" />
         </Link>
       </section>
 
-      <section className='w-full text-zinc-500 text-2xl'>
+      <section className='w-full text-grayIcon text-2xl'>
         <Link
           className='relative w-full h-12 flex justify-center items-center sidebar__span'
           href='/settings'
@@ -75,7 +75,7 @@ export default function Sidebar() {
         >
           {
             currPage === 'settings' 
-            &&  <div className='absolute top-0 left-0 h-full w-1 bg-paymentButton rounded-r-md' />
+            &&  <div className='absolute top-0 left-0 h-full w-1 bg-gradientBlue rounded-r-md' />
           }
 
           <BsFillGearFill className="hover:text-zinc-200" />

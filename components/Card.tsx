@@ -53,11 +53,11 @@ export function Card({ immobile }: TCard){
           </strong>
           {
             isSaved === false ? (
-              <button className='text-zinc-500'>
+              <button className='text-grayIcon'>
                 <BsBookmark />
               </button>
             ): (
-              <button className='text-zinc-500'>
+              <button className='text-grayIcon'>
                 <BsBookmarkFill />
               </button>
             )
@@ -66,7 +66,7 @@ export function Card({ immobile }: TCard){
 
         <div className='flex gap-2 pt-2 items-end'>
           <div className='w-52'>
-            <span  className='text-xs text-info line-clamp-2'>
+            <span  className='text-xs text-grayLegend line-clamp-2'>
               { immobile.description }
             </span>
 
@@ -89,7 +89,7 @@ export function Card({ immobile }: TCard){
             </div>
           </div>
 
-          <button className='flex  gap-2  w-32 h-10  bg-paymentButton rounded-md text-white shadow-xl
+          <button className='flex  gap-2  w-32 h-10  bg-gradientBlue rounded-md text-white shadow-xl
           hover:opacity-80 transition-all'>
             <span className=' pl-1 pt-1 text-[10px] text-left'>
               Alugar 

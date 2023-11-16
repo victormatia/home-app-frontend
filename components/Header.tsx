@@ -19,7 +19,7 @@ export function Header(){
   }
 
   return(
-    <div className='flex  h-20 px-6 py-7 items-center justify-around bg-app min-[700px]:justify-end'>
+    <div className='flex  h-20 px-6 py-7 items-center justify-around bg-grayBase min-[700px]:justify-end'>
 
       <div className='min-[700px]:fixed min-[700px]:left-[calc(50%-160px)] '>
         <Search />
@@ -46,7 +46,7 @@ export function Header(){
         )}
 
         {!isLoading && !user && (
-          <Nav className="h-full flex items-center justify-center rounded-md bg-paymentButton p-2 text-white " navbar>
+          <Nav className="h-full flex items-center justify-center rounded-md bg-gradientBlue p-2 text-white " navbar>
             <a
               href="/api/auth/login"
               className="btn btn-primary btn-block"
@@ -69,7 +69,7 @@ export function Header(){
                 <Image
                   src={user.picture as string}
                   alt="Profile"
-                  className="nav-user-profile rounded-full border border-appBlue"
+                  className="nav-user-profile rounded-full border border-primaryBlue"
                   width={50}
                   height={50}
                   data-testid="navbar-picture-mobile"
