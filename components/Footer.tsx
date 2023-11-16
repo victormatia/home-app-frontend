@@ -92,7 +92,8 @@ export function Footer() {
             <a
               href="/api/auth/login"
               className="btn btn-primary btn-block"
-              tabIndex={0}>
+              tabIndex={0}
+            >
               Log in
             </a>
           </Nav>
@@ -103,6 +104,10 @@ export function Footer() {
             className="w-full flex flex-col items-center justify-center bg-white rounded-r-md"
             navbar
             data-testid="navbar-menu-mobile">
+            {
+              currPage === 'profile'
+                &&  <div className='absolute top-0 w-16 h-1 bg-paymentButton rounded-b-md' />
+            }
             <NavItem>
               <span className="user-info">
                 <Image
@@ -116,11 +121,13 @@ export function Footer() {
               </span>
             </NavItem>
             <NavItem id="qsLogoutBtn">
-              <a
-                href="/api/auth/logout"
-                className="text-xs text-zinc-500">
-                Log out
-              </a>
+              <Link
+                href="/profile"
+                className="text-xs text-zinc-500"
+                onClick={() => setCurrPage('profile')}
+              >
+                Perfil
+              </Link>
             </NavItem>
           </Nav>
         )}

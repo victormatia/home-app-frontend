@@ -3,9 +3,9 @@
 import { ReactNode, useMemo, useState } from 'react';
 import globalContext from './context';
 import axios from 'axios';
-import { TImmobile, TRankedImmobile } from '@/types';
 import { useQuery } from '@tanstack/react-query';
 import { Session } from '@auth0/nextjs-auth0';
+import { TFiltredPropertys, TImmobile, TRankedImmobile } from '@/types';
 
 export default function GlobalProvider({ children }: { children: ReactNode }) {
   const [immobiles, setImmobiles] = useState<TImmobile[]>([]);
@@ -13,6 +13,7 @@ export default function GlobalProvider({ children }: { children: ReactNode }) {
   const [search, setSearch] = useState<string>('');
   const [currPage, setCurrPage] = useState<string>('home');
   const [toggleOpenFilter, setToggleOpenFilter] = useState<boolean>(false);
+  const [propertyCaracteristics, setPropertyCaracteristics] = useState<TFiltredPropertys>({} as TFiltredPropertys);
 
   const {} = useQuery({
     queryKey: ['immobiles'],
@@ -65,9 +66,8 @@ export default function GlobalProvider({ children }: { children: ReactNode }) {
     immobiles, setImmobiles,
     search, setSearch,
     searchedImmobiles, setSearchedImmobiles,
-    currPage, setCurrPage, toggleOpenFilter, setToggleOpenFilter,
-  }), [immobiles, searchedImmobiles, search, currPage, toggleOpenFilter]);
-
+    currPage, setCurrPage, toggleOpenFilter, setToggleOpenFilter, propertyCaracteristics, setPropertyCaracteristics,
+  }), [immobiles, searchedImmobiles, search, currPage, toggleOpenFilter, propertyCaracteristics]);
   return (
     <globalContext.Provider value={ states }>
       { children }

@@ -39,7 +39,7 @@ export function QuantitySelector(props: QuantitySelectorComponentProps){
       <ToggleGroup.Item 
         className='flex items-center justify-center border border-borderColor w-10 h-10 rounded-md p-2 
         data-[state=on]:border-blue-600 data-[state=on]:border-2' 
-        value='+4'>
+        value='4'>
         +4
       </ToggleGroup.Item>
     </ToggleGroup.Root>
