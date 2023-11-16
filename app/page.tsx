@@ -4,7 +4,7 @@ import { PiListFill } from 'react-icons/pi';
 import { BsFillGridFill } from 'react-icons/bs';
 import DesktopFilter from '@/components/FIlters/DesktopFilter';
 import ImmobileList from '@/components/ImmobileList';
-import MostUsedFilters from '@/components/MostUsedFilters';
+import MostUsedFilters from '@/components/MostUsedFiltersList';
 import OverlaidFilter from '@/components/FIlters/OverlaidFilter';
 import { useState } from 'react';
 
