@@ -12,10 +12,10 @@ export default function MostUsedFilters({ filter }: any) {
         applyedFilter ? (
           <li className="sticky">
             <button
-              className="rounded-2xl bg-primaryBlue text-white py-1 px-3
+              className="rounded-2xl bg-primaryBlue text-white py-1 px-3 font-medium
               before:bg-[#FF6F6F] before:text-white before:flex before:items-center before:justify-center 
-              before:content-['x'] before:absolute before:top-[-3px] before:right-[-3px] 
-              before:rounded-full before:w-3 before:h-3 before:text-[8px]" 
+              before:content-['\2716'] before:absolute before:top-[-3px] before:right-[-3px] 
+              before:rounded-full before:w-4 before:h-4 before:text-[10px] before:p-2" 
               onClick={() => {
                 setApplyedFilter(false);
                 setPropertyCaracteristics((prev) => ({
