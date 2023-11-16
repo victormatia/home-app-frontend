@@ -66,11 +66,11 @@ export function Card({ immobile }: TCard){
 
         <div className='flex gap-2 pt-2 items-end'>
           <div className='w-52'>
-            <span  className='text-xs text-grayLegend line-clamp-2'>
+            <span  className='text-xs text-grayIcon line-clamp-2'>
               { immobile.description }
             </span>
 
-            <div className='flex items-center gap-2 mt-4 text-placeholder'>
+            <div className='flex items-center gap-2 mt-4 text-grayIcon'>
               <span className='flex items-center gap-1 border-r-[1px] border-zinc-300 pr-1'>
                 <IoBedOutline />
                 {immobile.bedroomsQty} 
