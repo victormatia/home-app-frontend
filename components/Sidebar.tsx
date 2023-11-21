@@ -17,10 +17,10 @@ export default function Sidebar() {
       h-screen w-20 flex flex-col justify-between items-center absolute top-0 left-0 bg-darkGray py-6'  
     >
       <section>
-        <Image src={homeIcon} width={32} height={32} alt={''} />
+        <Image src={homeIcon} width={32} height={32} alt={'home-logo'} />
       </section>
 
-      <section className='h-64 w-full flex flex-col items-center justify-center gap-6 text-grayIcon text-2xl'>
+      <nav className='h-64 w-full flex flex-col items-center justify-center gap-6 text-grayIcon text-2xl'>
         <Link
           className='relative w-full h-12 flex justify-center items-center sidebar__span'
           href='/'
@@ -64,9 +64,9 @@ export default function Sidebar() {
 
           <BsHouseAdd className="hover:text-zinc-200" />
         </Link>
-      </section>
+      </nav>
 
-      <section className='w-full text-grayIcon text-2xl'>
+      <nav className='w-full text-grayIcon text-2xl'>
         <Link
           className='relative w-full h-12 flex justify-center items-center sidebar__span'
           href='/settings'
@@ -80,7 +80,7 @@ export default function Sidebar() {
 
           <BsFillGearFill className="hover:text-zinc-200" />
         </Link>
-      </section>
+      </nav>
     </section>
   );
 }
