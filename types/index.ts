@@ -12,6 +12,7 @@ export type TAddress = {
   id: string,
   street: string,
   city: string,
+  burgh: string,
   state: string, 
   postalCode: string,
   number: string, 
