@@ -1,5 +1,4 @@
-'use client';
-
+'use client'
 import Image from 'next/image';
 import { Sliders } from 'phosphor-react';
 import Search from './Search';
@@ -37,7 +36,7 @@ export function Header(){
 
       <div className='max-[700px]:hidden justify-self-end pr-3'>
         {isLoading && (
-          <div className="h-14 w-full  flex items-center justify-center gap-1 bg-white rounded-r-md">
+          <div className="h-14 w-full  flex items-center justify-center bg-transparent">
             <div 
               className='h-6 w-6 border-2 border-[#c3c3c373] rounded-full 
               border-t-[#2be4a0] animate-spin'
@@ -47,12 +46,12 @@ export function Header(){
 
         {!isLoading && !user && (
           <Nav className="h-full flex items-center justify-center rounded-md bg-gradientBlue p-2 text-white " navbar>
-            <a
+            <Link
               href="/api/auth/login"
               className="btn btn-primary btn-block"
               tabIndex={0}>
-              Log in
-            </a>
+              Login
+            </Link>
           </Nav>
         )}
         {user && (
