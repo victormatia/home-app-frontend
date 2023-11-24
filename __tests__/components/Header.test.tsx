@@ -37,20 +37,7 @@ describe('Header Tests', () => {
     expect(searchButton).toBeInTheDocument();
   });
 
-    // it('02 - should call login page when hit the button', async () => {
-    //   // arrange
-    //   renderComponent()
-    //   const loginButton = await screen.findByRole('link', {name: /login/i})
-    //   // act
-    //   userEvent.click(loginButton)
-
-
-    //   // assert
-    //   expect(loginButton.getAttribute('href')).toBe('/api/auth/login');
-
-    // });
-
-    it('03 - should value change when user type in search bar', async () => {
+    it('02 - should value change when user type in search bar', async () => {
       // arrange
       renderComponent()
       const searchBar = screen.getByPlaceholderText(/Rua 1, Número 2, Bairro 3.../i);
@@ -60,7 +47,7 @@ describe('Header Tests', () => {
      expect(searchBar).toHaveValue('Hello')
     });
 
-    it('04 - should profile icon is render correctly', async () => {
+    it('03 - should profile icon is render correctly', async () => {
       // arrange
       renderComponent()
       const name = 'test'
@@ -80,9 +67,6 @@ describe('Header Tests', () => {
       })
       const profilePicture = await screen.findByRole('img', {name: /profile/i})
       const logoutButton = screen.getByRole('link') 
-      screen.debug()
-     
-      // act
      
       // assert
      expect(profilePicture).toBeInTheDocument()
