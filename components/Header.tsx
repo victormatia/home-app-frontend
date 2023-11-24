@@ -1,5 +1,4 @@
-'use client';
-
+'use client'
 import Image from 'next/image';
 import { Sliders } from 'phosphor-react';
 import Search from './Search';
@@ -36,53 +35,58 @@ export function Header(){
       </div>
 
       <div className='max-[700px]:hidden justify-self-end pr-3'>
-        {isLoading && (
-          <div className="h-14 w-full  flex items-center justify-center gap-1 bg-white rounded-r-md">
-            <div 
-              className='h-6 w-6 border-2 border-[#c3c3c373] rounded-full 
-              border-t-[#2be4a0] animate-spin'
-            />
-          </div>
-        )}
-
-        {!isLoading && !user && (
-          <Nav className="h-full flex items-center justify-center rounded-md bg-gradientBlue p-2 text-white " navbar>
-            <a
-              href="/api/auth/login"
-              className="btn btn-primary btn-block"
-              tabIndex={0}>
-              Log in
-            </a>
-          </Nav>
-        )}
-        {user && (
-          <Nav
-            id="nav-mobile"
-            className="h-full  flex items-center justify-center"
-            navbar
-            data-testid="navbar-menu-mobile">
-            <NavItem className='flex items-center justify-center gap-2'>
-              <span className='text-lg text-info'>
-                {user.name}
-              </span>
-              <span className="user-info">
-                <Image
-                  src={user.picture as string}
-                  alt="Profile"
-                  className="nav-user-profile rounded-full border border-primaryBlue"
-                  width={50}
-                  height={50}
-                  data-testid="navbar-picture-mobile"
-                />
-              </span>
-            </NavItem>
-            <NavItem id="qsLogoutBtn" className='ml-4'>
-              <Link href="/api/auth/logout" >
-                <FiLogOut  className="text-xl text-info"/>
-              </Link>
-            </NavItem>
-          </Nav>
-        )}
+      {
+          isLoading ? (
+            <div className="h-14 w-full  flex items-center justify-center gap-1 bg-grayBase rounded-r-md">
+              <div 
+                className='h-6 w-6 border-2 border-[#c3c3c373] rounded-full 
+                border-t-[#2be4a0] animate-spin'
+              />
+            </div>
+          ) : (
+            <>
+              {
+                !user ? (
+                <Nav className="h-full flex items-center justify-center rounded-md bg-gradientBlue p-2 text-white " navbar>
+                  <a
+                    href="/api/auth/login"
+                    className="btn btn-primary btn-block"
+                    tabIndex={0}>
+                    Login
+                  </a>
+                </Nav>
+              ) : (
+                <Nav
+                  id="nav-mobile"
+                  className="h-full  flex items-center justify-center"
+                  navbar
+                  data-testid="navbar-menu-mobile">
+                  <NavItem className='flex items-center justify-center gap-2'>
+                    <span className='text-lg text-info'>
+                      {user.name}
+                    </span>
+                    <span className="user-info">
+                      <Image
+                        src={user.picture as string}
+                        alt="Profile"
+                        className="nav-user-profile rounded-full border border-primaryBlue"
+                        width={50}
+                        height={50}
+                        data-testid="navbar-picture-mobile"
+                      />
+                    </span>
+                  </NavItem>
+                  <NavItem id="qsLogoutBtn" className='ml-4'>
+                    <Link href="/api/auth/logout" >
+                      <FiLogOut  className="text-xl text-info"/>
+                    </Link>
+                  </NavItem>
+                </Nav>
+              )
+            }
+            </>
+          )
+        }
       </div>
     </div>   
   );
