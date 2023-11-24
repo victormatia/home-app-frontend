@@ -17,7 +17,7 @@ const renderComponent = () => {
     </TanStackProvider>
 )}
 
-const useUserSpy = jest.spyOn(useUser, 'useUser')
+
 
 describe('Header Tests', () => {
   it('01 - should be rendered correctly on screen', async () => {
@@ -62,25 +62,30 @@ describe('Header Tests', () => {
 
     it('04 - should profile icon is render correctly', async () => {
       // arrange
+      renderComponent()
       const name = 'test'
+      const useUserSpy = jest.spyOn(useUser, 'useUser')
       useUserSpy.mockReturnValue({
         user: {
           email: 'test@test.com.br',
           email_verified: true,
           name,
           nickname: 'test20',
-          picture :  'test.png',
+          picture :  'https://test.png',
           org_id: 'testorg',
+
         },
         isLoading: false ,
         checkSession: jest.fn(),
       })
-      renderComponent()
-      const profilePicture = screen.getByText(name)
+      const profilePicture = await screen.findByRole('img', {name: /profile/i})
+      const logoutButton = screen.getByRole('link') 
+      screen.debug()
      
       // act
      
       // assert
      expect(profilePicture).toBeInTheDocument()
+     expect(logoutButton.getAttribute('href')).toBe('/api/auth/logout')
     });
 })
