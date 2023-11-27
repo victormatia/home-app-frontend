@@ -97,7 +97,7 @@ export function Footer() {
               className="btn btn-primary btn-block"
               tabIndex={0}
             >
-              Login
+              Log in
             </a>
           </Nav>
         )}
