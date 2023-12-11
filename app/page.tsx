@@ -41,3 +41,5 @@ export default function Home() {
   );
 }
 
+// resolves all conflicts
+
