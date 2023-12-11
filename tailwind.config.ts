@@ -1,4 +1,5 @@
-import type { Config } from 'tailwindcss'
+/* eslint-disable linebreak-style */
+import type { Config } from 'tailwindcss';
 
 const config: Config = {
   content: [
@@ -8,13 +9,40 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      colors: {
+        grayBase: '#F5F5F5',
+        grayIcon: '#878787',
+        grayLegend: '#424242',
+        grayTitle: '#202020',
+        darkGray: '#2B2B2B',
+        buttonText: '#4A4A4A',
+        borderColor: '#949494',
+        primaryBlue: '#367ADF',
+        secondaryBlue: '#367ADF',
+      },
+
       backgroundImage: {
-        'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
-        'gradient-conic':
-          'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
+        gradientBlue: 'linear-gradient(107deg, #367ADF 13.1%, #36A5C8 68.23%);',
+      },
+
+      animation: {
+        openfilter: 'openfilter 0.2s ease-in',
+      },
+
+      keyframes:{
+        openfilter:{
+          'from': {
+            opacity: '0',
+            transform: 'translateX(100vw)',
+          },
+          'to': {
+            opacity: '1',
+            transform: 'translateX(0)',
+          },
+        },
       },
     },
   },
-  plugins: [],
-}
-export default config
+  plugins: [require('@tailwindcss/line-clamp')],
+};
+export default config;
