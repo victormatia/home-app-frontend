@@ -40,6 +40,3 @@ export default function Home() {
     </main>
   );
 }
-
-// resolves all conflicts
-

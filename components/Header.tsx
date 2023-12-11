@@ -1,4 +1,5 @@
 'use client'
+
 import Image from 'next/image';
 import { Sliders } from 'phosphor-react';
 import Search from './Search';
@@ -16,7 +17,6 @@ export function Header(){
   function handleOpenFilter() {
     setToggleOpenFilter(true);
   }
-
   return(
     <div className='flex  h-20 px-6 py-7 items-center justify-around bg-grayBase min-[700px]:justify-end'>
 
@@ -88,6 +88,6 @@ export function Header(){
           )
         }
       </div>
-    </div>   
+    </div>
   );
 };
