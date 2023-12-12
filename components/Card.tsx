@@ -8,6 +8,7 @@ import { useState } from 'react';
 import { useKeenSlider } from 'keen-slider/react';
 import 'keen-slider/keen-slider.min.css';
 import Image from 'next/image';
+import { Button } from './Button';
 
 export function Card({ immobile }: TCard){
   const [isSaved, setIsSaved] = useState(false);
@@ -53,21 +54,21 @@ export function Card({ immobile }: TCard){
           </h3>
           {
             isSaved === false ? (
-              <button
-                className='text-grayIcon'
+              <Button
+                variant='save'
                 onClick={() => setIsSaved(true)}
                 data-testid='bookMarkIcon'
               >
                 <BsBookmark />
-              </button>
+              </Button>
             ): (
-              <button
-                className='text-grayIcon'
+              <Button
+                variant='save'
                 onClick={() => setIsSaved(false)}
                 data-testid='bookMarkFillIcon'
               >
                 <BsBookmarkFill />
-              </button>
+              </Button>
             )
           }
         </div>
@@ -109,8 +110,7 @@ export function Card({ immobile }: TCard){
             </div>
           </div>
 
-          <button className='flex  gap-2  w-32 h-10  bg-gradientBlue rounded-md text-white shadow-xl
-          hover:opacity-80 transition-all'>
+          <Button variant='card'>
             <span className=' pl-1 pt-1 text-[10px] text-left'>
               Alugar 
               {' '}
@@ -120,7 +120,7 @@ export function Card({ immobile }: TCard){
             <span className='whitespace-nowrap flex-grow mt-3'>
               {`R$ ${Number(immobile.price).toFixed(2)}`} 
             </span>
-          </button>
+          </Button>
         </div>
       </div>
     </div>

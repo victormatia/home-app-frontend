@@ -9,6 +9,7 @@ import { useContext } from 'react';
 import { FiLogOut } from 'react-icons/fi';
 import Link from 'next/link';
 import globalContext from '@/context/context';
+import { Button } from './Button';
 
 export function Header(){
   const { setToggleOpenFilter } = useContext(globalContext);
@@ -25,13 +26,13 @@ export function Header(){
       </div>
 
       <div>
-        <button 
-          className='flex justify-between items-center text-placeholder min-[700px]:hidden '
+        <Button 
+          variant='filter'
           onClick={handleOpenFilter}
         >
           <Sliders size={24} className='rotate-90'/>
           Filter
-        </button>
+        </Button>
       </div>
 
       <div className='max-[700px]:hidden justify-self-end pr-3'>

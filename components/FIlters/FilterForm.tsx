@@ -6,6 +6,7 @@ import { Check } from 'phosphor-react';
 import { useContext, useMemo, useState } from 'react';
 import globalContext from '@/context/context';
 import { TImmobile } from '@/types';
+import { Button } from '../Button';
 
 export function FilterForm(){
   const { 
@@ -254,20 +255,17 @@ export function FilterForm(){
       </div>
 
       <div className='flex gap-1'>
-        <button
+        <Button
           onClick={handleCleanFilters}
           type='button' 
-          className='font-semibold text-lg p-3 rounded-md w-full hover:bg-gray-200'
+          variant='cleanFilter'
         >
           Limpar
-        </button>
+        </Button>
 
-        <button
-          type='submit' 
-          className='bg-gradientBlue font-semibold text-lg p-3 text-white rounded-md w-full'
-        >
+        <Button type='submit'>
          Aplicar
-        </button>
+        </Button>
       </div>
 
     </form>
