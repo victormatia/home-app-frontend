@@ -23,7 +23,7 @@ const button = tv({
       mostUsedFiltersClicked:[
       "rounded-2xl bg-primaryBlue text-white py-1 px-3 font-medium",
       "before:bg-[#FF6F6F] before:text-white before:flex before:items-center before:justify-center",  
-      "before:content-['\\2716'] before:absolute before:top-[-3px] before:right-[-3px] before:rounded-full before:w-4 before:h-4 before:text-[10px] before:p-2"
+      "before:content-['X'] before:absolute before:top-[-3px] before:right-[-3px] before:rounded-full before:w-4 before:h-4 before:text-[10px] before:p-2"
       ],
       talkToOwner:
       'bg-grayTitle w-full py-4 text-white rounded-md'
