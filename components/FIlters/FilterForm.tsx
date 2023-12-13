@@ -108,6 +108,10 @@ export function FilterForm(){
       isFurnished: 'todos',
     };
 
+    setImmobileType('todos')
+    setMinPrice(0)
+    setBathroomsQty('todos')
+
     setPropertyCaracteristics(cleanFilter);
 
     setToggleOpenFilter(false);
