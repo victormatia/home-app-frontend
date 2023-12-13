@@ -109,8 +109,15 @@ export function FilterForm(){
     };
 
     setImmobileType('todos')
-    setMinPrice(0)
+    setPetFriendly('todos')
+    setIsFurnished('todos')
+    setParkingQty('todos')
     setBathroomsQty('todos')
+    setBedroomsQty('todos')
+    setMinArea(0)
+    setMinPrice(0)
+    setMaxArea(9999)
+    setMaxPrice(999999)
 
     setPropertyCaracteristics(cleanFilter);
 
@@ -261,7 +268,7 @@ export function FilterForm(){
       <div className='flex gap-1'>
         <Button
           onClick={handleCleanFilters}
-          type='button' 
+          type='reset' 
           variant='cleanFilter'
         >
           Limpar
