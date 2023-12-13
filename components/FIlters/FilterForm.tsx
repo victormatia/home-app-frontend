@@ -16,6 +16,7 @@ export function FilterForm(){
     setPropertyCaracteristics, 
     propertyCaracteristics, 
   } = useContext(globalContext);
+  const [resetFilter, setResetFilter] = useState('1')
   const [immobileType, setImmobileType] = useState<string>('todos');
   const [minPrice, setMinPrice] = useState<number>(0);
   const [maxPrice, setMaxPrice] = useState<number>(999999);
@@ -108,6 +109,8 @@ export function FilterForm(){
       isFurnished: 'todos',
     };
 
+    setResetFilter((prev) => (prev === '1' ? '2' : '1'))
+
     setImmobileType('todos')
     setPetFriendly('todos')
     setIsFurnished('todos')
@@ -131,7 +134,7 @@ export function FilterForm(){
         <label htmlFor="immoblie-type" className='text-info font-semibold mb-2'>
                    Tipo de imóvel
         </label>
-        <SelectComponent immobliType={setImmobileType}/>
+        <SelectComponent immobliType={setImmobileType} key={resetFilter}/>
       </div>
 
       <div className='flex flex-col '>
@@ -178,21 +181,21 @@ export function FilterForm(){
       <div className='flex flex-col '>
         <label htmlFor="bathrooms" className='text-info font-semibold mb-2'>
                   Banheiros
-          <QuantitySelector quantitySelect={setBathroomsQty}/>
+          <QuantitySelector quantitySelect={setBathroomsQty} key={resetFilter}/>
         </label>
       </div>
 
       <div className='flex flex-col'>
         <label htmlFor="bedrooms" className='text-info font-semibold mb-2'>
                   Quartos
-          <QuantitySelector quantitySelect={setBedroomsQty}/>
+          <QuantitySelector quantitySelect={setBedroomsQty} key={resetFilter}/>
         </label>
       </div>
 
       <div className='flex flex-col mb-4'>
         <label htmlFor="parking" className='text-info font-semibold mb-2'>
                   Vagas
-          <QuantitySelector quantitySelect={setParkingQty}/>
+          <QuantitySelector quantitySelect={setParkingQty} key={resetFilter}/>
         </label>
       </div>
 
