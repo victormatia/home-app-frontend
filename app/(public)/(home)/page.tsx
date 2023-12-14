@@ -26,7 +26,8 @@ export default function Home() {
             <PiListFill className='hover:text-zinc-500 cursor-pointer transition-all' />
             <BsFillGridFill className='hover:text-zinc-500 cursor-pointer transition-all' />
             <Button
-              variant='openFilter'
+              variant='ghost'
+              className='border-[#C1C1C1] border-l text-center font-medium text-[#424242] text-base px-5 h-full min-[1466px]:hidden rounded-none'
               onClick={handleOpenOverlaidFilter}  
             >
               Filtros
