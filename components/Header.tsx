@@ -27,7 +27,8 @@ export function Header(){
 
       <div>
         <Button 
-          variant='filter'
+          variant='ghost'
+          className='flex justify-between items-center text-[#676767] min-[700px]:hidden'
           onClick={handleOpenFilter}
         >
           <Sliders size={24} className='rotate-90'/>

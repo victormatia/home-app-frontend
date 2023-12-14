@@ -272,12 +272,13 @@ export function FilterForm(){
         <Button
           onClick={handleCleanFilters}
           type='reset' 
-          variant='cleanFilter'
+          variant='ghost'
+          className='p-3 w-full shadow-lg font-semibold text-lg'
         >
           Limpar
         </Button>
 
-        <Button type='submit'>
+        <Button className='font-semibold text-lg p-3 w-full' type='submit'>
          Aplicar
         </Button>
       </div>

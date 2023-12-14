@@ -55,7 +55,8 @@ export function Card({ immobile }: TCard){
           {
             isSaved === false ? (
               <Button
-                variant='save'
+                variant='ghost'
+                className='text-grayIcon'
                 onClick={() => setIsSaved(true)}
                 data-testid='bookMarkIcon'
               >
@@ -63,7 +64,8 @@ export function Card({ immobile }: TCard){
               </Button>
             ): (
               <Button
-                variant='save'
+                variant='ghost'
+                className='text-grayIcon'
                 onClick={() => setIsSaved(false)}
                 data-testid='bookMarkFillIcon'
               >
@@ -110,7 +112,10 @@ export function Card({ immobile }: TCard){
             </div>
           </div>
 
-          <Button variant='card'>
+          <Button 
+            className='flex gap-2 w-32 h-10 shadow-xl hover:opacity-80 transition-all'
+            variant='primary'
+          >
             <span className=' pl-1 pt-1 text-[10px] text-left'>
               Alugar 
               {' '}
