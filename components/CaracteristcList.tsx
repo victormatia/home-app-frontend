@@ -7,55 +7,53 @@ const caracteristics = {sqrFootage: 40, bedrooms: 1, bathrooms: 3, petFrindly: t
 
 export function CaracteristicList(props: any) {
   return(
-    <div>
+    <>
       <h2 className="text-[#ACACAC]">Caracteristicas</h2>
       
-      <div className="grid grid-cols-3 gap-3">
-        <div className="border-grayIcon rounded-md border p-2 flex gap-2 items-center justify-center text-[10px] text-grayIcon">
+      <ul className="grid grid-cols-3 gap-3">
+        <li className="border-grayIcon rounded-md border p-2 flex gap-2 items-center justify-center text-[10px] text-grayIcon">
             <IoHomeOutline/>
             <p>Área de {caracteristics.sqrFootage} m²</p>
-        </div>
+        </li>
         {caracteristics.bedrooms === 0 ?
-          <div className="border-grayIcon rounded-md border p-2 flex gap-2 items-center justify-center text-[10px] text-grayIcon">
+          <li className="border-grayIcon rounded-md border p-2 flex gap-2 items-center justify-center text-[10px] text-grayIcon">
             <IoBedOutline/>
             <p>sem quartos</p>
-          </div>:
-          <div className="border-grayIcon rounded-md border p-2 flex gap-2 items-center justify-center text-[10px] text-grayIcon">
+          </li>:
+          <li className="border-grayIcon rounded-md border p-2 flex gap-2 items-center justify-center text-[10px] text-grayIcon">
             <IoBedOutline/>
             <p>{caracteristics.bedrooms} quartos</p>
-          </div>
+          </li>
         }
         {caracteristics.bathrooms === 0 ?
-          <div className="border-grayIcon rounded-md border p-2 flex gap-2 items-center justify-center text-[10px] text-grayIcon">
+          <li className="border-grayIcon rounded-md border p-2 flex gap-2 items-center justify-center text-[10px] text-grayIcon">
             <FaShower/>
             <p>sem banheiros</p>
-          </div>:
-          <div className="border-grayIcon rounded-md border p-2 flex gap-2 items-center justify-center text-[10px] text-grayIcon">
+          </li>:
+          <li className="border-grayIcon rounded-md border p-2 flex gap-2 items-center justify-center text-[10px] text-grayIcon">
             <FaShower/>
             <p>{caracteristics.bathrooms} banheiros</p>
-          </div>
+          </li>
         }
 
         {caracteristics.parking === 0 ?
-          <div className="border-grayIcon rounded-md border p-2 flex gap-2 items-center justify-center text-[10px] text-grayIcon">
+          <li className="border-grayIcon rounded-md border p-2 flex gap-2 items-center justify-center text-[10px] text-grayIcon">
             <FaCar/>
             <p>sem vagas</p>
-          </div>:
-          <div className="border-grayIcon rounded-md border p-2 flex gap-2 items-center justify-center text-[10px] text-grayIcon">
+          </li>:
+          <li className="border-grayIcon rounded-md border p-2 flex gap-2 items-center justify-center text-[10px] text-grayIcon">
             <FaCar/>
             <p>{caracteristics.parking} vagas</p>
-          </div>
+          </li>
         }
         {caracteristics.petFrindly ?
-          <div className="border-grayIcon rounded-md border p-2 flex gap-2 items-center justify-center text-[10px] text-grayIcon">
+          <li className="border-grayIcon rounded-md border p-2 flex gap-2 items-center justify-center text-[10px] text-grayIcon">
             <MdPets/>
             <p>Aceita pet</p>
-          </div>: null
+          </li>: null
         }
-
-    
-
-      </div>
-    </div>
+      </ul>
+    </>
+   
   )
 }
