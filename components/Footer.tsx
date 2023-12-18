@@ -29,14 +29,14 @@ export function Footer() {
             currPage === 'home'
             &&  <div className='absolute top-0 w-16 h-1 bg-gradientBlue rounded-b-md' />
           }
-          <button className='flex flex-col items-center justify-center gap-1'>
+          <div className='flex flex-col items-center justify-center gap-1'>
             <SlMagnifier
               className="hover:text-zinc-200 text-lg text-grayIcon"
             />
             <span className='text-xs text-grayIcon'>
               Buscar
             </span>
-          </button>
+          </div>
         </Link>
 
         <div className='w-[2px] h-5 bg-grayIcon'></div>
@@ -51,12 +51,12 @@ export function Footer() {
             currPage === 'advertise' 
             &&  <div className='absolute top-0 w-16 h-1 bg-gradientBlue rounded-b-md' />
           }
-          <button className='flex flex-col items-center justify-center gap-1'>
+          <div className='flex flex-col items-center justify-center gap-1'>
             <BsHouseAdd className="hover:text-zinc-200 text-lg text-grayIcon" />
             <span className='text-xs text-grayIcon'>
             Anunciar
             </span>
-          </button>
+          </div>
         </Link>
 
         <div className='w-[2px] h-5 bg-grayIcon'></div>
@@ -71,12 +71,12 @@ export function Footer() {
             currPage === 'saved'
             &&  <div className='absolute top-0 w-16 h-1 bg-gradientBlue rounded-b-md' />
           }
-          <button className='flex flex-col items-center justify-center gap-1'>
+          <div className='flex flex-col items-center justify-center gap-1'>
             <BsBookmarkFill className="hover:text-zinc-200 text-lg text-grayIcon" />
             <span className=' text-xs text-grayIcon'>  
             Favoritos
             </span>
-          </button>
+          </div>
         </Link>
 
         <div className='w-[2px] h-5 bg-placeholder'></div>

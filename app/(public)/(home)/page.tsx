@@ -7,6 +7,7 @@ import ImmobileList from '@/components/ImmobileList';
 import MostUsedFilters from '@/components/MostUsedFiltersList';
 import OverlaidFilter from '@/components/FIlters/OverlaidFilter';
 import { useState } from 'react';
+import { Button } from '@/components/Button';
 
 export default function Home() {
   const [openOverlaidFilter, setOpenOverlaidFilter] = useState(false);
@@ -24,13 +25,13 @@ export default function Home() {
           <div className='flex  items-center gap-2 pr-2 text-[#424242] text-2xl'>
             <PiListFill className='hover:text-zinc-500 cursor-pointer transition-all' />
             <BsFillGridFill className='hover:text-zinc-500 cursor-pointer transition-all' />
-            <button 
-              className='border-[#C1C1C1] border-l text-center font-medium text-[#424242] text-base px-5 h-full
-              min-[1466px]:hidden '
+            <Button
+              variant='ghost'
+              className='border-[#C1C1C1] border-l text-center font-medium text-[#424242] text-base px-5 h-full min-[1466px]:hidden rounded-none'
               onClick={handleOpenOverlaidFilter}  
             >
               Filtros
-            </button>
+            </Button>
           </div>
         </div>
         <ImmobileList />
