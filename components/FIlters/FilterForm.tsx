@@ -154,6 +154,7 @@ export function FilterForm(){
                 id="min-price"
                 min="0"
                 max="999999"
+                value={minPrice}
                 onChange={(e) => setMinPrice(Number(e.target.value))}
               />
             </InputRoot>
@@ -171,6 +172,7 @@ export function FilterForm(){
                 id="max-price"
                 min="0"
                 max="999999"
+                value={maxPrice}
                 onChange={(e) => setMaxPrice(Number(e.target.value))}
               />
             </InputRoot>
@@ -214,13 +216,17 @@ export function FilterForm(){
                 min="0"
                 max="9999"
                 placeholder='0 m²'
+                value={minArea}
                 onChange={(e) => setMinArea(Number(e.target.value))}
               />
+              <InputPrefix className='font-semibold text-xs'>
+                        m²
+              </InputPrefix>
             </InputRoot>
           </label>
 
           <label htmlFor="max-area" className='flex flex-col font-semibold text-xs'>
-                    Mínimo
+                    Máximo
             <InputRoot>
               <InputControl
                 type="number" 
@@ -229,8 +235,12 @@ export function FilterForm(){
                 min="0"
                 max="9999"
                 placeholder='9999 m²'
+                value={maxArea}
                 onChange={(e) => setMaxArea(Number(e.target.value))}
               />
+              <InputPrefix className='font-semibold text-xs'>
+                        m²
+              </InputPrefix>
             </InputRoot>
           </label>
         </div>
@@ -271,7 +281,7 @@ export function FilterForm(){
       <div className='flex gap-1'>
         <Button
           onClick={handleCleanFilters}
-          type='reset' 
+          type='button' 
           variant='ghost'
           className='p-3 w-full shadow-lg font-semibold text-lg'
         >
