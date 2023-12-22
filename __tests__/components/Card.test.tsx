@@ -15,7 +15,7 @@ describe('Card Tests', () => {
     const bedRoomQty = screen.getByTestId(/bedRoomQty/i);
     const parkingQty = screen.getByTestId(/parkingQty/i);
     const bathroomsQty = screen.getByTestId(/bathroomsQty/i);
-    const rentBtn = screen.getByRole('button', { name: /alugar/i });
+    const rentBtn = screen.getByRole('link', { name: /alugar/i });
 
     expect(immobilePhotos.length).toEqual(2);
     expect(title).toBeInTheDocument();
