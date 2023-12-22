@@ -13,7 +13,7 @@ const button = tv({
       tertiary:
       "bg-[#C1C1C1]",
       ghost:
-      'bg-transparent text-grayTitle hover:bg-gray-200',
+      'bg-transparent text-grayTitle',
     },
   },
 

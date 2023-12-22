@@ -9,6 +9,7 @@ import { useKeenSlider } from 'keen-slider/react';
 import 'keen-slider/keen-slider.min.css';
 import Image from 'next/image';
 import { Button } from './Button';
+import Link from 'next/link';
 
 export function Card({ immobile }: TCard){
   const [isSaved, setIsSaved] = useState(false);
@@ -112,10 +113,10 @@ export function Card({ immobile }: TCard){
             </div>
           </div>
 
-          <Button 
-            className='flex gap-2 w-32 h-10 shadow-xl hover:opacity-80 transition-all'
-            variant='primary'
-          >
+          <Link 
+            className='flex gap-2 w-32 h-10 shadow-xl hover:opacity-80 bg-gradientBlue rounded-md text-white transition-all'
+            href={`/immobile/${immobile.id}`}
+          >         
             <span className=' pl-1 pt-1 text-[10px] text-left'>
               Alugar 
               {' '}
@@ -125,7 +126,7 @@ export function Card({ immobile }: TCard){
             <span className='whitespace-nowrap flex-grow mt-3'>
               {`R$ ${Number(immobile.price).toFixed(2)}`} 
             </span>
-          </Button>
+          </Link>
         </div>
       </div>
     </div>

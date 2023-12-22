@@ -283,7 +283,7 @@ export function FilterForm(){
           onClick={handleCleanFilters}
           type='button' 
           variant='ghost'
-          className='p-3 w-full shadow-lg font-semibold text-lg'
+          className='p-3 w-full shadow-lg font-semibold text-lg hover:bg-gray-200'
         >
           Limpar
         </Button>
