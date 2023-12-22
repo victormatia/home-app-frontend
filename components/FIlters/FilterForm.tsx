@@ -6,6 +6,7 @@ import { Check } from 'phosphor-react';
 import { useContext, useMemo, useState } from 'react';
 import globalContext from '@/context/context';
 import { TImmobile } from '@/types';
+import { Button } from '../Button';
 
 export function FilterForm(){
   const { 
@@ -15,6 +16,7 @@ export function FilterForm(){
     setPropertyCaracteristics, 
     propertyCaracteristics, 
   } = useContext(globalContext);
+  const [resetFilter, setResetFilter] = useState('1')
   const [immobileType, setImmobileType] = useState<string>('todos');
   const [minPrice, setMinPrice] = useState<number>(0);
   const [maxPrice, setMaxPrice] = useState<number>(999999);
@@ -107,6 +109,19 @@ export function FilterForm(){
       isFurnished: 'todos',
     };
 
+    setResetFilter((prev) => (prev === '1' ? '2' : '1'))
+
+    setImmobileType('todos')
+    setPetFriendly('todos')
+    setIsFurnished('todos')
+    setParkingQty('todos')
+    setBathroomsQty('todos')
+    setBedroomsQty('todos')
+    setMinArea(0)
+    setMinPrice(0)
+    setMaxArea(9999)
+    setMaxPrice(999999)
+
     setPropertyCaracteristics(cleanFilter);
 
     setToggleOpenFilter(false);
@@ -119,7 +134,7 @@ export function FilterForm(){
         <label htmlFor="immoblie-type" className='text-info font-semibold mb-2'>
                    Tipo de imóvel
         </label>
-        <SelectComponent immobliType={setImmobileType}/>
+        <SelectComponent immobliType={setImmobileType} key={resetFilter}/>
       </div>
 
       <div className='flex flex-col '>
@@ -139,6 +154,7 @@ export function FilterForm(){
                 id="min-price"
                 min="0"
                 max="999999"
+                value={minPrice}
                 onChange={(e) => setMinPrice(Number(e.target.value))}
               />
             </InputRoot>
@@ -156,6 +172,7 @@ export function FilterForm(){
                 id="max-price"
                 min="0"
                 max="999999"
+                value={maxPrice}
                 onChange={(e) => setMaxPrice(Number(e.target.value))}
               />
             </InputRoot>
@@ -166,21 +183,21 @@ export function FilterForm(){
       <div className='flex flex-col '>
         <label htmlFor="bathrooms" className='text-info font-semibold mb-2'>
                   Banheiros
-          <QuantitySelector quantitySelect={setBathroomsQty}/>
+          <QuantitySelector quantitySelect={setBathroomsQty} key={resetFilter}/>
         </label>
       </div>
 
       <div className='flex flex-col'>
         <label htmlFor="bedrooms" className='text-info font-semibold mb-2'>
                   Quartos
-          <QuantitySelector quantitySelect={setBedroomsQty}/>
+          <QuantitySelector quantitySelect={setBedroomsQty} key={resetFilter}/>
         </label>
       </div>
 
       <div className='flex flex-col mb-4'>
         <label htmlFor="parking" className='text-info font-semibold mb-2'>
                   Vagas
-          <QuantitySelector quantitySelect={setParkingQty}/>
+          <QuantitySelector quantitySelect={setParkingQty} key={resetFilter}/>
         </label>
       </div>
 
@@ -199,13 +216,17 @@ export function FilterForm(){
                 min="0"
                 max="9999"
                 placeholder='0 m²'
+                value={minArea}
                 onChange={(e) => setMinArea(Number(e.target.value))}
               />
+              <InputPrefix className='font-semibold text-xs'>
+                        m²
+              </InputPrefix>
             </InputRoot>
           </label>
 
           <label htmlFor="max-area" className='flex flex-col font-semibold text-xs'>
-                    Mínimo
+                    Máximo
             <InputRoot>
               <InputControl
                 type="number" 
@@ -214,8 +235,12 @@ export function FilterForm(){
                 min="0"
                 max="9999"
                 placeholder='9999 m²'
+                value={maxArea}
                 onChange={(e) => setMaxArea(Number(e.target.value))}
               />
+              <InputPrefix className='font-semibold text-xs'>
+                        m²
+              </InputPrefix>
             </InputRoot>
           </label>
         </div>
@@ -254,20 +279,18 @@ export function FilterForm(){
       </div>
 
       <div className='flex gap-1'>
-        <button
+        <Button
           onClick={handleCleanFilters}
           type='button' 
-          className='font-semibold text-lg p-3 rounded-md w-full hover:bg-gray-200'
+          variant='ghost'
+          className='p-3 w-full shadow-lg font-semibold text-lg'
         >
           Limpar
-        </button>
+        </Button>
 
-        <button
-          type='submit' 
-          className='bg-gradientBlue font-semibold text-lg p-3 text-white rounded-md w-full'
-        >
+        <Button className='font-semibold text-lg p-3 w-full' type='submit'>
          Aplicar
-        </button>
+        </Button>
       </div>
 
     </form>
