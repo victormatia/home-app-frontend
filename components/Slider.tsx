@@ -28,10 +28,10 @@ export default function Slider(props: any) {
 
 
   return (
-      <div className="min-[700px]:left-20 relative w-full">
+      <>
         <figure ref={sliderRef} className="keen-slider  h-96 max-h-screen">
 
-          <div className="keen-slider__slide bg-blue-400">1</div>
+          <div className="keen-slider__slide  bg-blue-400">1</div>
           <div className="keen-slider__slide bg-green-400">2</div>
           <div className="keen-slider__slide bg-amber-400">3</div>
           <div className="keen-slider__slide bg-purple-400">4</div>
@@ -63,7 +63,7 @@ export default function Slider(props: any) {
 
             <Button
               variant="ghost"
-              className="w-9 h-full flex items-center justify-center  left-auto min-[700px]:right-20 right-6 px-2 top-0 absolute hover:cursor-pointer hover:bg-rSliderButtonGradient "
+              className="w-9 h-full flex items-center justify-center  left-auto min-[700px]:right-20 right-px px-2 top-0 absolute hover:cursor-pointer hover:bg-rSliderButtonGradient "
               onClick={(e: any) =>
                 e.stopPropagation() || instanceRef.current?.next()
               }
@@ -72,6 +72,6 @@ export default function Slider(props: any) {
             </Button>
           </>
         )}
-      </div>
+      </>
   )
 }

@@ -8,7 +8,7 @@ const caracteristics = {sqrFootage: 40, bedrooms: 1, bathrooms: 3, petFrindly: t
 export function CaracteristicList(props: any) {
   return(
     <>
-      <h2 className="text-[#ACACAC]">Caracteristicas</h2>
+      <h2 className="text-[#ACACAC] text-xs">Caracteristicas</h2>
       
       <ul className="grid grid-cols-3 gap-3">
         <li className="border-grayIcon rounded-md border p-2 flex gap-2 items-center justify-center text-[10px] text-grayIcon">

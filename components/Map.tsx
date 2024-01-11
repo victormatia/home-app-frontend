@@ -40,16 +40,17 @@ function Map() {
 
   return (
     <div
-      className='w-full h-full flex items-center justify-center'>
+      className='w-full flex items-center justify-center '>
       {
         isLoaded ? (
           <div className='flex flex-col'>
             <span
               className='text-[#ACACAC]
               font-medium
-              text-xl
+              text-xs
               text-left
               mb-2
+              pl-3
               '
             >Localização</span>
             <GoogleMap
