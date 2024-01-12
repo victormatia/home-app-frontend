@@ -28,16 +28,18 @@ export default function Immobile({ params: { id }  } : ImmobileProps ){
   return(
     <main className="w-full overflow-x-hidden">
       <div className="min-[700px]:left-20 left-0 relative w-full overflow-hidden">
-        <Slider />
+            <Slider immobile={immobile!}/>  
       </div>
-      <div className="w-full mt-2 flex flex-col gap-2 pb-20">
+      <div className="w-full mt-2 flex flex-col gap-2 pb-20 min-[700px]:pl-[400px] min-[700px]:pr-[340px]">
         <div className="pl-3 pr-10">
           <h2 className="text-[#ACACAC] text-xs">Descrição</h2>
           <p className="text-base font-medium">{ immobile?.description }</p>
-          <CaracteristicList />
         </div>
+        <div className="min-[700px]:grid min-[700px]:grid-cols-2 items-centerz'">
+          <CaracteristicList bathroomsQty={immobile?.bathroomsQty} parkingQty={immobile?.parkingQty} bedroomsQty={immobile?.bedroomsQty} sqrFootage={immobile?.sqrFootage} petFriendly={immobile?.petFriendly} />
            <Map />
-        <div className="mt-8 flex flex-col gap-4 px-4">
+        </div>
+        <div className="mt-8 flex flex-col gap-4 px-4 min-[700px]:grid min-[700px]:grid-cols-2 min-[700px]:gap-32">
           <Button 
             className="w-full py-3"
             variant="secondary"
