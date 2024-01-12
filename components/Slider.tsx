@@ -34,7 +34,7 @@ export default function Slider({ immobile }: TCard ) {
       <>
         <figure ref={sliderRef} className="keen-slider">
         {
-          immobile.photos?.map(( {photo} , index ) => {
+          immobile?.photos?.map(( {photo} , index ) => {
             return(
               <Image
                 key={ index }
@@ -62,7 +62,7 @@ export default function Slider({ immobile }: TCard ) {
                 e.stopPropagation() || instanceRef.current?.prev()
               }
             >
-              <CaretLeft size={32} />
+              <CaretLeft size={32} className="text-white font-bold"/>
             </Button>
 
             <Button
@@ -72,7 +72,7 @@ export default function Slider({ immobile }: TCard ) {
                 e.stopPropagation() || instanceRef.current?.next()
               }
             >
-             <CaretRight size={32}/> 
+             <CaretRight size={32} className="text-white font-bold"/> 
             </Button>
           </>
         )}
