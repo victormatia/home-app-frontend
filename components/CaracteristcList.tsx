@@ -16,7 +16,7 @@ export function CaracteristicList({bathroomsQty, bedroomsQty, parkingQty, sqrFoo
     <div className="pl-3 pr-10">
       <h2 className="text-[#ACACAC] text-xs">Caracteristicas</h2>
       
-      <ul className="grid grid-cols-3 gap-3">
+      <ul className="mt-2 grid grid-cols-3 gap-3">
         <li className="border-grayIcon rounded-md border p-2 flex gap-2 items-center justify-center text-[10px] text-grayIcon">
             <IoHomeOutline/>
             <p>Área de {sqrFootage} m²</p>
