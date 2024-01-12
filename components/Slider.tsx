@@ -1,12 +1,14 @@
 'use client'
 import { useState } from "react"
+import { Button } from "./Button"
+import { CaretLeft, CaretRight } from "phosphor-react"
+import { TCard } from "@/types"
+import Image from 'next/image';
+
 import { useKeenSlider } from "keen-slider/react"
 import "keen-slider/keen-slider.min.css"
-import { CaretLeft, CaretRight } from "phosphor-react"
-import { Button } from "./Button"
 
-
-export default function Slider(props: any) {
+export default function Slider({ immobile }: TCard ) {
   const [loaded, setLoaded] = useState(false)
   const [sliderRef, instanceRef] = useKeenSlider<HTMLDivElement>({
     initial: 0,
@@ -25,30 +27,32 @@ export default function Slider(props: any) {
       setLoaded(true)
     },
   })
-
+  
+  
 
   return (
       <>
-        <figure ref={sliderRef} className="keen-slider  h-96 max-h-screen">
-
-          <div className="keen-slider__slide  bg-blue-400">1</div>
-          <div className="keen-slider__slide bg-green-400">2</div>
-          <div className="keen-slider__slide bg-amber-400">3</div>
-          <div className="keen-slider__slide bg-purple-400">4</div>
-          <div className="keen-slider__slide bg-rose-400">5</div>
-              {/* <Image
-                src={ props }
-                alt={`immobile photo - ${index}`}
-                width={344}
-                height={222}
+        <figure ref={sliderRef} className="keen-slider">
+        {
+          immobile.photos?.map(( {photo} , index ) => {
+            return(
+              <Image
+                key={ index }
+                src={ photo.url }
+                alt={""}
+                width={400}
+                height={400}
                 className={
                   `keen-slider__slide
                   number-slide${index}
-                  w-full
-                  `
+                  w-full`
                 }
-              /> */}
-        </figure>
+              />
+            );
+          })
+        }
+
+      </figure>
         {loaded && instanceRef.current && (
           <>
             <Button
