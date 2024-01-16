@@ -3,7 +3,6 @@ import { useState } from "react"
 import { Button } from "./Button"
 import { CaretLeft, CaretRight } from "phosphor-react"
 import { TCard } from "@/types"
-import Image from 'next/image';
 
 import { useKeenSlider } from "keen-slider/react"
 import "keen-slider/keen-slider.min.css"
@@ -36,16 +35,16 @@ export default function Slider({ immobile }: TCard ) {
         {
           immobile?.photos?.map(( {photo} , index ) => {
             return(
-              <Image
+              <img
                 key={ index }
                 src={ photo.url }
                 alt={""}
-                width={400}
-                height={400}
                 className={
                   `keen-slider__slide
                   number-slide${index}
-                  w-full`
+                  w-full
+                  max-h-[400px]
+                  `
                 }
               />
             );
