@@ -15,10 +15,10 @@ const PropertyCarousel: React.FC = () => {
     <div className='mt-5 ml-5 flex flex-col'>
         <span className='text-left'>Meus Imoveis</span>
         <div ref={sliderRef} className="keen-slider mt-2 max-w-[95%]">
-            <div className='max-w-[250px] h-[130px] bg-gray-400 keen-slider__slide'></div>
-            <div className='max-w-[250px] h-[130px] bg-gray-400 keen-slider__slide'></div>
-            <div className='max-w-[250px] h-[130px] bg-gray-400 keen-slider__slide'></div>
-            <div className='max-w-[250px] h-[130px] bg-gray-400 keen-slider__slide'></div>
+            <div className='shadow-sm rounded max-w-[250px] h-[130px] bg-gray-400 keen-slider__slide'></div>
+            <div className='shadow-sm rounded max-w-[250px] h-[130px] bg-gray-400 keen-slider__slide'></div>
+            <div className='shadow-sm rounded max-w-[250px] h-[130px] bg-gray-400 keen-slider__slide'></div>
+            <div className='shadow-sm rounded max-w-[250px] h-[130px] bg-gray-400 keen-slider__slide'></div>
         </div>
     </div>
   );
