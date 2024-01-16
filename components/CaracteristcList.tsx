@@ -14,7 +14,7 @@ interface CaracteristListProps{
 export function CaracteristicList({bathroomsQty, bedroomsQty, parkingQty, sqrFootage, petFriendly} : CaracteristListProps) {
   return(
     <div className="pl-3 pr-10">
-      <h2 className="text-[#ACACAC] text-xs">Caracteristicas</h2>
+      <h2 className="text-[#ACACAC] text-xs  min-[700px]:text-xl">Caracteristicas</h2>
       
       <ul className="mt-2 grid grid-cols-3 gap-3">
         <li className="border-grayIcon rounded-md border p-2 flex gap-2 items-center justify-center text-[10px] text-grayIcon">
