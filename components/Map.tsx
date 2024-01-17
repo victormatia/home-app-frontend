@@ -30,6 +30,11 @@ function Map() {
     const bounds = new window.google.maps.LatLngBounds(center);
     map.fitBounds(bounds);
 
+    new google.maps.Marker({
+      position: center,
+      map
+    })
+
     setMap(map)
   }, [])
 
@@ -39,19 +44,17 @@ function Map() {
 
   return (
     <div
-      className='w-full flex items-center justify-center min-[700px]:justify-end min-[700px]:items-stretch'>
+      className='w-full flex items-center justify-center basis-[50%]'>
       {
         isLoaded ? (
-          <div className='flex flex-col'>
+          <div className='flex flex-col w-full'>
             <span
               className='text-[#ACACAC]
               font-medium
-              text-xs
+              text-base
               text-left
               mb-2
-              pl-3
-              min-[700px]:text-xl
-              '
+              min-[700px]:text-xl'
             >Localização</span>
             <GoogleMap
               mapContainerStyle={containerStyle}
