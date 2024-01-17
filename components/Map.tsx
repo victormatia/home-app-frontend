@@ -9,10 +9,11 @@ const center = {
 };
 
 const containerStyle = {
-  width: '410px',
+  width:'100%',
+  minWidth: '390px',
   height: '150px',
   borderRadius: '10px',
-  border: '1px solid #C1C1C1'
+  border: '1px solid #C1C1C1',
 };
 
 const API_KEY = 'AIzaSyCWzR7J9HG_IrHLC8N_57YG30ilzxj49A8';
@@ -20,12 +21,10 @@ const API_KEY = 'AIzaSyCWzR7J9HG_IrHLC8N_57YG30ilzxj49A8';
 function Map() {
   const [map, setMap] = useState(null);
   
-
   const { isLoaded } = useJsApiLoader({
     id: 'google-map-script',
     googleMapsApiKey: API_KEY,
   })
-
 
   const onLoad = useCallback(function callback(map: any) {
     const bounds = new window.google.maps.LatLngBounds(center);
@@ -40,7 +39,7 @@ function Map() {
 
   return (
     <div
-      className='w-full flex items-center justify-center '>
+      className='w-full flex items-center justify-center min-[700px]:justify-end min-[700px]:items-stretch'>
       {
         isLoaded ? (
           <div className='flex flex-col'>
@@ -51,6 +50,7 @@ function Map() {
               text-left
               mb-2
               pl-3
+              min-[700px]:text-xl
               '
             >Localização</span>
             <GoogleMap
