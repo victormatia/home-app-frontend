@@ -23,22 +23,41 @@ const ProfileBox: React.FC = () => {
             <div className='mb-5 flex flex-col'>
                 <span className='text-[#ACACAC]'>Nome: </span>
                 {isEditing ? (
-                <input className="rounded-md bg-white shadow-md p-1 text-buttonText" type="text" value={name} onChange={(e) => setName(e.target.value)} />
+                <input className="rounded-md bg-white shadow-md p-1 max-w-[200px] text-buttonText" type="text" value={name} onChange={(e) => setName(e.target.value)} />
                 ) : (
                 <span className="p-1">{name}</span>
                 )}
             </div>
-            <button onClick={isEditing ? handleSave : handleEdit}>
+            <button className='underline text-sm' onClick={isEditing ? handleSave : handleEdit}>
             {isEditing ? 'Salvar' : 'Editar'}
             </button>
         </div>
       <div className='mb-5 flex flex-col'>
         <span className='text-[#ACACAC]'>Email: </span>
-        <span className="p-1">{email}</span>
+        {isEditing ? (
+                <input className="rounded-md bg-white shadow-md p-1 max-w-[200px] text-buttonText" type="text" value={email} onChange={(e) => setEmail(e.target.value)} />
+                ) : (
+                <span className="p-1">{email}</span>
+                )}
       </div>
-      <div className='flex flex-col'>
+      <div className='mb-5 flex flex-col'>
         <span className='text-[#ACACAC]'>CPF: </span>
-        <span className="p-1">{cpf}</span>
+        {isEditing ? (
+                <input className="rounded-md bg-white shadow-md p-1 max-w-[200px] text-buttonText" type="text" value={cpf} onChange={(e) => setCpf(e.target.value)} />
+                ) : (
+                <span className="p-1">{cpf}</span>
+                )}
+      </div>
+      <div className='flex justify-between items-start'>
+      <div className='flex flex-col items-start'>
+        <span className='text-[#ACACAC]'>Senha: </span>
+        <span className="p-1">**********</span>
+      </div>
+      {isEditing ? (
+      <button className='underline p-1 text-sm'>Redefinir senha</button>
+      ) : (
+        ''
+        )}
       </div>
     </div>
   );

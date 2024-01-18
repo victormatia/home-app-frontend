@@ -18,8 +18,8 @@ export type TAddress = {
   number: string, 
   apto: string,
   complement: string,
-  createdAt: Date, 
-  updatedAt: Date,
+  createdAt?: Date, 
+  updatedAt?: Date,
 }
 
 export type TType = {
@@ -43,8 +43,8 @@ export type TImmobile = {
   parkingQty: number,
   sqrFootage: number,
   petFriendly: boolean,
-  createdAt: Date,
-  updatedAt: Date
+  createdAt?: Date,
+  updatedAt?: Date
   typeId: string,
   description: string,
   address?: TAddress,
