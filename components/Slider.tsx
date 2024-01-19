@@ -1,12 +1,13 @@
 'use client'
 import { useState } from "react"
+import { Button } from "./Button"
+import { CaretLeft, CaretRight } from "phosphor-react"
+import { TCard } from "@/types"
+
 import { useKeenSlider } from "keen-slider/react"
 import "keen-slider/keen-slider.min.css"
-import { CaretLeft, CaretRight } from "phosphor-react"
-import { Button } from "./Button"
 
-
-export default function Slider(props: any) {
+export default function Slider({ immobile }: TCard ) {
   const [loaded, setLoaded] = useState(false)
   const [sliderRef, instanceRef] = useKeenSlider<HTMLDivElement>({
     initial: 0,
@@ -25,30 +26,32 @@ export default function Slider(props: any) {
       setLoaded(true)
     },
   })
-
+  
+  
 
   return (
-      <div className="min-[700px]:left-20 relative w-full">
-        <figure ref={sliderRef} className="keen-slider  h-96 max-h-screen">
-
-          <div className="keen-slider__slide bg-blue-400">1</div>
-          <div className="keen-slider__slide bg-green-400">2</div>
-          <div className="keen-slider__slide bg-amber-400">3</div>
-          <div className="keen-slider__slide bg-purple-400">4</div>
-          <div className="keen-slider__slide bg-rose-400">5</div>
-              {/* <Image
-                src={ props }
-                alt={`immobile photo - ${index}`}
-                width={344}
-                height={222}
+      <>
+        <figure ref={sliderRef} className="keen-slider">
+        {
+          immobile?.photos?.map(( {photo} , index ) => {
+            return(
+              <img
+                key={ index }
+                src={ photo.url }
+                alt={""}
                 className={
                   `keen-slider__slide
                   number-slide${index}
                   w-full
+                  max-h-[400px]
                   `
                 }
-              /> */}
-        </figure>
+              />
+            );
+          })
+        }
+
+      </figure>
         {loaded && instanceRef.current && (
           <>
             <Button
@@ -58,20 +61,20 @@ export default function Slider(props: any) {
                 e.stopPropagation() || instanceRef.current?.prev()
               }
             >
-              <CaretLeft size={32} />
+              <CaretLeft size={32} className="text-white font-bold"/>
             </Button>
 
             <Button
               variant="ghost"
-              className="w-9 h-full flex items-center justify-center  left-auto min-[700px]:right-20 right-6 px-2 top-0 absolute hover:cursor-pointer hover:bg-rSliderButtonGradient "
+              className="w-9 h-full flex items-center justify-center  left-auto min-[700px]:right-20 right-px px-2 top-0 absolute hover:cursor-pointer hover:bg-rSliderButtonGradient "
               onClick={(e: any) =>
                 e.stopPropagation() || instanceRef.current?.next()
               }
             >
-             <CaretRight size={32}/> 
+             <CaretRight size={32} className="text-white font-bold"/> 
             </Button>
           </>
         )}
-      </div>
+      </>
   )
 }
