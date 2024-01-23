@@ -178,15 +178,21 @@ const RentCarousel: React.FC = () => {
   const [sliderRef] = useKeenSlider({
     initial: 0,
     breakpoints:{
-      '(max-width:700px)':{
+      '(min-width:700px)':{
         slides:{
-          perView:1.5,
+          perView:2,
           spacing: 10
         },
       },
+       '(min-width:1000px)':{
+         slides:{
+           perView:3,
+           spacing: 10
+         },
+       },
     },
     slides: {
-      perView: 3,
+      perView: 1.5,
       spacing: 10,
     },
   });
@@ -194,7 +200,7 @@ return (
 <div className='mt-5 flex flex-col'>
   <span className='text-left ml-5'>Meus Alugueis</span>
   <div className=''>
-    <div ref={sliderRef} className="keen-slider pt-2 pb-5 max-[700px]:pl-5">
+    <div ref={sliderRef} className="keen-slider pt-2 pb-5 pl-5">
     {
             immobiles?.map((immobile, index) => {
               return(

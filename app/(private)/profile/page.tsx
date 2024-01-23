@@ -15,7 +15,7 @@ export default function Profile() {
       <div className='w-full h-[125px] min-[700px]:h-[200px] bg-gradientBlue'/>
       <div className='lg:w-[1000px] mx-auto'>
         <ProfileImage/>
-        <div className='mt-5 lg:mt-8 px-5 md:flex min-[700px]:justify-normal'>
+        <div className='mt-5 lg:mt-8 px-5 min-[700px]:flex min-[700px]:justify-normal'>
           <ProfileBox/>
           <div className='min-[700px]:block hidden'>
             <DeleteAccountButton/>
