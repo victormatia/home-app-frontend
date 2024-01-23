@@ -1,8 +1,6 @@
 "use client"
-import React, { useEffect, useRef } from 'react';
-import Slider from "react-slick";
-import "slick-carousel/slick/slick.css"; 
-import "slick-carousel/slick/slick-theme.css";
+import { useKeenSlider } from 'keen-slider/react';
+import 'keen-slider/keen-slider.min.css';
 import { PropertyCard } from './PropertyCard';
 
 const immobiles = [
@@ -176,57 +174,28 @@ const immobiles = [
         }
 ]
 
-const PropertyCarousel: React.FC = () => {
-  const settings = {
-    infinite: true,
-    speed: 500,
-    slidesToShow: 3,
-    slidesToScroll: 1,
-    responsive: [
-      {
-      breakpoint: 320,
-        settings: {
-          slidesToShow: 1,
-          slidesToScroll: 1,
+const RentCarousel: React.FC = () => {
+  const [sliderRef] = useKeenSlider({
+    initial: 0,
+    breakpoints:{
+      '(max-width:700px)':{
+        slides:{
+          perView:1.5,
+          spacing: 10
         },
       },
-      {
-      breakpoint: 375,
-        settings: {
-          slidesToShow: 1.3,
-          slidesToScroll: 1,
-        },
-      },
-      {
-        breakpoint: 425,
-          settings: {
-            slidesToShow: 1,
-            slidesToScroll: 1,
-          },
-        },
-      {
-      breakpoint: 768,
-        settings: {
-          slidesToShow: 2,
-          slidesToScroll: 1,
-          swipeToSlide: true
-        },
-      },
-      {
-      breakpoint: 1024,
-        settings: {
-          slidesToShow: 3,
-          slidesToScroll: 3,
-        },
-      }
-      ]
-  };
-  return (
-    <div className='flex flex-col lg:w-[925px]'>
-        <span className='text-left ml-5'>Meus Imoveis</span>
-        <div className='xl:ml-5'>
-        <Slider {...settings} className="keen-slider pb-5 pt-2 max-[1200px]:px-5">
-        {
+    },
+    slides: {
+      perView: 3,
+      spacing: 15,
+    },
+  });
+return (
+<div className='mt-5 flex flex-col'>
+  <span className='text-left ml-5'>Meus Alugueis</span>
+  <div>
+    <div ref={sliderRef} className="keen-slider pt-2 pb-5 max-[700px]:pl-5">
+    {
             immobiles?.map((immobile, index) => {
               return(
                 <PropertyCard
@@ -236,10 +205,10 @@ const PropertyCarousel: React.FC = () => {
               );
             })
           }
-        </Slider>
-      </div>
     </div>
-  );
+  </div>
+</div>
+);
 };
 
-export default PropertyCarousel;
+export default RentCarousel;

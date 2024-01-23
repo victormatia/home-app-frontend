@@ -1,5 +1,4 @@
 "use client"
-import React, { useEffect, useRef } from 'react';
 import { useKeenSlider } from 'keen-slider/react';
 import 'keen-slider/keen-slider.min.css';
 import { PropertyCard } from './PropertyCard';
@@ -182,19 +181,19 @@ const RentCarousel: React.FC = () => {
       '(max-width:700px)':{
         slides:{
           perView:1.5,
-          spacing: 5
+          spacing: 10
         },
       },
     },
     slides: {
       perView: 3,
-      spacing: 15,
+      spacing: 10,
     },
   });
 return (
 <div className='mt-5 flex flex-col'>
   <span className='text-left ml-5'>Meus Alugueis</span>
-  <div>
+  <div className=''>
     <div ref={sliderRef} className="keen-slider pt-2 pb-5 max-[700px]:pl-5">
     {
             immobiles?.map((immobile, index) => {
