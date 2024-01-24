@@ -1,31 +1,41 @@
 "use client"
+import globalContext from '@/context/context';
 import queryClient from '@/tanstack/queryClient';
 import { useMutation, useQuery } from '@tanstack/react-query';
 import axios from 'axios';
-import React, { useState } from 'react';
+import { useRouter } from 'next/navigation';
+import React, { useEffect, useState } from 'react';
 
 const ProfileBox: React.FC = () => {
   const [isEditing, setIsEditing] = useState(false);
-  const [name, setName] = useState('John Doe');
-  const [email, setEmail] = useState('john@example.com');
-  const [cpf, setCpf] = useState('123.456.789-00');
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [cpf, setCpf] = useState('');
 
-  const { data: user } = useQuery({
+  const userId = localStorage.getItem('userId')
+
+  const { data: user, isError } = useQuery({
     queryKey: ['user'],
     queryFn: async () => {
-      const { data } = await axios.get(`http://localhost:3001/user/sign-in`);
+      const { data } = await axios.get(`http://localhost:3001/user/${userId}`);
+      setName(data.name);
+      setEmail(data.email);
+      setCpf(data.cpf);
       return data;
     },
   })
+  const router = useRouter();
+  if(isError) router.push(`/suspended/${userId}`);
 
   const updateUser = useMutation({
-    mutationFn: () => axios.put('', {
+    mutationFn: () => axios.put(`http://localhost:3001/user/${userId}`, {
       name,
       email,
       cpf
     }),
     onSuccess: () => {
-      queryClient.invalidateQueries('user')
+      queryClient.invalidateQueries({queryKey: ['user']})
+      //caso delay usar removeQueries
     }
   })
 
