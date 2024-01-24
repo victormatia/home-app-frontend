@@ -48,11 +48,13 @@ export default function GlobalProvider({ children }: { children: ReactNode }) {
 
       axios.post(SIGN_IN_URL, { email: session.user.email })
         .then((response) => {
+          localStorage.setItem('userId', response.data.userId);
           localStorage.setItem('token', response.data.token);
         })
         .catch(() => {
           axios.post(SIGN_UP_URL, userData)
             .then((response) => {
+              localStorage.setItem('userId', response.data.userId);
               localStorage.setItem('token', response.data.token);
             })
             .catch((e) => {
@@ -66,7 +68,9 @@ export default function GlobalProvider({ children }: { children: ReactNode }) {
     immobiles, setImmobiles,
     search, setSearch,
     searchedImmobiles, setSearchedImmobiles,
-    currPage, setCurrPage, toggleOpenFilter, setToggleOpenFilter, propertyCaracteristics, setPropertyCaracteristics,
+    currPage, setCurrPage,
+    toggleOpenFilter, setToggleOpenFilter,
+    propertyCaracteristics, setPropertyCaracteristics,
   }), [immobiles, searchedImmobiles, search, currPage, toggleOpenFilter, propertyCaracteristics]);
   return (
     <globalContext.Provider value={ states }>
