@@ -1,10 +1,20 @@
 "use client"
+import { useMutation } from '@tanstack/react-query';
+import axios from 'axios';
+import { useRouter } from 'next/navigation';
 import React from 'react';
 
 const DeleteAccountButton: React.FC = () => {
+  const router = useRouter();
+  const userId = localStorage.getItem('userId')
+  const suspendUser = useMutation({
+    mutationFn: () => axios.delete(`http://localhost:3001/user/${userId}`)
+  })
+
   const handleDelete = () => {
-    // Add logic to delete the account
+    suspendUser.mutate()
     console.log("conta deletada")
+    router.push(`/suspended/${userId}`);
   };
 
   return (
