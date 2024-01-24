@@ -63,7 +63,7 @@ export function Header(){
                   className="h-full  flex items-center justify-center"
                   navbar
                   data-testid="navbar-menu-mobile">
-              <Link href='/profile' className='hover:bg-black hover:bg-opacity-5 rounded-md p-2 '>
+              <Link href='/profile' className='hover:bg-black hover:bg-opacity-5 rounded-md p-2 ' data-testid='profilelink'>
                   <NavItem className='flex items-center justify-center gap-2'>
                     <span className='text-lg text-info'>
                       {user.name}
@@ -81,7 +81,7 @@ export function Header(){
                   </NavItem>
               </Link>
                   <NavItem id="qsLogoutBtn" className='ml-4 flex items-center justify-center w-7 h-7 rounded-md hover:bg-black hover:bg-opacity-5'>
-                    <Link href="/api/auth/logout">
+                    <Link href="/api/auth/logout" data-testid='logoutButton'>
                       <FiLogOut  className="text-xl"/>
                     </Link>
                   </NavItem>
