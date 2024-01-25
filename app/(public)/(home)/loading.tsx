@@ -1,3 +1,4 @@
+import { SkeletonCards } from "@/components/SkeletonCards";
 import { BsFillGridFill } from "react-icons/bs";
 import { PiListFill } from "react-icons/pi";
 
@@ -22,12 +23,12 @@ export default function HomeLoading(){
             min-[700px]:h-full min-[700px]:gap-6 
             min-[700px]:overflow-scroll min-[700px]:overflow-x-hidden
             '>
-            <div className="bg-zinc-600/80 animate-pulse rounded-md w-[360px] h-[345px]"></div>
-            <div className="bg-zinc-600/80 animate-pulse rounded-md w-[360px] h-[345px]"></div>
-            <div className="bg-zinc-600/80 animate-pulse rounded-md w-[360px] h-[345px]"></div>
-            <div className="bg-zinc-600/80 animate-pulse rounded-md w-[360px] h-[345px]"></div>
-            <div className="bg-zinc-600/80 animate-pulse rounded-md w-[360px] h-[345px]"></div>
-            <div className="bg-zinc-600/80 animate-pulse rounded-md w-[360px] h-[345px]"></div>
+              <SkeletonCards />
+              <SkeletonCards />
+              <SkeletonCards />
+              <SkeletonCards />
+              <SkeletonCards />
+              <SkeletonCards />
           </ul>
         
         </div>
