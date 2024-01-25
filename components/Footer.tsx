@@ -39,7 +39,7 @@ export function Footer() {
           </div>
         </Link>
 
-        <div className='w-[2px] h-5 bg-grayIcon'></div>
+        <div className='w-[2px] h-5 bg-grayIcon'/>
 
         <Link
           className='text-buttonText flex items-center justify-center font-semibold  py-3 h-14 w-full bg-white'
@@ -59,7 +59,7 @@ export function Footer() {
           </div>
         </Link>
 
-        <div className='w-[2px] h-5 bg-grayIcon'></div>
+        <div className='w-[2px] h-5 bg-grayIcon'/>
 
         <Link
           className='text-buttonText flex items-center justify-center font-semibold  py-3 h-14 w-full bg-white'
@@ -79,7 +79,7 @@ export function Footer() {
           </div>
         </Link>
 
-        <div className='w-[2px] h-5 bg-placeholder'></div>
+        <div className='w-[2px] h-5 bg-grayIcon'/>
 
         {isLoading && (
           <div className="h-14 w-full  flex items-center justify-center gap-1 bg-white rounded-r-md">
