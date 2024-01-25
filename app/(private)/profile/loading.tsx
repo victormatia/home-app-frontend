@@ -7,7 +7,7 @@ export default function ProfileLoading() {
         <div className="flex items-center justify-center h-screen">
           <div 
             className='h-12 w-12 border-4 border-[#c3c3c373] rounded-full 
-            border-t-[#2be4a0] animate-spin'
+            border-t-primaryBlue animate-spin'
           />
           </div> 
         </div>
