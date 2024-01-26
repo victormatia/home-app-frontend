@@ -24,7 +24,7 @@ export function Card({ immobile }: TCard){
 
   return(
     <div className='flex flex-col rounded-md shadow-lg bg-white w-[360px] h-[345px]
-    hover:scale-105 transition-all cursor-pointer p-2
+    min-[700px]:hover:scale-105 transition-all cursor-pointer p-2
     '>
       <figure ref={sliderRef} className="keen-slider">
         {
