@@ -27,8 +27,12 @@ export default function Immobile({ params: { id }  } : ImmobileProps ){
   return(
     <main className="w-full overflow-x-hidden ">
       <div className="min-[700px]:left-20 left-0 relative w-full overflow-hidden ">
-        <Slider immobile={immobile!}/>  
+        <Slider immobile={immobile!}/>
       </div>
+        <div className="text-right w-full max-w-[412px] bg-gradientBlack pr-2 absolute right-0 top-[292px] min-[700px]:hidden">
+          <p className="text-[#ACACAC]">Aluguel</p> 
+          <p className="text-white">R$ {immobile?.price}</p>
+        </div>  
       <div className="w-full mt-2 mx-auto flex flex-col gap-2 pb-20 min-[700px]:pl-[80px]  min-[700px]:mt-7 min-[700px]:w-[60%] px-3">
         <div>
           <h2 className="text-[#ACACAC] text-base min-[700px]:text-xl font-medium">Descrição</h2>
