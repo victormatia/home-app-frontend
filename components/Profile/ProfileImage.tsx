@@ -10,7 +10,7 @@ const { user, isLoading } = useUser();
         <Image
                   src={user.picture as string}
                   alt="Profile"
-                  className="nav-user-profile rounded-full border-2 border-white absolute ml-[30px] mt-[-50px]"
+                  className="nav-user-profile rounded-full border-4 border-[#F5F5F5] ml-[30px] mt-[-50px]"
                   width={98}
                   height={98}
                   data-testid="navbar-picture-mobile"
