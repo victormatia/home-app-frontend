@@ -9,7 +9,7 @@ export const metadata: Metadata = {
   title: 'Home | Perfil',
 };
 
-export default function Profile() {
+export default async function Profile() {
   return (
     <section className="text-center flex-col pb-20 bg-[#F5F5F5] h-screen min-[700px]:ml-20 overflow-y-scroll">
       <div className='w-full h-[125px] min-[700px]:h-[200px] bg-gradientBlue'/>
