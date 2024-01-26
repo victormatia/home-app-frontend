@@ -66,10 +66,12 @@ describe('Header Tests', () => {
         checkSession: jest.fn(),
       })
       const profilePicture = await screen.findByRole('img', {name: /profile/i})
-      const logoutButton = screen.getByRole('link') 
+      const logoutButton = screen.getByTestId(/logoutbutton/i) 
+      const profileLink = screen.getByTestId(/profilelink/i) 
      
       // assert
      expect(profilePicture).toBeInTheDocument()
      expect(logoutButton.getAttribute('href')).toBe('/api/auth/logout')
+     expect(profileLink.getAttribute('href')).toBe('/profile')
     });
 })
