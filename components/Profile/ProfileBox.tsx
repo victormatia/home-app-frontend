@@ -1,10 +1,10 @@
 "use client"
-import globalContext from '@/context/context';
+import { resetPassword } from '@/app/api/auth/resetPassword/route';
 import queryClient from '@/tanstack/queryClient';
 import { useMutation, useQuery } from '@tanstack/react-query';
 import axios from 'axios';
 import { useRouter } from 'next/navigation';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 
 const ProfileBox: React.FC = () => {
   const [isEditing, setIsEditing] = useState(false);
@@ -42,12 +42,14 @@ const ProfileBox: React.FC = () => {
   const handleEdit = () => {
     setIsEditing(!isEditing);
   };
+
+  const handleResetPassword = () => {
+    // Redirect the user to Auth0's Change Password page
+    // loginWithRedirect({ screen_hint: 'resetPassword' });
+    resetPassword()
+  };
   
   const handleSave = () => {
-      //pegar as informacoes do usuario do banco de dados
-      //sincronizar com os estados locais
-      //atualizar o banco de dados
-    // Add logic to save changes
     updateUser.mutate()
     console.log("salvo")
     setIsEditing(false);
@@ -89,7 +91,7 @@ const ProfileBox: React.FC = () => {
         <div className='flex w-full justify-between'>
           <span className="p-1">**********</span>
           {isEditing ? (
-            <button className='underline p-1 text-sm'>Redefinir senha</button>
+            <button className='underline p-1 text-sm' onClick={handleResetPassword}>Redefinir senha</button>
             ) : (
               ''
               )}
