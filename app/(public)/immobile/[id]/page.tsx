@@ -30,7 +30,7 @@ export default function Immobile({ params: { id }  } : ImmobileProps ){
       <div className="min-[700px]:left-20 left-0 relative w-full overflow-hidden ">
         <Slider immobile={immobile!}/>
       </div>
-        <div className="text-right w-full  bg-gradientBlack pr-2 relative -top-12 right-0 min-[700px]:right-[300px]">
+        <div className="text-right w-full  bg-gradientBlack pr-2 relative -top-12 right-0 ">
           <p className="text-[#ACACAC]">Aluguel</p> 
           <p className="text-white">R$ {immobile?.price}</p>
         </div>  
