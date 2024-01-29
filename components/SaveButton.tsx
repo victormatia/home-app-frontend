@@ -12,7 +12,7 @@ export function SaveButton(){
       isSaved === false ? (
         <Button
         variant='ghost'
-        className='text-grayIcon'
+        className='text-grayIcon text-lg'
         onClick={() => setIsSaved(true)}
         data-testid='bookMarkIcon'
         >
@@ -21,7 +21,7 @@ export function SaveButton(){
       ): (
         <Button
         variant='ghost'
-        className='text-grayIcon'
+        className='text-grayIcon text-lg'
         onClick={() => setIsSaved(false)}
         data-testid='bookMarkFillIcon'
         >
