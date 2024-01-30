@@ -42,7 +42,7 @@ export default function Immobile({ params: { id }  } : ImmobileProps ){
           </div>
           <p className="text-base font-medium w-[90%] min-[700px]:w-full  min-[700px]:text-xl">{ immobile?.description }</p>
         </div>
-        <div className="flex flex-col gap-3 min-[700px]:flex-row  min-[700px]:mt-5">
+        <div className="flex flex-col gap-3 min-[1200px]:flex-row  min-[700px]:mt-5">
           <CaracteristicList
             bathroomsQty={immobile?.bathroomsQty}
             parkingQty={immobile?.parkingQty}
@@ -52,7 +52,7 @@ export default function Immobile({ params: { id }  } : ImmobileProps ){
           />
           <Map />
         </div>
-        <div className="mt-8 flex flex-col gap-4 min-[700px]:flex-row  min-[700px]:gap-48 min-[700px]:px-0">
+        <div className="mt-8 flex flex-col gap-4 min-[700px]:flex-row  min-[700px]:gap-5 min-[1100px]:gap-48 min-[700px]:px-0">
           <Button 
             className="w-full py-3"
             variant="secondary"
