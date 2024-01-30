@@ -1,10 +1,10 @@
 'use client'
 
 import { Button } from "@/components/Button"
-import { CaracteristicList } from "@/components/CaracteristcList"
-import Map from "@/components/Map"
+import { CaracteristicList } from "@/components/ImmobilePage/CaracteristcList"
+import Map from "@/components/ImmobilePage/Map"
 import { SaveButton } from "@/components/SaveButton"
-import Slider from "@/components/Slider"
+import Slider from "@/components/ImmobilePage/Slider"
 import { TImmobile } from "@/types"
 import { useQuery } from "@tanstack/react-query"
 import axios from "axios"
