@@ -38,7 +38,7 @@ export default function Immobile({ params: { id }  } : ImmobileProps ){
         <div>
           <div className="flex justify-between">
             <h2 className="text-[#ACACAC] text-base min-[700px]:text-xl font-medium">Descrição</h2>
-            <SaveButton />
+            <SaveButton immobileId={immobile?.id}/>
           </div>
           <p className="text-base font-medium w-[90%] min-[700px]:w-full  min-[700px]:text-xl">{ immobile?.description }</p>
         </div>

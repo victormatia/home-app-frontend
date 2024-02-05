@@ -4,20 +4,43 @@ import { BsBookmark, BsBookmarkFill } from "react-icons/bs";
 import * as Dialog from '@radix-ui/react-dialog';
 import { useUser } from "@auth0/nextjs-auth0/client";
 import { X } from "phosphor-react";
+import axios from "axios";
 
 
-export function SaveButton(){
+interface SaveButtonPorps {
+  immobileId: string | undefined
+}
+
+
+export function SaveButton(immobileId : SaveButtonPorps){
   const [isSaved, setIsSaved] = useState(false);
   const { user } = useUser();
+  const userId = localStorage.getItem('userId')
+
+
+  function FavoriteImmobile(){
+    axios({
+      method: 'post',
+      url: 'http://localhost:3001/immobile/favorite',
+      headers: {},
+      data: {
+        userId,
+        immobileId,
+      }
+    })
+    setIsSaved(true)
+  }
+
+
   return(
     <div>
 
-{user ? (
+    {user ? (
             isSaved === false ? (
               <Button
                 variant='ghost'
                 className='text-grayIcon'
-                onClick={() => setIsSaved(true)}
+                onClick={FavoriteImmobile}
                 data-testid='bookMarkIcon'
               >
                 <BsBookmark />
@@ -57,7 +80,7 @@ export function SaveButton(){
                   className="text-primaryBlue hover:bg-secondaryBlue/60 inline-flex h-[35px] items-center justify-center px-[15px] font-medium"
                   href="/api/auth/login"
                   >
-                    Para fazer login <span className="text-inherit"> clique aqui </span> 
+                    Para fazer login clique aqui 
                   </a>
                 </Dialog.Close>
                 <Dialog.Close asChild>
