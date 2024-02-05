@@ -19,11 +19,11 @@ const config: Config = {
         borderColor: '#949494',
         primaryBlue: '#367ADF',
         secondaryBlue: '#367ADF',
+        
       },
 
       backgroundImage: {
         gradientBlue: 'linear-gradient(107deg, #367ADF 13.1%, #36A5C8 68.23%);',
-        gradientBlack: ' linear-gradient(294deg, #000 25.9%, rgba(0, 0, 0, 0.00) 43.55%);',
         rSliderButtonGradient: 'linear-gradient(270deg, rgba(0, 0, 0, 0.46) -80%, rgba(0, 0, 0, 0.00) 100%);',
         lSliderButtonGradient: 'linear-gradient(90deg, rgba(0, 0, 0, 0.46) -80%, rgba(0, 0, 0, 0.00) 100%);',
         profileCardGradient: 'linear-gradient(270deg, rgba(255, 255, 255, 0.00) 44.8%, #FFF 100%);',
@@ -35,6 +35,8 @@ const config: Config = {
 
       animation: {
         openfilter: 'openfilter 0.2s ease-in',
+        overlayShow: 'overlayShow 150ms cubic-bezier(0.16, 1, 0.3, 1)',
+        contentShow: 'contentShow 150ms cubic-bezier(0.16, 1, 0.3, 1)',
       },
 
       keyframes:{
@@ -47,6 +49,14 @@ const config: Config = {
             opacity: '1',
             transform: 'translateX(0)',
           },
+        },
+        overlayShow: {
+          'from': {opacity: '0' },
+          'to': { opacity: '1' },
+        },
+        contentShow: {
+          'from': { opacity: '0', transform: 'translate(-50%, -48%) scale(0.96)' },
+          'to': { opacity:'1', transform: 'translate(-50%, -50%) scale(1)' },
         },
       },
     },
