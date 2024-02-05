@@ -199,20 +199,28 @@ const PropertyCarousel: React.FC = () => {
 return (
 <div className='mt-5 flex flex-col'>
   <span className='text-left ml-5'>Meus Imóveis</span>
+  { immobiles.length === 0 ? (
+    <div className='flex items-center justify-center w-full h-36'>
+       <p className='text-[#ACACAC]'>sem imóveis cadastrados</p>
+    </div>
+  ) : (
   <div className=''>
     <div ref={sliderRef} className="keen-slider pt-2 pb-5 pl-5">
     {
-            immobiles?.map((immobile, index) => {
-              return(
-                <PropertyCard
-                key={ index }
-                immobile={immobile}
-                />
-              );
-            })
+      immobiles?.map((immobile, index) => {
+        return(
+          <PropertyCard
+          key={ index }
+          immobile={immobile}
+          />
+          );
+        })
           }
     </div>
   </div>
+  )
+
+      }
 </div>
 );
 };
