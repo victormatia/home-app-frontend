@@ -14,7 +14,7 @@ export default function Sidebar() {
   return (
     <section
       className='max-[700px]:hidden
-      h-screen w-20 flex flex-col justify-between items-center absolute top-0 left-0 bg-darkGray py-6'  
+      h-screen w-20 flex flex-col justify-between items-center bg-darkGray py-6'  
     >
       <section>
         <Image src={homeIcon} width={32} height={32} alt={'home-logo'} />
