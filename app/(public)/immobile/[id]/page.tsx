@@ -15,7 +15,6 @@ interface ImmobileProps {
   }
 }
 
-
 export default function Immobile({ params: { id }  } : ImmobileProps ){
   const { data: immobile } = useQuery<TImmobile>({
     queryKey: ['immobile'],
@@ -26,21 +25,26 @@ export default function Immobile({ params: { id }  } : ImmobileProps ){
   });
 
   return(
-    <main className="w-full overflow-x-hidden ">
-      <div className="min-[700px]:left-20 left-0 relative w-full overflow-hidden ">
+    <main className="w-full overflow-x-hidden">
+      <div className="relative w-full overflow-hidden mb-2">
         <Slider immobile={immobile!}/>
       </div>
-        <div className="text-right w-full  bg-gradientBlack pr-2 relative -top-12 right-0 ">
-          <p className="text-[#ACACAC]">Aluguel</p> 
-          <p className="text-white">R$ {immobile?.price}</p>
-        </div>  
-      <div className="w-full -mt-6 mx-auto flex flex-col gap-2 pb-20 min-[700px]:pl-[80px] min-[700px]:w-[60%] px-3">
+        {/* <div className="text-right w-full font-medium bg-gradientTransparentToBlue text-white pr-2 py-2 relative -top-[72px] text-lg right-0">
+          <p>Aluguel</p> 
+          <p>R$ {immobile?.price}</p>
+        </div>   */}
+      <div className="mx-auto flex flex-col gap-2 pb-20 min-[700px]:w-[60%] h-full">
         <div>
           <div className="flex justify-between">
-            <h2 className="text-[#ACACAC] text-base min-[700px]:text-xl font-medium">Descrição</h2>
+            <h2 className="text-[#ACACAC] text-base min-[700px]:text-xl font-normal">Descrição</h2>
             <SaveButton />
           </div>
           <p className="text-base font-medium w-[90%] min-[700px]:w-full  min-[700px]:text-xl">{ immobile?.description }</p>
+          <h2 className="mt-4 text-[#ACACAC] text-base min-[700px]:text-xl font-medium">Alugar por</h2>
+          <div className="flex items-center gap-2">
+          <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAACXBIWXMAAAsTAAALEwEAmpwYAAABtElEQVR4nO2Vv0scURDHN5wQkYAQElSuiWBnl0AKSeOfYHFgo9bRRgub4B9wiKlCihSXqy6B73cexy24YOORNAG9RoQDm6QxhYYgiAdiuGx4ZBaG9Y7dQhTFgWnm1+fNvHm7QXAv1yUiEotI8+YA8j8grWci0hKR1SiKHqZzABRIrpDcMfEVAMW8gDhRkl+azeZAKueT8Z+b+EMAo/0Ac+aERZIbiQ/AvPG91MJ/AczGcfyA5CTJn2p/mwnwoolt9X00gEUtdGDjSb7R2L1cAC8iEmmxmrG91vhf1Wp1MMiSfgAAwyJyrL61xF6v15+R7Ch4E8BELgDJdyRLqksk99X32zk3ZnNILojIhfq7JEMRmc7qoNcGtQG86JXnnHuuhbsmp5LeONvBNskPqh1vc84tZ40YwDjJ936r0uPsewd+1RR6BOBRFkTrlJO3kAloNBoj+jovnYjkaa+lcM7N6KE6mQAttK4JJwAem/gttX8Lw3BIx1QQkc9ap5ULAOCp6aJs7K9I/klG6IEkf5i7LOUC2Ln6tu03huSUiOyai/X63X86gquUWq32RIt/DW7tD+fuyj+RvDqW7+XkEAAAAABJRU5ErkJggg=="/>
+            <p className="mt-2 text-base font-medium w-[90%] min-[700px]:w-full  min-[700px]:text-xl">{ immobile?.price }</p>
+          </div>
         </div>
         <div className="flex flex-col gap-3 min-[1200px]:flex-row  min-[700px]:mt-5">
           <CaracteristicList
@@ -52,7 +56,8 @@ export default function Immobile({ params: { id }  } : ImmobileProps ){
           />
           <Map />
         </div>
-        <div className="mt-8 flex flex-col gap-4 min-[700px]:flex-row  min-[700px]:gap-5 min-[1100px]:gap-48 min-[700px]:px-0">
+        <div className="
+        mt-8 flex flex-col gap-4 min-[700px]:flex-row  min-[700px]:gap-5 min-[1100px]:gap-48">
           <Button 
             className="w-full py-3"
             variant="secondary"
@@ -67,8 +72,6 @@ export default function Immobile({ params: { id }  } : ImmobileProps ){
           </Button>
         </div>
       </div>
-
-
     </main>
   )
 }

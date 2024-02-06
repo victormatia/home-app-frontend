@@ -6,6 +6,7 @@ import { TCard } from "@/types"
 
 import { useKeenSlider } from "keen-slider/react"
 import "keen-slider/keen-slider.min.css"
+import Image from "next/image"
 
 export default function Slider({ immobile }: TCard ) {
   const [loaded, setLoaded] = useState(false)
@@ -30,7 +31,7 @@ export default function Slider({ immobile }: TCard ) {
   
 
   return (
-      <>
+      <div className="w-full">
         <figure ref={sliderRef} className="keen-slider">
         {
           immobile?.photos?.map(( {photo} , index ) => {
@@ -50,7 +51,6 @@ export default function Slider({ immobile }: TCard ) {
             );
           })
         }
-
       </figure>
         {loaded && instanceRef.current && (
           <>
@@ -66,7 +66,7 @@ export default function Slider({ immobile }: TCard ) {
 
             <Button
               variant="ghost"
-              className="w-9 h-full flex items-center justify-center  left-auto min-[700px]:right-20 right-px px-2 top-0 absolute hover:cursor-pointer hover:bg-rSliderButtonGradient "
+              className="w-9 h-full flex items-center justify-center  left-auto right-px px-2 top-0 absolute hover:cursor-pointer hover:bg-rSliderButtonGradient "
               onClick={(e: any) =>
                 e.stopPropagation() || instanceRef.current?.next()
               }
@@ -75,6 +75,6 @@ export default function Slider({ immobile }: TCard ) {
             </Button>
           </>
         )}
-      </>
+      </div>
   )
 }
