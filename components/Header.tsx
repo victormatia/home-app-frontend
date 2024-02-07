@@ -81,7 +81,9 @@ export function Header(){
                   </NavItem>
               </Link>
                   <NavItem id="qsLogoutBtn" className='ml-4 flex items-center justify-center w-7 h-7 rounded-md hover:bg-black hover:bg-opacity-5'>
-                    <Link href="/api/auth/logout" data-testid='logoutButton'>
+                    <Link onClick={() => {
+                      localStorage.clear()
+                    }} href="/api/auth/logout" data-testid='logoutButton'>
                       <FiLogOut  className="text-xl"/>
                     </Link>
                   </NavItem>
