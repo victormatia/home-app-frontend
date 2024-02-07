@@ -12,13 +12,13 @@ interface SaveButtonPorps {
 }
 
 
-export function SaveButton(immobileId : SaveButtonPorps){
+export function SaveButton({immobileId} : SaveButtonPorps){
   const [isSaved, setIsSaved] = useState(false);
   const { user } = useUser();
   const userId = localStorage.getItem('userId')
 
 
-  function FavoriteImmobile(){
+  function favoriteImmobile(){
     axios({
       method: 'post',
       url: 'http://localhost:3001/immobile/favorite',
@@ -31,6 +31,19 @@ export function SaveButton(immobileId : SaveButtonPorps){
     setIsSaved(true)
   }
 
+  function unFavoriteImmobile(){
+    axios({
+      method: 'delete',
+      url: 'http://localhost:3001/immobile/unfavorite',
+      headers: {},
+      data: {
+        userId,
+        immobileId,
+      }
+    })
+    setIsSaved(false)
+  }
+
 
   return(
     <div>
@@ -40,7 +53,7 @@ export function SaveButton(immobileId : SaveButtonPorps){
               <Button
                 variant='ghost'
                 className='text-grayIcon'
-                onClick={FavoriteImmobile}
+                onClick={favoriteImmobile}
                 data-testid='bookMarkIcon'
               >
                 <BsBookmark />
@@ -49,7 +62,7 @@ export function SaveButton(immobileId : SaveButtonPorps){
               <Button
                 variant='ghost'
                 className='text-grayIcon'
-                onClick={() => setIsSaved(false)}
+                onClick={unFavoriteImmobile}
                 data-testid='bookMarkFillIcon'
               >
                 <BsBookmarkFill />
@@ -77,7 +90,7 @@ export function SaveButton(immobileId : SaveButtonPorps){
                 </Dialog.Description>
                 <Dialog.Close asChild>
                   <a 
-                  className="text-primaryBlue hover:bg-secondaryBlue/60 inline-flex h-[35px] items-center justify-center px-[15px] font-medium"
+                  className="text-primaryBlue hover:bg-borderColor inline-flex h-[35px] items-center justify-center px-2 font-medium"
                   href="/api/auth/login"
                   >
                     Para fazer login clique aqui 
