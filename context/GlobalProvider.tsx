@@ -5,7 +5,7 @@ import globalContext from './context';
 import axios from 'axios';
 import { useQuery } from '@tanstack/react-query';
 import { Session } from '@auth0/nextjs-auth0';
-import { TFiltredPropertys, TImmobile, TRankedImmobile } from '@/types';
+import { TFavoriteList, TFiltredPropertys, TImmobile, TRankedImmobile } from '@/types';
 
 export default function GlobalProvider({ children }: { children: ReactNode }) {
   const [immobiles, setImmobiles] = useState<TImmobile[]>([]);
@@ -14,6 +14,9 @@ export default function GlobalProvider({ children }: { children: ReactNode }) {
   const [currPage, setCurrPage] = useState<string>('home');
   const [toggleOpenFilter, setToggleOpenFilter] = useState<boolean>(false);
   const [propertyCaracteristics, setPropertyCaracteristics] = useState<TFiltredPropertys>({} as TFiltredPropertys);
+  const [ favoriteList, setFavoriteList ] = useState<TFavoriteList[]>([]) 
+
+  const userId = localStorage.getItem('userId')
 
   const {} = useQuery({
     queryKey: ['immobiles'],
@@ -30,10 +33,19 @@ export default function GlobalProvider({ children }: { children: ReactNode }) {
     queryKey: ['session'],
     queryFn: async () => {
       const { data } = await axios.get('http://localhost:3000/api/auth/sessionInfos');
-      
       return data;
     },
   });
+
+  const { data } = useQuery({
+    queryKey: ['favorite'],
+    queryFn: async () => {
+      const { data } = await axios.get(`http://localhost:3001/user/${userId}`);
+        console.log(data.favoriteImmobile)
+        setFavoriteList(data.favoriteImmobile)
+      return data;
+    },
+  })
   
   useMemo(async () => {
     if (session?.user) {
@@ -71,7 +83,8 @@ export default function GlobalProvider({ children }: { children: ReactNode }) {
     currPage, setCurrPage,
     toggleOpenFilter, setToggleOpenFilter,
     propertyCaracteristics, setPropertyCaracteristics,
-  }), [immobiles, searchedImmobiles, search, currPage, toggleOpenFilter, propertyCaracteristics]);
+    favoriteList, setFavoriteList
+  }), [immobiles, searchedImmobiles, search, currPage, toggleOpenFilter, propertyCaracteristics, favoriteList]);
   return (
     <globalContext.Provider value={ states }>
       { children }

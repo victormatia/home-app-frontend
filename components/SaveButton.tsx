@@ -1,64 +1,65 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { Button } from "./Button";
 import { BsBookmark, BsBookmarkFill } from "react-icons/bs";
 import * as Dialog from '@radix-ui/react-dialog';
-import { useUser } from "@auth0/nextjs-auth0/client";
 import { X } from "phosphor-react";
 import axios from "axios";
+import queryClient from "@/tanstack/queryClient";
+import { useMutation } from "@tanstack/react-query";
+import globalContext from "@/context/context";
 
 
 interface SaveButtonPorps {
   immobileId: string | undefined
 }
 
-
 export function SaveButton({immobileId} : SaveButtonPorps){
-  const [isSaved, setIsSaved] = useState(false);
-  const { user } = useUser();
+  const { favoriteList } = useContext( globalContext)
   const userId = localStorage.getItem('userId')
 
+  
 
-  function favoriteImmobile(){
-    axios({
-      method: 'post',
-      url: 'http://localhost:3001/immobile/favorite',
-      headers: {},
-      data: {
+  const saveImmobile = useMutation({
+    mutationFn: () => axios.post(`http://localhost:3001/immobile/favorite`, {
         userId,
         immobileId,
-      }
-    })
-    setIsSaved(true)
-  }
+    }),
+    onSuccess: () => {
 
-  function unFavoriteImmobile(){
-    axios({
-      method: 'delete',
-      url: 'http://localhost:3001/immobile/unfavorite',
-      headers: {},
-      data: {
+      //caso delay usar removeQueries
+    }
+  })
+
+  const unSaveImmobile = useMutation({
+    mutationFn: () => axios.delete(`http://localhost:3001/immobile/unfavorite`, {
+       data: {
         userId,
         immobileId,
-      }
-    })
-    setIsSaved(false)
+       } 
+    }),
+    onSuccess: () => {
+      //caso delay usar removeQueries
+    }
+  })
+
+  async function favoriteImmobile(){
+    console.log('favoritou')
+    await saveImmobile.mutateAsync()
+    queryClient.removeQueries({queryKey: ['favorite']})
   }
 
+  async function unFavoriteImmobile(){
+    console.log('desfavoritou')
+    await unSaveImmobile.mutateAsync()
+    queryClient.removeQueries({queryKey: ['favorite']})
+  }
 
   return(
     <div>
 
-    {user ? (
-            isSaved === false ? (
-              <Button
-                variant='ghost'
-                className='text-grayIcon'
-                onClick={favoriteImmobile}
-                data-testid='bookMarkIcon'
-              >
-                <BsBookmark />
-              </Button>
-            ): (
+
+    {userId ? (
+            favoriteList.some((favorite) => favorite.immobileId === immobileId) ? ( 
               <Button
                 variant='ghost'
                 className='text-grayIcon'
@@ -66,6 +67,15 @@ export function SaveButton({immobileId} : SaveButtonPorps){
                 data-testid='bookMarkFillIcon'
               >
                 <BsBookmarkFill />
+              </Button>
+            ): (
+              <Button
+                variant='ghost'
+                className='text-grayIcon'
+                onClick={favoriteImmobile}
+                data-testid='bookMarkIcon'
+              >
+                <BsBookmark />
               </Button>
             )
           ) : (
@@ -111,4 +121,8 @@ export function SaveButton({immobileId} : SaveButtonPorps){
           }
     </div>
   )
+}
+
+function useContex() {
+  throw new Error("Function not implemented.");
 }
