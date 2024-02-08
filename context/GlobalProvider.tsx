@@ -49,7 +49,6 @@ export default function GlobalProvider({ children }: { children: ReactNode }) {
         name: session.user.name,
         email: session.user.email,
         updatedAt: session.user.updated_at,
-        auth_id: session.user.sub,
       };
 
       axios
@@ -64,7 +63,9 @@ export default function GlobalProvider({ children }: { children: ReactNode }) {
         })
         .catch(() => {
           axios
-            .post(SIGN_UP_URL, userData)
+            .post(SIGN_UP_URL, userData, {
+              headers: { Authorization: `Bearer ${token}` },
+            })
             .then(() => {
               console.log('SIGN-UP');
               localStorage.setItem('token', token || '');
