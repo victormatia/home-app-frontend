@@ -53,7 +53,7 @@ export type TImmobile = {
   photos?: { photo: TPhoto }[]
 }
 
-export type  TFavoriteList = {
+export type  TFavorite = {
   userId : string,
   immobileId: string,
   immobile: TImmobile
@@ -78,8 +78,6 @@ export type TConext = {
   setToggleOpenFilter: Dispatch<SetStateAction<boolean>>
   propertyCaracteristics: TFiltredPropertys
   setPropertyCaracteristics: Dispatch<SetStateAction<TFiltredPropertys>>
-  favoriteList: TFavoriteList[] 
-  setFavoriteList: Dispatch<SetStateAction<TFavoriteList[]>>
 }
 
 export type TFiltredPropertys = {
@@ -102,5 +100,9 @@ export type TDefaultDiacriticalMapItem = {
 
 export type TCard = {
   immobile: TImmobile,
+}
+
+export type TUser = {
+  favoriteImmobile: TFavorite[]
 }
 
