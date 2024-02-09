@@ -1,18 +1,20 @@
 'use client'
-import globalContext from "@/context/context";
+
 import { useUser } from "@auth0/nextjs-auth0/client";
-import { useContext } from "react";
+
 import { Card } from "./Card";
+import queryClient from "@/tanstack/queryClient";
+import { TFavorite } from "@/types";
 
 export function SavedPageLogin(){
   const { user } = useUser();
-  const { favoriteList } = useContext(globalContext)
+ const favoriteList  = queryClient.getQueryData<TFavorite[]>(['favorite'])
 
   return(
     <>
       { user ? (
           <div>
-            {favoriteList.map(({immobile, immobileId}) => <Card immobile={immobile} key={immobileId}/>)}
+            {favoriteList?.map(({immobile, immobileId}) => <Card immobile={immobile} key={immobileId}/>)}
           </div>
       ):(
         <section className="text-center w-full h-full flex flex-col items-center justify-center">
