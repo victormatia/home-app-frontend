@@ -18,7 +18,7 @@ export default function Home() {
 
   return (
     <main className='flex flex-col gap-4 items-center w-full h-[calc(100vh-80px)] bg-grayBase
-    min-[700px]:pl-20 min-[700px]:flex-row min-[700px]:gap-0 min-[700px]:items-stretch'>
+    min-[700px]:flex-row min-[700px]:gap-0 min-[700px]:items-stretch'>
       <div className='basis-[85%] max-[1466px]:basis-full flex flex-col'>
         <div className='max-[700px]:hidden border border-x-0 border-[#C1C1C1] w-full flex justify-between  pl-2 py-2'>
           <MostUsedFilters />
