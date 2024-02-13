@@ -13,9 +13,13 @@ export function SavedPageLogin(){
   return(
     <>
       { user ? (
-          <div>
+           <ul className='flex flex-col pb-20 gap-4 w-full
+           min-[700px]:p-6 min-[700px]:flex-wrap min-[700px]:flex-row 
+           min-[700px]:h-full min-[700px]:gap-6 
+           min-[700px]:overflow-scroll min-[700px]:overflow-x-hidden
+           '>
             {favoriteList?.map(({immobile, immobileId}) => <Card immobile={immobile} key={immobileId}/>)}
-          </div>
+          </ul>
       ):(
         <section className="text-center w-full h-full flex flex-col items-center justify-center">
           <h1 className="text-2xl font-semibold">Para acessar seus imóveis salvos é necessário estar logado</h1>
