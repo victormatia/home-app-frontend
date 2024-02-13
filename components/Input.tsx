@@ -22,8 +22,8 @@ type InputRootPorps = ComponentProps<'div'>
 export function InputRoot(props: InputRootPorps) {
   return (
     <div
-      className="flex w-full items-center gap-2 
-      border border-borderColor bg-transparent rounded-md px-3 py-2 shadow-sm 
+      className="flex w-full items-center gap-2
+       bg-[#FFF] rounded-md px-3 py-2 shadow-sm 
       focus-within:ring-1 focus-within:border-primaryBlue"
       {...props}
     ></div>
