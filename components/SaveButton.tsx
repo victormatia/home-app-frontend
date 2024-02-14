@@ -24,7 +24,6 @@ export function SaveButton({immobileId} : SaveButtonPorps){
     queryFn: async () => {
       if(!userId) return
       const { data } = await axios.get(`http://localhost:3001/user/${userId}`);
-    
         //setFavoriteList(data.favoriteImmobile)
       return data.favoriteImmobile;
     },
