@@ -23,6 +23,7 @@ const config: Config = {
         borderColor: '#949494',
         primaryBlue: '#367ADF',
         secondaryBlue: '#367ADF',
+        
       },
 
       backgroundImage: {
@@ -40,6 +41,8 @@ const config: Config = {
 
       animation: {
         openfilter: 'openfilter 0.2s ease-in',
+        overlayShow: 'overlayShow 150ms cubic-bezier(0.16, 1, 0.3, 1)',
+        contentShow: 'contentShow 150ms cubic-bezier(0.16, 1, 0.3, 1)',
       },
 
       keyframes:{
@@ -52,6 +55,14 @@ const config: Config = {
             opacity: '1',
             transform: 'translateX(0)',
           },
+        },
+        overlayShow: {
+          'from': {opacity: '0' },
+          'to': { opacity: '1' },
+        },
+        contentShow: {
+          'from': { opacity: '0', transform: 'translate(-50%, -48%) scale(0.96)' },
+          'to': { opacity:'1', transform: 'translate(-50%, -50%) scale(1)' },
         },
       },
     },

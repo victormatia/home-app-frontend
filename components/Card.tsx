@@ -51,7 +51,7 @@ export function Card({ immobile }: TCard){
           <h3 className='text-black text-sm font-medium'>
               {`${immobile.type?.type}, ${immobile.address?.city}`}
           </h3>
-          <SaveButton />
+          <SaveButton immobileId={immobile.id}/>
         </div>
 
         <div className='flex gap-2 pt-2 items-end'>
