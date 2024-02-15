@@ -11,13 +11,13 @@ export const metadata: Metadata = {
 
 export default async function Profile() {
   return (
-    <section className="text-center flex-col pb-20 bg-[#F5F5F5] h-screen min-[700px]:ml-20 overflow-y-scroll">
-      <div className='w-full h-[125px] min-[700px]:h-[200px] bg-gradientBlue'/>
-      <div className='lg:w-[1000px] mx-auto'>
+    <section className="h-screen flex-col overflow-y-scroll bg-[#F5F5F5] pb-20 text-center">
+      <div className='bg-gradientBlue h-[125px] w-full min-[700px]:h-[200px]'/>
+      <div className='mx-auto lg:w-[1000px]'>
         <ProfileImage/>
-        <div className='mt-5 lg:mt-8 px-5 min-[700px]:pr-0 min-[700px]:flex min-[700px]:justify-normal'>
+        <div className='mt-5 px-5 min-[700px]:flex min-[700px]:justify-normal min-[700px]:pr-0 lg:mt-8'>
           <ProfileBox/>
-          <div className='min-[700px]:flex min-[700px]:w-full min-[700px]:justify-end hidden'>
+          <div className='hidden min-[700px]:flex min-[700px]:w-full min-[700px]:justify-end'>
             <DeleteAccountButton/>
           </div>
         </div>
