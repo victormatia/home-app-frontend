@@ -1,11 +1,10 @@
-'use client'
-import { Button } from "../Button"
-import { CaretLeft, CaretRight } from "phosphor-react"
-import { TCard } from "@/types"
+'use client';
+import { Button } from '../Button';
+import { CaretLeft, CaretRight } from 'phosphor-react';
+import { TCard } from '@/types';
 
-import { useKeenSlider } from "keen-slider/react"
-import "keen-slider/keen-slider.min.css"
-
+import { useKeenSlider } from 'keen-slider/react';
+import 'keen-slider/keen-slider.min.css';
 
 export default function Slider({ immobile }: TCard ) {
   const [sliderRef, instanceRef] = useKeenSlider<HTMLDivElement>({
@@ -13,7 +12,7 @@ export default function Slider({ immobile }: TCard ) {
     breakpoints:{
       '(max-width:700px)':{
         slides:{
-          perView:1
+          perView:1,
         },
       },
     },
@@ -21,25 +20,23 @@ export default function Slider({ immobile }: TCard ) {
       perView: 2.5,
     },
     loop:true,
-  })
-  
-  
+  });
 
   return (
-      <div className="w-full">
-        <figure ref={sliderRef} className="keen-slider">
+    <div className="w-full">
+      <figure ref={sliderRef} className="keen-slider">
         {
-          immobile?.photos?.map(( {photo} , index ) => {
+          immobile?.photos?.map(( { photo } , index ) => {
             return(
               <img
                 key={ index }
                 src={ photo.url }
-                alt={""}
+                alt={''}
                 className={
                   `keen-slider__slide
                   number-slide${index}
-                  w-full
                   max-h-[400px]
+                  w-full
                   `
                 }
               />
@@ -47,30 +44,31 @@ export default function Slider({ immobile }: TCard ) {
           })
         }
       </figure>
-        <Button
-          variant="ghost"
-          data-testid='prevButton'
-          className="w-9 h-full flex items-center justify-center left-0 px-2 top-0 absolute hover:bg-lSliderButtonGradient"
-          onClick={(e: any) =>
-            e.stopPropagation() || instanceRef.current?.prev()
-          }
-        >
-          <CaretLeft size={32} className="text-white font-bold"/>
-        </Button>
+      <Button
+        variant="ghost"
+        data-testid='prevButton'
+        className="hover:bg-lSliderButtonGradient absolute left-0 top-0 
+        flex h-full w-9 items-center justify-center px-2"
+        onClick={(e: any) =>
+          e.stopPropagation() || instanceRef.current?.prev()
+        }
+      >
+        <CaretLeft size={32} className="font-bold text-white"/>
+      </Button>
 
-        <Button
-          variant="ghost"
-          data-testid='nextButton'
-          className="w-9 h-full flex items-center justify-center  left-auto right-px px-2 top-0 absolute hover:cursor-pointer hover:bg-rSliderButtonGradient "
-          onClick={(e: any) =>
-            e.stopPropagation() || instanceRef.current?.next()
-          }
-            >
-             <CaretRight size={32} className="text-white font-bold"/> 
-        </Button>
-          
+      <Button
+        variant="ghost"
+        data-testid='nextButton'
+        className="hover:bg-rSliderButtonGradient absolute left-auto right-px top-0  
+        flex h-full w-9 items-center justify-center px-2 hover:cursor-pointer "
+        onClick={(e: any) =>
+          e.stopPropagation() || instanceRef.current?.next()
+        }
+      >
+        <CaretRight size={32} className="font-bold text-white"/> 
+      </Button>
        
-      </div>
+    </div>
 
-  )
+  );
 }
