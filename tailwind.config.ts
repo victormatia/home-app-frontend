@@ -23,6 +23,7 @@ const config: Config = {
 
       backgroundImage: {
         gradientBlue: 'linear-gradient(107deg, #367ADF 13.1%, #36A5C8 68.23%);',
+        gradientBlack: ' linear-gradient(294deg, #000 25.9%, rgba(0, 0, 0, 0.00) 43.55%);',
         rSliderButtonGradient: 'linear-gradient(270deg, rgba(0, 0, 0, 0.46) -80%, rgba(0, 0, 0, 0.00) 100%);',
         lSliderButtonGradient: 'linear-gradient(90deg, rgba(0, 0, 0, 0.46) -80%, rgba(0, 0, 0, 0.00) 100%);',
         profileCardGradient: 'linear-gradient(270deg, rgba(255, 255, 255, 0.00) 44.8%, #FFF 100%);',

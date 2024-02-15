@@ -1,9 +1,10 @@
 'use client'
 
 import { Button } from "@/components/Button"
-import { CaracteristicList } from "@/components/CaracteristcList"
-import Map from "@/components/Map"
-import Slider from "@/components/Slider"
+import { CaracteristicList } from "@/components/ImmobilePage/CaracteristcList"
+import Map from "@/components/ImmobilePage/Map"
+import { SaveButton } from "@/components/SaveButton"
+import Slider from "@/components/ImmobilePage/Slider"
 import { TImmobile } from "@/types"
 import { useQuery } from "@tanstack/react-query"
 import axios from "axios"
@@ -27,12 +28,19 @@ export default function Immobile({ params: { id }  } : ImmobileProps ){
   return(
     <main className="w-full overflow-x-hidden ">
       <div className="min-[700px]:left-20 left-0 relative w-full overflow-hidden ">
-        <Slider immobile={immobile!}/>  
+        <Slider immobile={immobile!}/>
       </div>
-      <div className="w-full mt-2 mx-auto flex flex-col gap-2 pb-20 min-[700px]:pl-[80px]  min-[700px]:mt-7 min-[700px]:w-[60%] px-3">
+        <div className="text-right w-full  bg-gradientBlack pr-2 relative -top-12 right-0 ">
+          <p className="text-[#ACACAC]">Aluguel</p> 
+          <p className="text-white">R$ {immobile?.price}</p>
+        </div>  
+      <div className="w-full -mt-6 mx-auto flex flex-col gap-2 pb-20 min-[700px]:pl-[80px] min-[700px]:w-[60%] px-3">
         <div>
-          <h2 className="text-[#ACACAC] text-base min-[700px]:text-xl font-medium">Descrição</h2>
-          <p className="text-base font-medium  min-[700px]:text-xl">{ immobile?.description }</p>
+          <div className="flex justify-between">
+            <h2 className="text-[#ACACAC] text-base min-[700px]:text-xl font-medium">Descrição</h2>
+            <SaveButton />
+          </div>
+          <p className="text-base font-medium w-[90%] min-[700px]:w-full  min-[700px]:text-xl">{ immobile?.description }</p>
         </div>
         <div className="flex flex-col gap-3 min-[700px]:flex-row  min-[700px]:mt-5">
           <CaracteristicList

@@ -1,6 +1,6 @@
 'use client'
 import { useState } from "react"
-import { Button } from "./Button"
+import { Button } from "../Button"
 import { CaretLeft, CaretRight } from "phosphor-react"
 import { TCard } from "@/types"
 
@@ -8,7 +8,6 @@ import { useKeenSlider } from "keen-slider/react"
 import "keen-slider/keen-slider.min.css"
 
 export default function Slider({ immobile }: TCard ) {
-  const [loaded, setLoaded] = useState(false)
   const [sliderRef, instanceRef] = useKeenSlider<HTMLDivElement>({
     initial: 0,
     breakpoints:{
@@ -22,9 +21,6 @@ export default function Slider({ immobile }: TCard ) {
       perView: 2.5,
     },
     loop:true,
-    created() {
-      setLoaded(true)
-    },
   })
   
   
@@ -52,29 +48,27 @@ export default function Slider({ immobile }: TCard ) {
         }
 
       </figure>
-        {loaded && instanceRef.current && (
-          <>
-            <Button
-              variant="ghost"
-              className="w-9 h-full flex items-center justify-center left-0 px-2 top-0 absolute hover:bg-lSliderButtonGradient"
-              onClick={(e: any) =>
-                e.stopPropagation() || instanceRef.current?.prev()
-              }
-            >
-              <CaretLeft size={32} className="text-white font-bold"/>
-            </Button>
+        <Button
+          variant="ghost"
+          data-testid='prevButton'
+          className="w-9 h-full flex items-center justify-center left-0 px-2 top-0 absolute hover:bg-lSliderButtonGradient"
+          onClick={(e: any) =>
+            e.stopPropagation() || instanceRef.current?.prev()
+          }
+        >
+          <CaretLeft size={32} className="text-white font-bold"/>
+        </Button>
 
-            <Button
-              variant="ghost"
-              className="w-9 h-full flex items-center justify-center  left-auto min-[700px]:right-20 right-px px-2 top-0 absolute hover:cursor-pointer hover:bg-rSliderButtonGradient "
-              onClick={(e: any) =>
-                e.stopPropagation() || instanceRef.current?.next()
-              }
-            >
-             <CaretRight size={32} className="text-white font-bold"/> 
-            </Button>
-          </>
-        )}
+        <Button
+          variant="ghost"
+          data-testid='nextButton'
+          className="w-9 h-full flex items-center justify-center  left-auto min-[700px]:right-20 right-px px-2 top-0 absolute hover:cursor-pointer hover:bg-rSliderButtonGradient "
+          onClick={(e: any) =>
+            e.stopPropagation() || instanceRef.current?.next()
+          }
+        >
+          <CaretRight size={32} className="text-white font-bold"/> 
+        </Button>  
       </>
   )
 }

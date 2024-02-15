@@ -25,7 +25,7 @@ export default function RootLayout({
       <UserProvider>
         <GlobalProvider>
           <html lang="en">
-            <body className={`${jost.className} bg-app min-[700px]:overflow-clip`}>
+            <body className={`${jost.className} bg-grayBase min-[700px]:overflow-clip`}>
               <Sidebar />
               <MobileFilter />
               {children}
