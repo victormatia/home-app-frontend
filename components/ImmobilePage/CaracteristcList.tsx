@@ -3,7 +3,7 @@ import { IoBedOutline } from 'react-icons/io5';
 import { FaCar, FaShower } from 'react-icons/fa';
 import { MdPets } from 'react-icons/md';
 
-interface CaracteristListProps{
+export interface CaracteristListProps{
   bathroomsQty: number | undefined,
   bedroomsQty: number | undefined,
   parkingQty: number | undefined,
