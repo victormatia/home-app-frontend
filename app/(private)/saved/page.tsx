@@ -8,7 +8,7 @@ export const metadata: Metadata = {
 export default function Saved() {
   return (
     <div className='h-screen min-[700px]:pl-20'>
-        <SavedPageLogin /> 
+      <SavedPageLogin /> 
     </div> 
   );
 }
