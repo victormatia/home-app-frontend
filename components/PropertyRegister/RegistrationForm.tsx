@@ -1,49 +1,79 @@
-"use client"
-import * as RadioGroup from '@radix-ui/react-radio-group';
-import { InputControl, InputPrefix, InputRoot } from '../Input';
-import { useState } from 'react';
+'use client'
+
+import * as Checkbox from '@radix-ui/react-checkbox';
+import Input, { InputPrefix, InputRoot } from '../Input';
+import { useContext, useEffect, useState } from 'react';
 import { Button } from '../Button';
 import { QuantitySelector } from '../FIlters/MobileFilter/QuantitySelector';
 import { SelectComponent } from '../FIlters/MobileFilter/Select';
+import globalContext from '@/context/context';
+import { Check } from 'phosphor-react';
+import { useForm, SubmitHandler } from 'react-hook-form';
+import * as ToggleGroup from '@radix-ui/react-toggle-group';
 
-export function RegisterForm(){
-  const [description, setDescription] = useState('')
-  const [address, setAddress] = useState('')
-  const [number, setNumber] = useState('')
-  const [burgh, setBurgh] = useState('')
-  const [city, setCity] = useState('')
-  const [registeredProperty, setRegisteredProperty] = useState({})
-  const [immobileType, setImmobileType] = useState<string>('todos');
-  const [minPrice, setMinPrice] = useState<number| string>('0,00');
-  const [maxPrice, setMaxPrice] = useState<number| string>('99.999,99');
-  const [minArea, setMinArea] = useState<number| string>(0);
-  const [maxArea, setMaxArea] = useState<number| string>(9999);
-  const [bathroomsQty, setBathroomsQty] = useState<number| string>('todos');
-  const [bedroomsQty, setBedroomsQty] = useState<number| string>('todos');
-  const [parkingQty, setParkingQty] = useState<number| string>('todos');
-  const [petFriendly, setPetFriendly] = useState<boolean | string>('todos');
-  const [isFurnished, setIsFurnished] = useState<boolean | string>('todos');
+type TInputs = {
+  address: string,
+  number: string,
+  burgh: string,
+  city: string,
+  price: string,
+  area: string,
+  petFriendly: boolean,
+  bedrooms: number,
+  bathrooms: number,
+  parkings: number,
+  isFurnished: boolean,
+  description: string
+}
 
-  const propetyKeys = Object.keys(registeredProperty);
+const defaultValues = {
+  address: '',
+  number: '',
+  burgh: '',
+  city: '',
+  price: '',
+  area: '',
+  bedrooms: 0,
+  bathrooms: 0,
+  parkings: 0,
+  petFriendly: false,
+  isFurnished: false,
+  description: ''
+}
 
-  function handleRegister(event: React.FormEvent<HTMLFormElement>) {
-    event.preventDefault();
+export function RegisterForm() {
+  const { register, handleSubmit, reset } = useForm({ defaultValues });
 
-    const newProperty = {
-      bedroomsQty,
-      bathroomsQty,
-      parkingQty,
-      minPrice,
-      maxPrice,
-      minArea,
-      maxArea,
-      immobileType,
-      petFriendly ,
-      isFurnished,
-    };
-
-    setRegisteredProperty(newProperty);
+  const registerImmobile: SubmitHandler<TInputs> = (data) => {
+    console.log(data);
+    reset()
   };
+
+
+  const { setCurrPage } = useContext(globalContext)
+
+  useEffect(() => setCurrPage('advertise'), [])
+
+  // const propetyKeys = Object.keys(registeredProperty);
+
+  // function handleRegister(event: React.FormEvent<HTMLFormElement>) {
+  //   event.preventDefault();
+
+  //   const newProperty = {
+  //     bedroomsQty,
+  //     bathroomsQty,
+  //     parkingQty,
+  //     minPrice,
+  //     maxPrice,
+  //     minArea,
+  //     maxArea,
+  //     immobileType,
+  //     petFriendly,
+  //     isFurnished,
+  //   };
+
+  //   setRegisteredProperty(newProperty);
+  // };
 
   // const handleNumberFormatter = (inputValue: string) => {
 
@@ -56,250 +86,195 @@ export function RegisterForm(){
   //   return result
   // };
 
-  return(
-    <form onSubmit={handleRegister}
-      className='w-full flex flex-col gap-4 p-4 min-[700px]:overflow-y-scroll'>
-        <span>Localização</span>
-        <div className='flex flex-col '>
-              <div>
-            <label htmlFor="address" className='flex flex-col font-semibold text-xs'>
-                Endereço
-                <InputRoot>
-                <InputControl
-                    type="string" 
-                    name="address" 
-                    id="address"
-                    placeholder='Ex.: Rua Perilo Teixeira'
-                    value={address}
-                    onChange={(e) => setAddress(e.target.value)}
-                />
-                </InputRoot>
-            </label>
-            <label htmlFor="number" className='flex flex-col font-semibold text-xs'>
-            Número
-                <InputRoot>
-                <InputControl
-                    type="number" 
-                    name="number" 
-                    id="number"
-                    min="0"
-                    max="999999"
-                    placeholder='Ex.: 192'
-                    value={number}
-                    onChange={(e) => setNumber((e.target.value))}
-                />
-                </InputRoot>
-            </label>
-            </div>
-            <label htmlFor="burgh" className='flex flex-col font-semibold text-xs'>
-            Bairro
-                <InputRoot>
-                <InputControl
-                    type="string" 
-                    name="burgh" 
-                    id="burgh"
-                    placeholder='Ex.: Centro'
-                    value={burgh}
-                    onChange={(e) => setBurgh(e.target.value)}
-                />
-                </InputRoot>
-            </label>
-            <label htmlFor="city" className='flex flex-col font-semibold text-xs'>
-            Cidade
-                <InputRoot>
-                <InputControl
-                    type="string" 
-                    name="city" 
-                    id="city"
-                    placeholder='Ex.: Itapipoca'
-                    value={city}
-                    onChange={(e) => setCity(e.target.value)}
-                />
-                </InputRoot>
-            </label>
-        </div>
-
-      <span>Características do imóvel</span>
-      <div className='flex flex-col '>
-        <label htmlFor="immoblie-type" className='text-info font-semibold mb-2'>
-                   Tipo de imóvel
-        </label>
-        <SelectComponent immobliType={setImmobileType}/>
-      </div>
-
-      <div className='flex flex-col '>
-        <label htmlFor="price-range" className='text-info font-semibold mb-2'>
-                   Preço
-        </label>
-        <div className=' grid grid-cols-2 gap-3 pr-10'>
-          <label htmlFor="min-price" className='flex flex-col font-semibold text-xs'>
-                    Mínimo
+  return (
+    <form
+      onSubmit={handleSubmit(registerImmobile)}
+      className='w-full flex flex-col gap-8 min-[700px]:overflow-y-scroll
+      pb-20'
+    >
+      <div>
+        <h2 className='text-xl font-medium text-grayTitle mb-4'>Localização</h2>
+        <div className='flex flex-col gap-4'>
+          <label htmlFor="address" className='flex flex-col font-medium text-grayLabel'>
+            <h3 className='text-base mb-2'>Endereço</h3>
             <InputRoot>
-              <InputPrefix className='font-semibold text-xs'>
-                        R$
-              </InputPrefix>
-              <InputControl
-                type="number" 
-                name="min-price" 
-                id="min-price"
-                min="0"
-                max="999999"
-                placeholder='0,00'
-                value={minPrice}
-                onChange={(e) => setMinPrice(e.target.value)}
+              <Input
+                type='text'
+                id='address'
+                placeholder='Ex.: Rua Perilo Teixeira'
+                {...register('address')}
               />
             </InputRoot>
           </label>
 
-          <label htmlFor="max-price" className='flex flex-col font-semibold text-xs'>
-                    Máximo
+          <label htmlFor="number" className='flex flex-col font-medium text-grayLabel'>
+            <h3 className='text-base mb-2'>Número</h3>
             <InputRoot>
-              <InputPrefix className='font-semibold text-xs'>
-                        R$
-              </InputPrefix>
-              <InputControl
-                type="number" 
-                name="max-price" 
-                id="max-price"
-                min="0"
-                max="999999"
-                placeholder='10.000,00'
-                value={maxPrice}
-                onChange={(e) => setMaxPrice(e.target.value)}
+              <Input
+                type='number'
+                id='number'
+                placeholder='Ex.: 2223'
+                {...register('number')}
+              />
+            </InputRoot>
+          </label>
+
+          <label htmlFor="burgh" className='flex flex-col font-medium text-grayLabel'>
+            <h3 className='text-base mb-2'>Bairro</h3>
+            <InputRoot>
+              <Input
+                type='text'
+                id='burgh'
+                placeholder='Ex.: Centro'
+                {...register('burgh')}
+              />
+            </InputRoot>
+          </label>
+          <label htmlFor="city" className='flex flex-col font-medium text-grayLabel'>
+            <h3 className='text-base mb-2'>Cidade</h3>
+            <InputRoot>
+              <Input
+                type='text'
+                id='city'
+                placeholder='Ex.: Itapipoca'
+                {...register('city')}
               />
             </InputRoot>
           </label>
         </div>
       </div>
 
-      <div className='flex flex-col '>
-        <label htmlFor="bathrooms" className='text-info font-semibold mb-2'>
-                  Banheiros
-          <QuantitySelector quantitySelect={setBathroomsQty}/>
-        </label>
-      </div>
-
-      <div className='flex flex-col'>
-        <label htmlFor="bedrooms" className='text-info font-semibold mb-2'>
-                  Quartos
-          <QuantitySelector quantitySelect={setBedroomsQty}/>
-        </label>
-      </div>
-
-      <div className='flex flex-col mb-4'>
-        <label htmlFor="parking" className='text-info font-semibold mb-2'>
-                  Vagas
-          <QuantitySelector quantitySelect={setParkingQty}/>
-        </label>
-      </div>
-
-      <div className='flex flex-col'>
-        <label htmlFor="area-range" className='text-info font-semibold mb-2'>
-                   Área do imóvel
-        </label>
-        <div className=' grid grid-cols-2 gap-3 pr-10'>
-          <label htmlFor="min-area" className='flex flex-col font-semibold text-xs'>
-                    Mínimo
-            <InputRoot>
-              <InputControl
-                type="number" 
-                name="min-area" 
-                id="min-area"
-                min="0"
-                max="9999"
-                placeholder='0 m²'
-                value={minArea}
-                onChange={(e) => setMinArea(e.target.value)}
-              />
-              <InputPrefix className='font-semibold text-xs'>
-                        m²
-              </InputPrefix>
-            </InputRoot>
+      <div>
+        <h2 className='text-xl font-medium text-grayTitle mb-4'>Características do imóvel</h2>
+        <div className='flex flex-col gap-4'>
+          <label htmlFor="immoblie-type" className='font-medium flex flex-col text-grayLabel'>
+            <h3 className='text-base mb-2'>Tipo de imóvel</h3>
+            <SelectComponent immobliType={() => { }} />
           </label>
-
-          <label htmlFor="max-area" className='flex flex-col font-semibold text-xs'>
-                    Máximo
-            <InputRoot>
-              <InputControl
-                type="number" 
-                name="max-area" 
-                id="max-area"
-                min="0"
-                max="9999"
-                placeholder='9.999 m²'
-                value={maxArea}
-                onChange={(e) => setMaxArea(e.target.value)}
-              />
-              <InputPrefix className='font-semibold text-xs'>
-                        m²
-              </InputPrefix>
-            </InputRoot>
-          </label>
-        </div>
-      </div>
-
-      <div className='flex flex-col gap-2 text-info font-semibold'>
-        <span>Aceita Pets</span>
-        <RadioGroup.Root className="RadioGroupRoot" defaultValue="yes" aria-label="View density">
-        <div style={{ display: 'flex', alignItems: 'center' }}>
-          <RadioGroup.Item className="className='bg-white w-6 h-6 rounded border-borderColor data-[state=checked]:bg-blue-700'" value="yes" id="r1">
-            <RadioGroup.Indicator className="flex items-center justify-center text-white" />
-          </RadioGroup.Item>
-          <label className="Label" htmlFor="r1">
-          Sim
-          </label>
-        </div>
-        <div style={{ display: 'flex', alignItems: 'center' }}>
-          <RadioGroup.Item className="className='bg-white w-6 h-6 rounded border-borderColor data-[state=checked]:bg-blue-700'" value="no" id="r2">
-            <RadioGroup.Indicator className="flex items-center justify-center text-white" />
-          </RadioGroup.Item>
-          <label className="Label" htmlFor="r2">
-          Não
-          </label>
-        </div>
-      </RadioGroup.Root>
-      <span>Mobiliado</span>
-        <RadioGroup.Root className="RadioGroupRoot" defaultValue="no" aria-label="View density">
-        <div style={{ display: 'flex', alignItems: 'center' }}>
-          <RadioGroup.Item className="className='bg-white w-6 h-6 rounded border-borderColor data-[state=checked]:bg-blue-700'" value="yes" id="r1">
-            <RadioGroup.Indicator className="flex items-center justify-center text-white" />
-          </RadioGroup.Item>
-          <label className="Label" htmlFor="r1">
-          Sim
-          </label>
-        </div>
-        <div style={{ display: 'flex', alignItems: 'center' }}>
-          <RadioGroup.Item className="className='bg-white w-6 h-6 rounded border-borderColor data-[state=checked]:bg-blue-700'" value="no" id="r2">
-            <RadioGroup.Indicator className="flex items-center justify-center text-white" />
-          </RadioGroup.Item>
-          <label className="Label" htmlFor="r2">
-          Não
-          </label>
-        </div>
-      </RadioGroup.Root>
-      </div>
-
-      <label htmlFor="description" className='flex flex-col font-semibold text-xs'>
-      Descrição
-                <InputRoot>
-                <InputControl
-                    type="string" 
-                    name="description" 
-                    id="description"
-                    placeholder='Ex.: Um apartamento espaçoso com boa localização... '
-                    value={description}
-                    onChange={(e) => setDescription(e.target.value)}
+          <div className='flex gap-4'>
+            <label htmlFor="price" className='text-info font-semibold'>
+              <h3 className='text-base font-medium text-grayLabel mb-2'>Preço</h3>
+              <InputRoot>
+                <InputPrefix className='font-semibold text-base'>
+                  R$
+                </InputPrefix>
+                <Input
+                  type='number'
+                  id='price'
+                  placeholder='Ex.: 550.00'
+                  {...register('price')}
                 />
-                </InputRoot>
+              </InputRoot>
             </label>
 
-      add a 
+            <label htmlFor="area" className='flex flex-col font-medium text-grayLabel'>
+              <h3 className='text-base text-grayLabel mb-2'>Área</h3>
+              <InputRoot>
+                <Input
+                  type='number'
+                  id='area'
+                  placeholder='Ex.: Centro'
+                  {...register('area')}
+                />
+                <InputPrefix className='font-semibold text-base'>
+                  m²
+                </InputPrefix>
+              </InputRoot>
+            </label>
+          </div>
 
-      <div className='flex gap-1'>
-        <Button className='font-semibold text-lg p-3 w-full' type='submit'>
+          <div className='flex w-full gap-8'>
+            <label htmlFor="bathrooms" className='flex flex-col font-medium text-grayLabel'>
+              <h3 className='text-base mb-2'>Banheiros</h3>
+              <ToggleGroup.Root
+                type="single"
+                {...register('bathrooms')} // ainda não funciona
+                className='flex gap-3 text-grayLabel text-base'
+              >
+                <ToggleGroup.Item
+                  className='flex items-center justify-center border-2 bg-white border-transparent w-8 h-8 rounded-md p-2  shadow-default
+                data-[state=on]:border-blue-600'
+                  value='1'
+                >
+                  1
+                </ToggleGroup.Item>
+                <ToggleGroup.Item
+                  className='flex items-center justify-center border-2 bg-white border-transparent w-8 h-8 rounded-md p-2 shadow-default
+                data-[state=on]:border-blue-600'
+                  value='2'>
+                  2
+                </ToggleGroup.Item>
+                <ToggleGroup.Item
+                  className='flex items-center justify-center border-2 bg-white border-transparent w-8 h-8 rounded-md p-2 shadow-default
+                data-[state=on]:border-blue-600'
+                  value='3'>
+                  3
+                </ToggleGroup.Item>
+                <ToggleGroup.Item
+                  className='flex items-center justify-center border-2 bg-white border-transparent w-8 h-8 rounded-md p-2 shadow-default
+                data-[state=on]:border-blue-600'
+                  value='4'>
+                  +4
+                </ToggleGroup.Item>
+              </ToggleGroup.Root>
+            </label>
+            <label htmlFor="bedrooms" className='flex flex-col font-medium text-grayLabel'>
+              <h3 className='text-base mb-2'>Quartos</h3>
+              <QuantitySelector quantitySelect={() => { }} />
+            </label>
+          </div>
+
+          <label htmlFor="parking" className='flex flex-col font-medium text-grayLabel'>
+            <h3 className='text-base mb-2'>Vagas de estacionamento</h3>
+            <QuantitySelector quantitySelect={() => { }} />
+          </label>
+
+          <div className='flex gap-4 font-medium text-grayLabel'>
+
+            <label htmlFor='Mobiliado' className='flex gap-2 text-base items-center'>
+              <h3>Aceita pet</h3>
+              <Checkbox.Root
+                className='bg-white w-7 h-7 rounded border-borderColor data-[state=checked]:bg-primaryBlue shadow-default'
+                id='Mobiliado'
+                {...register('petFriendly')}
+              >
+                <Checkbox.Indicator className='flex items-center justify-center text-white'>
+                  <Check size={16} />
+                </Checkbox.Indicator>
+              </Checkbox.Root>
+            </label>
+
+            <label htmlFor='Mobiliado' className='flex gap-2 items-center py-1'>
+              <h3>Mobiliado</h3>
+              <Checkbox.Root
+                className='bg-white w-7 h-7 rounded border-borderColor data-[state=checked]:bg-primaryBlue shadow-default'
+                id='Mobiliado'
+                {...register('isFurnished')}
+              >
+                <Checkbox.Indicator className='flex items-center justify-center text-white'>
+                  <Check size={16} />
+                </Checkbox.Indicator>
+              </Checkbox.Root>
+            </label>
+
+          </div>
+          <label htmlFor="description" className='flex flex-col font-medium text-base text-grayLabel'>
+            <h3 className='mb-2'>Descrição</h3>
+            <textarea
+              className='p-2 outline-primaryBlue rounded-md' id="description"
+              cols={30}
+              rows={10}
+              placeholder='Ex.: Um apartamento espaçoso com boa localização... '
+              {...register('description')}
+            />
+          </label>
+        </div>
+      </div>
+
+      <Button className='font-semibold text-lg p-3 w-full' type='submit'>
         Cadastrar imóvel
-        </Button>
-      </div>
+      </Button>
+
 
     </form>
   );
