@@ -1,5 +1,6 @@
 import * as Checkbox from '@radix-ui/react-checkbox';
-import { InputControl, InputPrefix, InputRoot } from '../Input';
+import { InputPrefix, InputRoot } from '../Input';
+import Input from '../Input'
 import { QuantitySelector } from './MobileFilter/QuantitySelector';
 import { SelectComponent } from './MobileFilter/Select';
 import { Check } from 'phosphor-react';
@@ -129,7 +130,7 @@ export function FilterForm(){
 
   return(
     <form onSubmit={handleApplyFilter} 
-      className='w-full flex flex-col gap-4 p-4 min-[700px]:overflow-y-scroll'>
+      className='w-full flex flex-col gap-4 p-4 min-[700px]:overflow-y-scroll h-full'>
       <div className='flex flex-col '>
         <label htmlFor="immoblie-type" className='text-info font-semibold mb-2'>
                    Tipo de imóvel
@@ -148,7 +149,7 @@ export function FilterForm(){
               <InputPrefix className='font-semibold text-xs'>
                         R$
               </InputPrefix>
-              <InputControl
+              <Input
                 type="number" 
                 name="min-price" 
                 id="min-price"
@@ -166,7 +167,7 @@ export function FilterForm(){
               <InputPrefix className='font-semibold text-xs'>
                         R$
               </InputPrefix>
-              <InputControl
+              <Input
                 type='number' 
                 name="max-price" 
                 id="max-price"
@@ -209,7 +210,7 @@ export function FilterForm(){
           <label htmlFor="min-area" className='flex flex-col font-semibold text-xs'>
                     Mínimo
             <InputRoot>
-              <InputControl
+              <Input
                 type="number" 
                 name="min-area" 
                 id="min-area"
@@ -228,7 +229,7 @@ export function FilterForm(){
           <label htmlFor="max-area" className='flex flex-col font-semibold text-xs'>
                     Máximo
             <InputRoot>
-              <InputControl
+              <Input
                 type="number" 
                 name="max-area" 
                 id="max-area"
