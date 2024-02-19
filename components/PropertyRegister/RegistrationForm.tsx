@@ -2,13 +2,12 @@
 
 import * as Checkbox from '@radix-ui/react-checkbox';
 import Input, { InputPrefix, InputRoot } from '../Input';
-import { useContext, useEffect, useState } from 'react';
+import { useContext, useEffect } from 'react';
 import { Button } from '../Button';
-import { QuantitySelector } from '../FIlters/MobileFilter/QuantitySelector';
 import { SelectComponent } from '../FIlters/MobileFilter/Select';
 import globalContext from '@/context/context';
 import { Check } from 'phosphor-react';
-import { useForm, SubmitHandler } from 'react-hook-form';
+import { useForm, SubmitHandler, Controller } from 'react-hook-form';
 import * as ToggleGroup from '@radix-ui/react-toggle-group';
 
 type TInputs = {
@@ -19,9 +18,9 @@ type TInputs = {
   price: string,
   area: string,
   petFriendly: boolean,
-  bedrooms: number,
-  bathrooms: number,
-  parkings: number,
+  bedrooms: string,
+  bathrooms: string,
+  parkings: string,
   isFurnished: boolean,
   description: string
 }
@@ -33,16 +32,16 @@ const defaultValues = {
   city: '',
   price: '',
   area: '',
-  bedrooms: 0,
-  bathrooms: 0,
-  parkings: 0,
+  bedrooms: "0",
+  bathrooms: "0",
+  parkings: "0",
   petFriendly: false,
   isFurnished: false,
   description: ''
 }
 
 export function RegisterForm() {
-  const { register, handleSubmit, reset } = useForm({ defaultValues });
+  const { register, handleSubmit, reset, control } = useForm({ defaultValues });
 
   const registerImmobile: SubmitHandler<TInputs> = (data) => {
     console.log(data);
@@ -114,7 +113,7 @@ export function RegisterForm() {
                 type='number'
                 id='number'
                 placeholder='Ex.: 2223'
-                {...register('number')}
+                {...register('number', {valueAsNumber: true})}
               />
             </InputRoot>
           </label>
@@ -149,7 +148,7 @@ export function RegisterForm() {
         <div className='flex flex-col gap-4'>
           <label htmlFor="immoblie-type" className='font-medium flex flex-col text-grayLabel'>
             <h3 className='text-base mb-2'>Tipo de imóvel</h3>
-            <SelectComponent immobliType={() => { }} />
+            <SelectComponent immobliType={() => { }}/>
           </label>
           <div className='flex gap-4'>
             <label htmlFor="price" className='text-info font-semibold'>
@@ -162,7 +161,7 @@ export function RegisterForm() {
                   type='number'
                   id='price'
                   placeholder='Ex.: 550.00'
-                  {...register('price')}
+                  {...register('price', {valueAsNumber: true})}
                 />
               </InputRoot>
             </label>
@@ -174,7 +173,7 @@ export function RegisterForm() {
                   type='number'
                   id='area'
                   placeholder='Ex.: Centro'
-                  {...register('area')}
+                  {...register('area', {valueAsNumber: true})}
                 />
                 <InputPrefix className='font-semibold text-base'>
                   m²
@@ -184,50 +183,141 @@ export function RegisterForm() {
           </div>
 
           <div className='flex w-full gap-8'>
-            <label htmlFor="bathrooms" className='flex flex-col font-medium text-grayLabel'>
-              <h3 className='text-base mb-2'>Banheiros</h3>
-              <ToggleGroup.Root
-                type="single"
-                {...register('bathrooms')} // ainda não funciona
-                className='flex gap-3 text-grayLabel text-base'
-              >
-                <ToggleGroup.Item
-                  className='flex items-center justify-center border-2 bg-white border-transparent w-8 h-8 rounded-md p-2  shadow-default
-                data-[state=on]:border-blue-600'
-                  value='1'
-                >
-                  1
-                </ToggleGroup.Item>
-                <ToggleGroup.Item
-                  className='flex items-center justify-center border-2 bg-white border-transparent w-8 h-8 rounded-md p-2 shadow-default
-                data-[state=on]:border-blue-600'
-                  value='2'>
-                  2
-                </ToggleGroup.Item>
-                <ToggleGroup.Item
-                  className='flex items-center justify-center border-2 bg-white border-transparent w-8 h-8 rounded-md p-2 shadow-default
-                data-[state=on]:border-blue-600'
-                  value='3'>
-                  3
-                </ToggleGroup.Item>
-                <ToggleGroup.Item
-                  className='flex items-center justify-center border-2 bg-white border-transparent w-8 h-8 rounded-md p-2 shadow-default
-                data-[state=on]:border-blue-600'
-                  value='4'>
-                  +4
-                </ToggleGroup.Item>
-              </ToggleGroup.Root>
-            </label>
-            <label htmlFor="bedrooms" className='flex flex-col font-medium text-grayLabel'>
-              <h3 className='text-base mb-2'>Quartos</h3>
-              <QuantitySelector quantitySelect={() => { }} />
-            </label>
+            <Controller
+              control={control}
+              name='bathrooms'
+              render={({field}) => {
+                return(
+                  <label htmlFor="bathrooms" className='flex flex-col font-medium text-grayLabel'>
+                    <h3 className='text-base mb-2'>Banheiros</h3>
+                    <ToggleGroup.Root
+                    type="single"
+                    onValueChange={field.onChange}
+                    value={field.value}
+                    className='flex gap-3 text-grayLabel text-base'
+                    >
+                      <ToggleGroup.Item
+                        className='flex items-center justify-center border-2 bg-white border-transparent w-8 h-8 rounded-md p-2  shadow-default
+                      data-[state=on]:border-blue-600'
+                        value='1'
+                      >
+                        1
+                      </ToggleGroup.Item>
+                      <ToggleGroup.Item
+                        className='flex items-center justify-center border-2 bg-white border-transparent w-8 h-8 rounded-md p-2 shadow-default
+                      data-[state=on]:border-blue-600'
+                        value='2'>
+                        2
+                      </ToggleGroup.Item>
+                      <ToggleGroup.Item
+                        className='flex items-center justify-center border-2 bg-white border-transparent w-8 h-8 rounded-md p-2 shadow-default
+                      data-[state=on]:border-blue-600'
+                        value='3'>
+                        3
+                      </ToggleGroup.Item>
+                      <ToggleGroup.Item
+                        className='flex items-center justify-center border-2 bg-white border-transparent w-8 h-8 rounded-md p-2 shadow-default
+                      data-[state=on]:border-blue-600'
+                        value='4'>
+                        +4
+                      </ToggleGroup.Item>
+                    </ToggleGroup.Root>
+                  </label>
+                )
+              }}
+            />
+            
+            <Controller 
+              control={control}
+              name='bedrooms'
+              render={({field}) => {
+
+                return(
+                  <label htmlFor="bedrooms" className='flex flex-col font-medium text-grayLabel'>
+                    <h3 className='text-base mb-2'>Quartos</h3>
+                    <ToggleGroup.Root
+                    type="single"
+                    onValueChange={field.onChange}
+                    value={field.value}
+                    className='flex gap-3 text-grayLabel text-base'
+                    >
+                      <ToggleGroup.Item
+                        className='flex items-center justify-center border-2 bg-white border-transparent w-8 h-8 rounded-md p-2  shadow-default
+                      data-[state=on]:border-blue-600'
+                        value='1'
+                      >
+                        1
+                      </ToggleGroup.Item>
+                      <ToggleGroup.Item
+                        className='flex items-center justify-center border-2 bg-white border-transparent w-8 h-8 rounded-md p-2 shadow-default
+                      data-[state=on]:border-blue-600'
+                        value='2'>
+                        2
+                      </ToggleGroup.Item>
+                      <ToggleGroup.Item
+                        className='flex items-center justify-center border-2 bg-white border-transparent w-8 h-8 rounded-md p-2 shadow-default
+                      data-[state=on]:border-blue-600'
+                        value='3'>
+                        3
+                      </ToggleGroup.Item>
+                      <ToggleGroup.Item
+                        className='flex items-center justify-center border-2 bg-white border-transparent w-8 h-8 rounded-md p-2 shadow-default
+                      data-[state=on]:border-blue-600'
+                        value='4'>
+                        +4
+                      </ToggleGroup.Item>
+                    </ToggleGroup.Root>
+                  </label>
+                )
+              }}  
+            />
           </div>
 
-          <label htmlFor="parking" className='flex flex-col font-medium text-grayLabel'>
-            <h3 className='text-base mb-2'>Vagas de estacionamento</h3>
-            <QuantitySelector quantitySelect={() => { }} />
-          </label>
+          <Controller 
+            control={control}
+            name='parkings'
+            render={({field}) => {
+              return(
+                <label htmlFor="parking" className='flex flex-col font-medium text-grayLabel'>
+                  <h3 className='text-base mb-2'>Vagas de estacionamento</h3>
+                  <ToggleGroup.Root
+                    type="single"
+                    onValueChange={field.onChange}
+                    value={field.value}
+                    className='flex gap-3 text-grayLabel text-base'
+                    >
+                      <ToggleGroup.Item
+                        className='flex items-center justify-center border-2 bg-white border-transparent w-8 h-8 rounded-md p-2  shadow-default
+                      data-[state=on]:border-blue-600'
+                        value='1'
+                      >
+                        1
+                      </ToggleGroup.Item>
+                      <ToggleGroup.Item
+                        className='flex items-center justify-center border-2 bg-white border-transparent w-8 h-8 rounded-md p-2 shadow-default
+                      data-[state=on]:border-blue-600'
+                        value='2'>
+                        2
+                      </ToggleGroup.Item>
+                      <ToggleGroup.Item
+                        className='flex items-center justify-center border-2 bg-white border-transparent w-8 h-8 rounded-md p-2 shadow-default
+                      data-[state=on]:border-blue-600'
+                        value='3'>
+                        3
+                      </ToggleGroup.Item>
+                      <ToggleGroup.Item
+                        className='flex items-center justify-center border-2 bg-white border-transparent w-8 h-8 rounded-md p-2 shadow-default
+                      data-[state=on]:border-blue-600'
+                        value='4'>
+                        +4
+                      </ToggleGroup.Item>
+                    </ToggleGroup.Root>
+                </label>
+              )
+            }}
+          /> 
+
+          
 
           <div className='flex gap-4 font-medium text-grayLabel'>
 
