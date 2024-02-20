@@ -1,4 +1,4 @@
-'use client'
+'use client';
 
 import * as Checkbox from '@radix-ui/react-checkbox';
 import Input, { InputPrefix, InputRoot } from '../Input';
@@ -34,38 +34,37 @@ const defaultValues = {
   postalCode: '',
   price: '',
   area: '',
-  bedrooms: "0",
-  bathrooms: "0",
-  parkings: "0",
+  bedrooms: '0',
+  bathrooms: '0',
+  parkings: '0',
   petFriendly: false,
   isFurnished: false,
-  description: ''
-}
+  description: '',
+};
 
 export function RegisterForm() {
   const { register, handleSubmit, reset, control } = useForm({ defaultValues });
 
   const registerImmobile: SubmitHandler<TInputs> = (data) => {
     console.log(data);
-    reset()
+    reset();
   };
 
+  const { setCurrPage } = useContext(globalContext);
 
-  const { setCurrPage } = useContext(globalContext)
-
-  useEffect(() => setCurrPage('advertise'), [])
+  useEffect(() => setCurrPage('advertise'), []);
 
   return (
     <form
       onSubmit={handleSubmit(registerImmobile)}
-      className='w-full flex flex-col gap-8 min-[700px]:overflow-y-scroll
-      pb-20'
+      className='flex w-full flex-col gap-8 pb-20
+      min-[700px]:overflow-y-scroll'
     >
       <div>
-        <h2 className='text-xl font-medium text-grayTitle mb-4'>Localização</h2>
+        <h2 className='text-grayTitle mb-4 text-xl font-medium'>Localização</h2>
         <div className='flex flex-col gap-4'>
-          <label htmlFor="address" className='flex flex-col font-medium text-grayLabel'>
-            <h3 className='text-base mb-2'>Endereço</h3>
+          <label htmlFor="address" className='text-grayLabel flex flex-col font-medium'>
+            <h3 className='mb-2 text-base'>Endereço</h3>
             <InputRoot>
               <Input
                 type='text'
@@ -76,20 +75,20 @@ export function RegisterForm() {
             </InputRoot>
           </label>
 
-          <label htmlFor="number" className='flex flex-col font-medium text-grayLabel'>
-            <h3 className='text-base mb-2'>Número</h3>
+          <label htmlFor="number" className='text-grayLabel flex flex-col font-medium'>
+            <h3 className='mb-2 text-base'>Número</h3>
             <InputRoot>
               <Input
                 type='number'
                 id='number'
                 placeholder='Ex.: 2223'
-                {...register('number', {valueAsNumber: true})}
+                {...register('number', { valueAsNumber: true })}
               />
             </InputRoot>
           </label>
 
-          <label htmlFor="burgh" className='flex flex-col font-medium text-grayLabel'>
-            <h3 className='text-base mb-2'>Bairro</h3>
+          <label htmlFor="burgh" className='text-grayLabel flex flex-col font-medium'>
+            <h3 className='mb-2 text-base'>Bairro</h3>
             <InputRoot>
               <Input
                 type='text'
@@ -100,8 +99,8 @@ export function RegisterForm() {
             </InputRoot>
           </label>
 
-          <label htmlFor="city" className='flex flex-col font-medium text-grayLabel'>
-            <h3 className='text-base mb-2'>Cidade</h3>
+          <label htmlFor="city" className='text-grayLabel flex flex-col font-medium'>
+            <h3 className='mb-2 text-base'>Cidade</h3>
             <InputRoot>
               <Input
                 type='text'
@@ -112,8 +111,8 @@ export function RegisterForm() {
             </InputRoot>
           </label>
 
-          <label htmlFor="postalCode" className='flex flex-col font-medium text-grayLabel'>
-            <h3 className='text-base mb-2'>CEP</h3>
+          <label htmlFor="postalCode" className='text-grayLabel flex flex-col font-medium'>
+            <h3 className='mb-2 text-base'>CEP</h3>
             <InputRoot>
               <Input
                 type='text'
@@ -127,38 +126,38 @@ export function RegisterForm() {
       </div>
 
       <div>
-        <h2 className='text-xl font-medium text-grayTitle mb-4'>Características do imóvel</h2>
+        <h2 className='text-grayTitle mb-4 text-xl font-medium'>Características do imóvel</h2>
         <div className='flex flex-col gap-4'>
-          <label htmlFor="immoblie-type" className='font-medium flex flex-col text-grayLabel'>
-            <h3 className='text-base mb-2'>Tipo de imóvel</h3>
+          <label htmlFor="immoblie-type" className='text-grayLabel flex flex-col font-medium'>
+            <h3 className='mb-2 text-base'>Tipo de imóvel</h3>
             <SelectComponent immobliType={() => { }}/>
           </label>
           <div className='flex gap-4'>
             <label htmlFor="price" className='text-info font-semibold'>
-              <h3 className='text-base font-medium text-grayLabel mb-2'>Preço</h3>
+              <h3 className='text-grayLabel mb-2 text-base font-medium'>Preço</h3>
               <InputRoot>
-                <InputPrefix className='font-semibold text-base'>
+                <InputPrefix className='text-base font-semibold'>
                   R$
                 </InputPrefix>
                 <Input
                   type='number'
                   id='price'
                   placeholder='Ex.: 550.00'
-                  {...register('price', {valueAsNumber: true})}
+                  {...register('price', { valueAsNumber: true })}
                 />
               </InputRoot>
             </label>
 
-            <label htmlFor="area" className='flex flex-col font-medium text-grayLabel'>
-              <h3 className='text-base text-grayLabel mb-2'>Área</h3>
+            <label htmlFor="area" className='text-grayLabel flex flex-col font-medium'>
+              <h3 className='text-grayLabel mb-2 text-base'>Área</h3>
               <InputRoot>
                 <Input
                   type='number'
                   id='area'
                   placeholder='Ex.: 120'
-                  {...register('area', {valueAsNumber: true})}
+                  {...register('area', { valueAsNumber: true })}
                 />
-                <InputPrefix className='font-semibold text-base'>
+                <InputPrefix className='text-base font-semibold'>
                   m²
                 </InputPrefix>
               </InputRoot>
@@ -169,89 +168,97 @@ export function RegisterForm() {
             <Controller
               control={control}
               name='bathrooms'
-              render={({field}) => {
+              render={({ field }) => {
                 return(
-                  <label htmlFor="bathrooms" className='flex flex-col font-medium text-grayLabel'>
-                    <h3 className='text-base mb-2'>Banheiros</h3>
+                  <label htmlFor="bathrooms" className='text-grayLabel flex flex-col font-medium'>
+                    <h3 className='mb-2 text-base'>Banheiros</h3>
                     <ToggleGroup.Root
-                    type="single"
-                    onValueChange={field.onChange}
-                    value={field.value}
-                    className='flex gap-3 text-grayLabel text-base'
+                      type="single"
+                      onValueChange={field.onChange}
+                      value={field.value}
+                      className='text-grayLabel flex gap-3 text-base'
                     >
                       <ToggleGroup.Item
-                        className='flex items-center justify-center border-2 bg-white border-transparent w-8 h-8 rounded-md p-2  shadow-default
+                        className='shadow-default flex h-8 w-8 items-center justify-center 
+                        rounded-md border-2 border-transparent bg-white  p-2
                       data-[state=on]:border-blue-600'
                         value='1'
                       >
                         1
                       </ToggleGroup.Item>
                       <ToggleGroup.Item
-                        className='flex items-center justify-center border-2 bg-white border-transparent w-8 h-8 rounded-md p-2 shadow-default
+                        className='shadow-default flex h-8 w-8 items-center justify-center 
+                        rounded-md border-2 border-transparent bg-white p-2
                       data-[state=on]:border-blue-600'
                         value='2'>
                         2
                       </ToggleGroup.Item>
                       <ToggleGroup.Item
-                        className='flex items-center justify-center border-2 bg-white border-transparent w-8 h-8 rounded-md p-2 shadow-default
+                        className='shadow-default flex h-8 w-8 items-center justify-center 
+                        rounded-md border-2 border-transparent bg-white p-2
                       data-[state=on]:border-blue-600'
                         value='3'>
                         3
                       </ToggleGroup.Item>
                       <ToggleGroup.Item
-                        className='flex items-center justify-center border-2 bg-white border-transparent w-8 h-8 rounded-md p-2 shadow-default
+                        className='shadow-default flex h-8 w-8 items-center justify-center 
+                        rounded-md border-2 border-transparent bg-white p-2
                       data-[state=on]:border-blue-600'
                         value='4'>
                         +4
                       </ToggleGroup.Item>
                     </ToggleGroup.Root>
                   </label>
-                )
+                );
               }}
             />
             
             <Controller 
               control={control}
               name='bedrooms'
-              render={({field}) => {
+              render={({ field }) => {
 
                 return(
-                  <label htmlFor="bedrooms" className='flex flex-col font-medium text-grayLabel'>
-                    <h3 className='text-base mb-2'>Quartos</h3>
+                  <label htmlFor="bedrooms" className='text-grayLabel flex flex-col font-medium'>
+                    <h3 className='mb-2 text-base'>Quartos</h3>
                     <ToggleGroup.Root
-                    type="single"
-                    onValueChange={field.onChange}
-                    value={field.value}
-                    className='flex gap-3 text-grayLabel text-base'
+                      type="single"
+                      onValueChange={field.onChange}
+                      value={field.value}
+                      className='text-grayLabel flex gap-3 text-base'
                     >
                       <ToggleGroup.Item
-                        className='flex items-center justify-center border-2 bg-white border-transparent w-8 h-8 rounded-md p-2  shadow-default
+                        className='shadow-default flex h-8 w-8 items-center justify-center 
+                        rounded-md border-2 border-transparent bg-white  p-2
                       data-[state=on]:border-blue-600'
                         value='1'
                       >
                         1
                       </ToggleGroup.Item>
                       <ToggleGroup.Item
-                        className='flex items-center justify-center border-2 bg-white border-transparent w-8 h-8 rounded-md p-2 shadow-default
+                        className='shadow-default flex h-8 w-8 items-center justify-center 
+                        rounded-md border-2 border-transparent bg-white p-2
                       data-[state=on]:border-blue-600'
                         value='2'>
                         2
                       </ToggleGroup.Item>
                       <ToggleGroup.Item
-                        className='flex items-center justify-center border-2 bg-white border-transparent w-8 h-8 rounded-md p-2 shadow-default
+                        className='shadow-default flex h-8 w-8 items-center justify-center 
+                        rounded-md border-2 border-transparent bg-white p-2
                       data-[state=on]:border-blue-600'
                         value='3'>
                         3
                       </ToggleGroup.Item>
                       <ToggleGroup.Item
-                        className='flex items-center justify-center border-2 bg-white border-transparent w-8 h-8 rounded-md p-2 shadow-default
+                        className='shadow-default flex h-8 w-8 items-center justify-center 
+                        rounded-md border-2 border-transparent bg-white p-2
                       data-[state=on]:border-blue-600'
                         value='4'>
                         +4
                       </ToggleGroup.Item>
                     </ToggleGroup.Root>
                   </label>
-                )
+                );
               }}  
             />
           </div>
@@ -259,98 +266,102 @@ export function RegisterForm() {
           <Controller 
             control={control}
             name='parkings'
-            render={({field}) => {
+            render={({ field }) => {
               return(
-                <label htmlFor="parking" className='flex flex-col font-medium text-grayLabel'>
-                  <h3 className='text-base mb-2'>Vagas de estacionamento</h3>
+                <label htmlFor="parking" className='text-grayLabel flex flex-col font-medium'>
+                  <h3 className='mb-2 text-base'>Vagas de estacionamento</h3>
                   <ToggleGroup.Root
                     type="single"
                     onValueChange={field.onChange}
                     value={field.value}
-                    className='flex gap-3 text-grayLabel text-base'
+                    className='text-grayLabel flex gap-3 text-base'
+                  >
+                    <ToggleGroup.Item
+                      className='shadow-default flex h-8 w-8 items-center justify-center 
+                      rounded-md border-2 border-transparent bg-white  p-2
+                      data-[state=on]:border-blue-600'
+                      value='1'
                     >
-                      <ToggleGroup.Item
-                        className='flex items-center justify-center border-2 bg-white border-transparent w-8 h-8 rounded-md p-2  shadow-default
-                      data-[state=on]:border-blue-600'
-                        value='1'
-                      >
                         1
-                      </ToggleGroup.Item>
-                      <ToggleGroup.Item
-                        className='flex items-center justify-center border-2 bg-white border-transparent w-8 h-8 rounded-md p-2 shadow-default
+                    </ToggleGroup.Item>
+                    <ToggleGroup.Item
+                      className='shadow-default flex h-8 w-8 items-center justify-center 
+                      rounded-md border-2 border-transparent bg-white p-2
                       data-[state=on]:border-blue-600'
-                        value='2'>
+                      value='2'>
                         2
-                      </ToggleGroup.Item>
-                      <ToggleGroup.Item
-                        className='flex items-center justify-center border-2 bg-white border-transparent w-8 h-8 rounded-md p-2 shadow-default
+                    </ToggleGroup.Item>
+                    <ToggleGroup.Item
+                      className='shadow-default flex h-8 w-8 items-center justify-center 
+                      rounded-md border-2 border-transparent bg-white p-2
                       data-[state=on]:border-blue-600'
-                        value='3'>
+                      value='3'>
                         3
-                      </ToggleGroup.Item>
-                      <ToggleGroup.Item
-                        className='flex items-center justify-center border-2 bg-white border-transparent w-8 h-8 rounded-md p-2 shadow-default
+                    </ToggleGroup.Item>
+                    <ToggleGroup.Item
+                      className='shadow-default flex h-8 w-8 items-center justify-center 
+                      rounded-md border-2 border-transparent bg-white p-2
                       data-[state=on]:border-blue-600'
-                        value='4'>
+                      value='4'>
                         +4
-                      </ToggleGroup.Item>
-                    </ToggleGroup.Root>
+                    </ToggleGroup.Item>
+                  </ToggleGroup.Root>
                 </label>
-              )
+              );
             }}
           /> 
 
-          
+          <div className='text-grayLabel flex gap-4 font-medium'>
 
-          <div className='flex gap-4 font-medium text-grayLabel'>
-
-            <label htmlFor='petFriendly' className='flex gap-2 text-base items-center'>
+            <label htmlFor='petFriendly' className='flex items-center gap-2 text-base'>
               <h3>Aceita pet</h3>
               <Controller 
-              control={control}
-              name='petFriendly'
-              render={({field}) => {
-              return(
-              <Checkbox.Root
-                className='bg-white w-7 h-7 rounded border-borderColor data-[state=checked]:bg-primaryBlue shadow-default'
-                id='petFriendly'
-                onCheckedChange={field.onChange}
-              >
-                <Checkbox.Indicator className='flex items-center justify-center text-white'>
-                  <Check size={16} />
-                </Checkbox.Indicator>
-              </Checkbox.Root>
-              )
-            }}
-          /> 
+                control={control}
+                name='petFriendly'
+                render={({ field }) => {
+                  return(
+                    <Checkbox.Root
+                      className='border-borderColor data-[state=checked]:bg-primaryBlue 
+                      shadow-default h-7 w-7 rounded bg-white'
+                      id='petFriendly'
+                      onCheckedChange={field.onChange}
+                    >
+                      <Checkbox.Indicator className='flex items-center justify-center text-white'>
+                        <Check size={16} />
+                      </Checkbox.Indicator>
+                    </Checkbox.Root>
+                  );
+                }}
+              /> 
             </label>
 
-            <label htmlFor='Mobiliado' className='flex gap-2 items-center py-1'>
+            <label htmlFor='Mobiliado' className='flex items-center gap-2 py-1'>
               <h3>Mobiliado</h3>
               <Controller 
-              control={control}
-              name='isFurnished'
-              render={({field}) => {
-              return(
-              <Checkbox.Root
-                className='bg-white w-7 h-7 rounded border-borderColor data-[state=checked]:bg-primaryBlue shadow-default'
-                id='Mobiliado'
-                onCheckedChange={field.onChange}
-              >
-                <Checkbox.Indicator className='flex items-center justify-center text-white'>
-                  <Check size={16} />
-                </Checkbox.Indicator>
-              </Checkbox.Root>
-              )
-            }}
-          /> 
+                control={control}
+                name='isFurnished'
+                render={({ field }) => {
+                  return(
+                    <Checkbox.Root
+                      className='border-borderColor data-[state=checked]:bg-primaryBlue 
+                      shadow-default h-7 w-7 rounded bg-white'
+                      id='Mobiliado'
+                      onCheckedChange={field.onChange}
+                    >
+                      <Checkbox.Indicator className='flex items-center justify-center text-white'>
+                        <Check size={16} />
+                      </Checkbox.Indicator>
+                    </Checkbox.Root>
+                  );
+                }}
+              /> 
             </label>
 
           </div>
-          <label htmlFor="description" className='flex flex-col font-medium text-base text-grayLabel'>
+          <label htmlFor="description" className='text-grayLabel flex flex-col text-base font-medium'>
             <h3 className='mb-2'>Descrição</h3>
             <textarea
-              className='p-2 outline-primaryBlue rounded-md' id="description"
+              className='outline-primaryBlue rounded-md p-2' id="description"
               cols={30}
               rows={10}
               placeholder='Ex.: Um apartamento espaçoso com boa localização... '
@@ -360,10 +371,9 @@ export function RegisterForm() {
         </div>
       </div>
 
-      <Button className='font-semibold text-lg p-3 w-full' type='submit'>
+      <Button className='w-full p-3 text-lg font-semibold' type='submit'>
         Cadastrar imóvel
       </Button>
-
 
     </form>
   );
