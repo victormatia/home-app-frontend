@@ -15,6 +15,7 @@ type TInputs = {
   number: string,
   burgh: string,
   city: string,
+  postalCode: string,
   price: string,
   area: string,
   petFriendly: boolean,
@@ -30,6 +31,7 @@ const defaultValues = {
   number: '',
   burgh: '',
   city: '',
+  postalCode: '',
   price: '',
   area: '',
   bedrooms: "0",
@@ -52,38 +54,6 @@ export function RegisterForm() {
   const { setCurrPage } = useContext(globalContext)
 
   useEffect(() => setCurrPage('advertise'), [])
-
-  // const propetyKeys = Object.keys(registeredProperty);
-
-  // function handleRegister(event: React.FormEvent<HTMLFormElement>) {
-  //   event.preventDefault();
-
-  //   const newProperty = {
-  //     bedroomsQty,
-  //     bathroomsQty,
-  //     parkingQty,
-  //     minPrice,
-  //     maxPrice,
-  //     minArea,
-  //     maxArea,
-  //     immobileType,
-  //     petFriendly,
-  //     isFurnished,
-  //   };
-
-  //   setRegisteredProperty(newProperty);
-  // };
-
-  // const handleNumberFormatter = (inputValue: string) => {
-
-  //   const result = Number(inputValue).toLocaleString('pt-BR', {
-  //     style: 'currency',
-  //     currency: 'brl',
-  //     minimumFractionDigits: 2,
-  //     maximumFractionDigits: 2,
-  //   })
-  //   return result
-  // };
 
   return (
     <form
@@ -129,6 +99,7 @@ export function RegisterForm() {
               />
             </InputRoot>
           </label>
+
           <label htmlFor="city" className='flex flex-col font-medium text-grayLabel'>
             <h3 className='text-base mb-2'>Cidade</h3>
             <InputRoot>
@@ -137,6 +108,18 @@ export function RegisterForm() {
                 id='city'
                 placeholder='Ex.: Itapipoca'
                 {...register('city')}
+              />
+            </InputRoot>
+          </label>
+
+          <label htmlFor="postalCode" className='flex flex-col font-medium text-grayLabel'>
+            <h3 className='text-base mb-2'>CEP</h3>
+            <InputRoot>
+              <Input
+                type='text'
+                id='postalCode'
+                placeholder='Ex.: 62500-000'
+                {...register('postalCode')}
               />
             </InputRoot>
           </label>
