@@ -1,6 +1,5 @@
 import * as Checkbox from '@radix-ui/react-checkbox';
-import { InputPrefix, InputRoot } from '../Input';
-import Input from '../Input'
+import Input, { InputPrefix, InputRoot } from '../Input';
 import { QuantitySelector } from './MobileFilter/QuantitySelector';
 import { SelectComponent } from './MobileFilter/Select';
 import { Check } from 'phosphor-react';
