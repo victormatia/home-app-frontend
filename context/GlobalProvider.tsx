@@ -5,7 +5,7 @@ import globalContext from './context';
 import axios from 'axios';
 import { useQuery } from '@tanstack/react-query';
 import { Session } from '@auth0/nextjs-auth0';
-import { TFiltredPropertys, TImmobile, TRankedImmobile } from '@/types';
+import { TFavorite, TFiltredPropertys, TImmobile, TRankedImmobile } from '@/types';
 
 export default function GlobalProvider({ children }: { children: ReactNode }) {
   const [immobiles, setImmobiles] = useState<TImmobile[]>([]);
@@ -14,6 +14,7 @@ export default function GlobalProvider({ children }: { children: ReactNode }) {
   const [currPage, setCurrPage] = useState<string>('home');
   const [toggleOpenFilter, setToggleOpenFilter] = useState<boolean>(false);
   const [propertyCaracteristics, setPropertyCaracteristics] = useState<TFiltredPropertys>({} as TFiltredPropertys);
+
 
   const {} = useQuery({
     queryKey: ['immobiles'],
@@ -30,7 +31,6 @@ export default function GlobalProvider({ children }: { children: ReactNode }) {
     queryKey: ['session'],
     queryFn: async () => {
       const { data } = await axios.get('http://localhost:3000/api/auth/sessionInfos');
-      
       return data;
     },
   });
@@ -71,6 +71,7 @@ export default function GlobalProvider({ children }: { children: ReactNode }) {
     currPage, setCurrPage,
     toggleOpenFilter, setToggleOpenFilter,
     propertyCaracteristics, setPropertyCaracteristics,
+   
   }), [immobiles, searchedImmobiles, search, currPage, toggleOpenFilter, propertyCaracteristics]);
   return (
     <globalContext.Provider value={ states }>

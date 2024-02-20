@@ -1,4 +1,4 @@
-import Map from '@/components/Map';
+import { SavedPageLogin } from '@/components/SavedPageLogin';
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
@@ -7,9 +7,8 @@ export const metadata: Metadata = {
 
 export default function Saved() {
   return (
-    <section className="text-center">
-      <h1>Saved</h1>
-      <Map />
-    </section>
+    <div className='h-screen min-[700px]:pl-20'>
+      <SavedPageLogin /> 
+    </div> 
   );
 }

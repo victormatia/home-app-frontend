@@ -53,6 +53,12 @@ export type TImmobile = {
   photos?: { photo: TPhoto }[]
 }
 
+export type  TFavorite = {
+  userId : string,
+  immobileId: string,
+  immobile: TImmobile
+} 
+
 export type TRankedImmobile = {
   immobileId: string,
   immobile: TImmobile,
@@ -96,5 +102,9 @@ export type TDefaultDiacriticalMapItem = {
 
 export type TCard = {
   immobile: TImmobile,
+}
+
+export type TUser = {
+  favoriteImmobile: TFavorite[]
 }
 

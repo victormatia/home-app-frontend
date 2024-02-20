@@ -1,18 +1,16 @@
 'use client';
 import { TCard } from '@/types';
-import { BsBookmark, BsBookmarkFill } from 'react-icons/bs';
 import { IoBedOutline } from 'react-icons/io5';
 import { FaCar, FaShower } from 'react-icons/fa';
 import { MdPets } from 'react-icons/md';
-import { useState } from 'react';
 import { useKeenSlider } from 'keen-slider/react';
 import 'keen-slider/keen-slider.min.css';
 import Image from 'next/image';
-import { Button } from './Button';
 import Link from 'next/link';
+import { SaveButton } from './SaveButton';
 
 export function Card({ immobile }: TCard){
-  const [isSaved, setIsSaved] = useState(false);
+
   const { photos } = immobile;
 
   const [sliderRef] = useKeenSlider({
@@ -24,7 +22,7 @@ export function Card({ immobile }: TCard){
 
   return(
     <div className='flex flex-col rounded-md shadow-lg bg-white w-[360px] h-[345px]
-    hover:scale-105 transition-all cursor-pointer p-2
+    min-[700px]:hover:scale-105 transition-all cursor-pointer p-2
     '>
       <figure ref={sliderRef} className="keen-slider">
         {
@@ -53,27 +51,7 @@ export function Card({ immobile }: TCard){
           <h3 className='text-black text-sm font-medium'>
               {`${immobile.type?.type}, ${immobile.address?.city}`}
           </h3>
-          {
-            isSaved === false ? (
-              <Button
-                variant='ghost'
-                className='text-grayIcon'
-                onClick={() => setIsSaved(true)}
-                data-testid='bookMarkIcon'
-              >
-                <BsBookmark />
-              </Button>
-            ): (
-              <Button
-                variant='ghost'
-                className='text-grayIcon'
-                onClick={() => setIsSaved(false)}
-                data-testid='bookMarkFillIcon'
-              >
-                <BsBookmarkFill />
-              </Button>
-            )
-          }
+          <SaveButton immobileId={immobile.id}/>
         </div>
 
         <div className='flex gap-2 pt-2 items-end'>
