@@ -16,7 +16,7 @@ const config: Config = {
       colors: {
         grayBase: '#F5F5F5',
         grayIcon: '#878787',
-        grayLegend: '#424242',
+        grayLabel: '#424242',
         grayTitle: '#202020',
         darkGray: '#2B2B2B',
         buttonText: '#4A4A4A',

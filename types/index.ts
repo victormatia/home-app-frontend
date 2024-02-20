@@ -72,13 +72,15 @@ export type TConext = {
   setSearch: Dispatch<SetStateAction<string>>,
   searchedImmobiles: TRankedImmobile[],
   setSearchedImmobiles: Dispatch<SetStateAction<TRankedImmobile[]>>
-  currPage: string,
-  setCurrPage: Dispatch<SetStateAction<string>>
+  currPage: TRoute,
+  setCurrPage: Dispatch<SetStateAction<TRoute>>
   toggleOpenFilter: boolean,
   setToggleOpenFilter: Dispatch<SetStateAction<boolean>>
   propertyCaracteristics: TFiltredPropertys
   setPropertyCaracteristics: Dispatch<SetStateAction<TFiltredPropertys>>
 }
+
+export type TRoute = 'home' | 'saved' | 'advertise' | 'settings'
 
 export type TFiltredPropertys = {
   immobileType: string
