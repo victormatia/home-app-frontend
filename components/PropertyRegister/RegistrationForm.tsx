@@ -155,7 +155,7 @@ export function RegisterForm() {
                 <Input
                   type='number'
                   id='area'
-                  placeholder='Ex.: Centro'
+                  placeholder='Ex.: 120'
                   {...register('area', {valueAsNumber: true})}
                 />
                 <InputPrefix className='font-semibold text-base'>
@@ -304,30 +304,46 @@ export function RegisterForm() {
 
           <div className='flex gap-4 font-medium text-grayLabel'>
 
-            <label htmlFor='Mobiliado' className='flex gap-2 text-base items-center'>
+            <label htmlFor='petFriendly' className='flex gap-2 text-base items-center'>
               <h3>Aceita pet</h3>
+              <Controller 
+              control={control}
+              name='petFriendly'
+              render={({field}) => {
+              return(
               <Checkbox.Root
                 className='bg-white w-7 h-7 rounded border-borderColor data-[state=checked]:bg-primaryBlue shadow-default'
-                id='Mobiliado'
-                {...register('petFriendly')}
+                id='petFriendly'
+                onCheckedChange={field.onChange}
               >
                 <Checkbox.Indicator className='flex items-center justify-center text-white'>
                   <Check size={16} />
                 </Checkbox.Indicator>
               </Checkbox.Root>
+              )
+            }}
+          /> 
             </label>
 
             <label htmlFor='Mobiliado' className='flex gap-2 items-center py-1'>
               <h3>Mobiliado</h3>
+              <Controller 
+              control={control}
+              name='isFurnished'
+              render={({field}) => {
+              return(
               <Checkbox.Root
                 className='bg-white w-7 h-7 rounded border-borderColor data-[state=checked]:bg-primaryBlue shadow-default'
                 id='Mobiliado'
-                {...register('isFurnished')}
+                onCheckedChange={field.onChange}
               >
                 <Checkbox.Indicator className='flex items-center justify-center text-white'>
                   <Check size={16} />
                 </Checkbox.Indicator>
               </Checkbox.Root>
+              )
+            }}
+          /> 
             </label>
 
           </div>
