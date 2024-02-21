@@ -9,6 +9,8 @@ import globalContext from '@/context/context';
 import { Check } from 'phosphor-react';
 import { useForm, SubmitHandler, Controller } from 'react-hook-form';
 import * as ToggleGroup from '@radix-ui/react-toggle-group';
+import { useMutation } from '@tanstack/react-query';
+import axios from 'axios';
 
 type TInputs = {
   address: string,
@@ -23,7 +25,8 @@ type TInputs = {
   bathrooms: string,
   parkings: string,
   isFurnished: boolean,
-  description: string
+  description: string,
+  state: string
 }
 
 const defaultValues = {
@@ -31,6 +34,7 @@ const defaultValues = {
   number: '',
   burgh: '',
   city: '',
+  state: '',
   postalCode: '',
   price: '',
   area: '',
@@ -44,9 +48,41 @@ const defaultValues = {
 
 export function RegisterForm() {
   const { register, handleSubmit, reset, control } = useForm({ defaultValues });
+  const userId = localStorage.getItem('userId');
+  const token = localStorage.getItem('token');
+
+  const { mutate } = useMutation({
+    mutationFn: (immobile : TInputs) => axios.post('http://localhost:3001/immobile/create', {
+      ownerId: userId,
+      typeId: '001',
+      price: immobile.price,
+      sqrFootage: Number(immobile.area),
+      description: immobile.description,
+      bathroomsQty: Number(immobile.bathrooms),
+      bedroomsQty:Number(immobile.bedrooms),
+      parkingQty:Number(immobile.parkings),
+      petFriendly: immobile.petFriendly,
+      furnished: immobile.isFurnished,
+      address: {
+        street: immobile.address,
+        burgh: immobile.burgh,
+        city: immobile.city,
+        state: immobile.state,
+        postalCode: immobile.postalCode,
+        number: String(immobile.number),
+      },
+    }, 
+    {
+      headers: {
+        Authorization: token,
+      },
+    }
+    ),
+    onSuccess: () => {},
+  });
 
   const registerImmobile: SubmitHandler<TInputs> = (data) => {
-    console.log(data);
+    mutate(data);
     reset();
   };
 
@@ -79,10 +115,10 @@ export function RegisterForm() {
             <h3 className='mb-2 text-base'>Número</h3>
             <InputRoot>
               <Input
-                type='number'
+                type='text'
                 id='number'
                 placeholder='Ex.: 2223'
-                {...register('number', { valueAsNumber: true })}
+                {...register('number')}
               />
             </InputRoot>
           </label>
@@ -107,6 +143,18 @@ export function RegisterForm() {
                 id='city'
                 placeholder='Ex.: Itapipoca'
                 {...register('city')}
+              />
+            </InputRoot>
+          </label>
+
+          <label htmlFor="city" className='text-grayLabel flex flex-col font-medium'>
+            <h3 className='mb-2 text-base'>Estado</h3>
+            <InputRoot>
+              <Input
+                type='text'
+                id='state'
+                placeholder='Ex.: Ceará'
+                {...register('state')}
               />
             </InputRoot>
           </label>
