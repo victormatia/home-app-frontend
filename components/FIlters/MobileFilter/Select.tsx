@@ -1,24 +1,30 @@
 import * as Select from '@radix-ui/react-select';
 import { CaretDown } from 'phosphor-react';
-import React, { useContext } from 'react';
 import classnames from 'classnames';
-import globalContext from '@/context/context';
+import { useQuery } from '@tanstack/react-query';
+import axios from 'axios';
+import React from 'react';
 
 interface SelectComponentProps{
   immobliType: Function
 }
 
+interface ImmobileTypesProps {
+    type: string,
+    id: string
+};
+
 export function SelectComponent(props: SelectComponentProps) {
 
-  const { immobiles } = useContext(globalContext);
-
-  const immobileType : string[] = [];
-  immobiles.forEach((immobile) => {
-    if(!immobileType.includes(immobile.type?.type!)){
-      immobileType.push(immobile.type?.type!);
-    }
+  const { data : listType } = useQuery<ImmobileTypesProps>({
+    queryKey: ['listType'],
+    queryFn: async () => {
+      const { data } = await axios.get('http://localhost:3001/immobile/listTypes');
+      
+      return data;
+    },
   });
-
+  
   function selectImmobliType(data: string){
     props.immobliType(data);
   }
@@ -26,9 +32,9 @@ export function SelectComponent(props: SelectComponentProps) {
   return(
     <Select.Root onValueChange={selectImmobliType} defaultValue='todos'>
       <Select.Trigger 
-        className='bg-[#FFF] shadow-sm h-[32px]
-        focus-within:ring-1 focus-within:border-primaryBlue
-        inline-flex items-center justify-between px-3 rounded-md outline-none min-[700px]:w-full'
+        className='focus-within:border-primaryBlue inline-flex h-[32px]
+        items-center justify-between
+        rounded-md bg-[#FFF] px-3 shadow-sm outline-none focus-within:ring-1 min-[700px]:w-full'
       >
         <Select.Value placeholder="Selecione o típo de imóvel" />
         <Select.Icon >
@@ -41,16 +47,16 @@ export function SelectComponent(props: SelectComponentProps) {
           side='bottom'
           position='popper'
           sideOffset={8}
-          className='overflow-hidden bg-white rounded-md z-30 w-[--radix-select-trigger-width]'
+          className='z-30 w-[--radix-select-trigger-width] overflow-hidden rounded-md bg-white'
         >
           <Select.Viewport className='px-2 py-3'>
             <Select.Group>
               <SelectItem value="todos">Todos</SelectItem>
-              {immobileType.map((type) => {
+              {listType?.map(({ type, id } : ImmobileTypesProps) => {
                 return(
-                  <SelectItem key={type} value={type}>{type.charAt(0).toUpperCase() + type.slice(1)}</SelectItem>
+                  <SelectItem key={id} value={type}>{type.charAt(0).toUpperCase() + type.slice(1)}</SelectItem>
                 );
-              })}
+              })} 
             </Select.Group>
           </Select.Viewport>
         </Select.Content>
@@ -65,7 +71,7 @@ const SelectItem = React.forwardRef(({ children, className, ...props }: any, for
     <Select.Item
       className={classnames(
         // eslint-disable-next-line max-len
-        'flex leading-none text-placeholder items-center h-6 relative select-none data-[disabled]:pointer-events-none data-[highlighted]:outline-none data-[highlighted]:bg-grayBase',
+        'text-placeholder data-[highlighted]:bg-grayBase relative flex h-6 select-none items-center leading-none data-[disabled]:pointer-events-none data-[highlighted]:outline-none',
         className
       )}
       {...props}
