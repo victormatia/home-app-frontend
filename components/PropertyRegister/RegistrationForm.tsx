@@ -1,16 +1,18 @@
 'use client';
 
 import * as Checkbox from '@radix-ui/react-checkbox';
+import * as Select from '@radix-ui/react-select';
 import Input, { InputPrefix, InputRoot } from '../Input';
 import { useContext, useEffect } from 'react';
 import { Button } from '../Button';
-import { SelectComponent } from '../FIlters/MobileFilter/Select';
+import { ImmobileTypesProps, SelectItem } from '../FIlters/MobileFilter/Select';
 import globalContext from '@/context/context';
-import { Check } from 'phosphor-react';
+import { CaretDown, Check } from 'phosphor-react';
 import { useForm, SubmitHandler, Controller } from 'react-hook-form';
 import * as ToggleGroup from '@radix-ui/react-toggle-group';
 import { useMutation } from '@tanstack/react-query';
 import axios from 'axios';
+import queryClient from '@/tanstack/queryClient';
 
 type TInputs = {
   address: string,
@@ -26,7 +28,8 @@ type TInputs = {
   parkings: string,
   isFurnished: boolean,
   description: string,
-  state: string
+  state: string,
+  type: string
 }
 
 const defaultValues = {
@@ -44,17 +47,19 @@ const defaultValues = {
   petFriendly: false,
   isFurnished: false,
   description: '',
+  type: '',
 };
 
 export function RegisterForm() {
   const { register, handleSubmit, reset, control } = useForm({ defaultValues });
   const userId = localStorage.getItem('userId');
   const token = localStorage.getItem('token');
+  const typeList  = queryClient.getQueryData<ImmobileTypesProps[]>(['listType']);
 
   const { mutate } = useMutation({
     mutationFn: (immobile : TInputs) => axios.post('http://localhost:3001/immobile/create', {
       ownerId: userId,
-      typeId: '001',
+      typeId: immobile.type,
       price: immobile.price,
       sqrFootage: Number(immobile.area),
       description: immobile.description,
@@ -178,7 +183,51 @@ export function RegisterForm() {
         <div className='flex flex-col gap-4'>
           <label htmlFor="immoblie-type" className='text-grayLabel flex flex-col font-medium'>
             <h3 className='mb-2 text-base'>Tipo de imóvel</h3>
-            <SelectComponent immobliType={() => { }}/>
+            <Controller 
+              control={control}
+              name='type'
+              render={({ field }) => {
+                return(
+                  <Select.Root
+                    onValueChange={field.onChange}
+                    value={field.value}
+                  >
+                    <Select.Trigger 
+                      className='focus-within:border-primaryBlue inline-flex h-[32px]
+                      items-center justify-between
+                      rounded-md bg-[#FFF] px-3 shadow-sm outline-none focus-within:ring-1 min-[700px]:w-full'
+                    >
+                      <Select.Value placeholder="Selecione o típo de imóvel" />
+                      <Select.Icon >
+                        <CaretDown size={17} />
+                      </Select.Icon >
+                    </Select.Trigger>
+
+                    <Select.Portal>
+                      <Select.Content 
+                        side='bottom'
+                        position='popper'
+                        sideOffset={8}
+                        className='z-30 w-[--radix-select-trigger-width] overflow-hidden rounded-md bg-white'
+                      >
+                        <Select.Viewport className='px-2 py-3'>
+                          <Select.Group>
+                            {typeList?.map(({ type, id } : ImmobileTypesProps) => {
+                              return(
+                                <SelectItem key={type} value={id}>
+                                  {type.charAt(0).toUpperCase() + type.slice(1)}
+                                </SelectItem>
+                              );
+                            })} 
+                          </Select.Group>
+                        </Select.Viewport>
+                      </Select.Content>
+                    </Select.Portal>
+                  </Select.Root>
+                );
+              }}
+            />
+
           </label>
           <div className='flex gap-4'>
             <label htmlFor="price" className='text-info font-semibold'>

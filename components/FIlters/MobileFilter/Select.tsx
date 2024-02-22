@@ -9,7 +9,7 @@ interface SelectComponentProps{
   immobliType: Function
 }
 
-interface ImmobileTypesProps {
+export interface ImmobileTypesProps {
     type: string,
     id: string
 };
@@ -66,7 +66,7 @@ export function SelectComponent(props: SelectComponentProps) {
 }
 
 // eslint-disable-next-line react/display-name
-const SelectItem = React.forwardRef(({ children, className, ...props }: any, forwardedRef) => {
+export const SelectItem = React.forwardRef(({ children, className, ...props }: any, forwardedRef) => {
   return (
     <Select.Item
       className={classnames(
