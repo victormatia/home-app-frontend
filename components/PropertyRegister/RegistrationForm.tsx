@@ -29,7 +29,9 @@ type TInputs = {
   isFurnished: boolean,
   description: string,
   state: string,
-  type: string
+  type: string,
+  apto: string,
+  complement: string
 }
 
 const defaultValues = {
@@ -48,6 +50,8 @@ const defaultValues = {
   isFurnished: false,
   description: '',
   type: '',
+  apto: '',
+  complement: '',
 };
 
 export function RegisterForm() {
@@ -75,6 +79,8 @@ export function RegisterForm() {
         state: immobile.state,
         postalCode: immobile.postalCode,
         number: String(immobile.number),
+        apto: immobile.apto,
+        complement: immobile.complement,
       },
     }, 
     {
@@ -98,10 +104,10 @@ export function RegisterForm() {
   return (
     <form
       onSubmit={handleSubmit(registerImmobile)}
-      className='flex w-full flex-col gap-8 pb-20
-      min-[700px]:overflow-y-scroll'
+      className=' flex w-full flex-col gap-8 pb-20 min-[700px]:pb-2 min-[1000px]:flex-row
+      min-[1000px]:justify-center'
     >
-      <div>
+      <div className='min-[1000px]:w-[500px]'>
         <h2 className='text-grayTitle mb-4 text-xl font-medium'>Localização</h2>
         <div className='flex flex-col gap-4'>
           <label htmlFor="address" className='text-grayLabel flex flex-col font-medium'>
@@ -112,6 +118,7 @@ export function RegisterForm() {
                 id='address'
                 placeholder='Ex.: Rua Perilo Teixeira'
                 {...register('address')}
+                required
               />
             </InputRoot>
           </label>
@@ -124,6 +131,7 @@ export function RegisterForm() {
                 id='number'
                 placeholder='Ex.: 2223'
                 {...register('number')}
+                required
               />
             </InputRoot>
           </label>
@@ -136,6 +144,7 @@ export function RegisterForm() {
                 id='burgh'
                 placeholder='Ex.: Centro'
                 {...register('burgh')}
+                required
               />
             </InputRoot>
           </label>
@@ -148,6 +157,7 @@ export function RegisterForm() {
                 id='city'
                 placeholder='Ex.: Itapipoca'
                 {...register('city')}
+                required
               />
             </InputRoot>
           </label>
@@ -160,6 +170,7 @@ export function RegisterForm() {
                 id='state'
                 placeholder='Ex.: Ceará'
                 {...register('state')}
+                required
               />
             </InputRoot>
           </label>
@@ -172,13 +183,38 @@ export function RegisterForm() {
                 id='postalCode'
                 placeholder='Ex.: 62500-000'
                 {...register('postalCode')}
+                required
+              />
+            </InputRoot>
+          </label>
+
+          <label htmlFor="apto" className='text-grayLabel flex flex-col font-medium'>
+            <h3 className='mb-2 text-base'>Apartamento</h3>
+            <InputRoot>
+              <Input
+                type='text'
+                id='apto'
+                placeholder='Ex.: 106'
+                {...register('apto')}
+              />
+            </InputRoot>
+          </label>
+
+          <label htmlFor="complement" className='text-grayLabel flex flex-col font-medium'>
+            <h3 className='mb-2 text-base'>Complemento</h3>
+            <InputRoot>
+              <Input
+                type='text'
+                id='complement'
+                placeholder='Ex.: Bloco 1'
+                {...register('complement')}
               />
             </InputRoot>
           </label>
         </div>
       </div>
 
-      <div>
+      <div className='min-[1000px]:w-500px'>
         <h2 className='text-grayTitle mb-4 text-xl font-medium'>Características do imóvel</h2>
         <div className='flex flex-col gap-4'>
           <label htmlFor="immoblie-type" className='text-grayLabel flex flex-col font-medium'>
@@ -191,6 +227,7 @@ export function RegisterForm() {
                   <Select.Root
                     onValueChange={field.onChange}
                     value={field.value}
+                    required
                   >
                     <Select.Trigger 
                       className='focus-within:border-primaryBlue inline-flex h-[32px]
@@ -240,6 +277,7 @@ export function RegisterForm() {
                   type='number'
                   id='price'
                   placeholder='Ex.: 550.00'
+                  required
                   {...register('price', { valueAsNumber: true })}
                 />
               </InputRoot>
@@ -252,6 +290,7 @@ export function RegisterForm() {
                   type='number'
                   id='area'
                   placeholder='Ex.: 120'
+                  required
                   {...register('area', { valueAsNumber: true })}
                 />
                 <InputPrefix className='text-base font-semibold'>
@@ -463,13 +502,17 @@ export function RegisterForm() {
               rows={10}
               placeholder='Ex.: Um apartamento espaçoso com boa localização... '
               {...register('description')}
+              required
             />
           </label>
         </div>
       </div>
-
-      <Button className='w-full p-3 text-lg font-semibold' type='submit'>
-        Cadastrar imóvel
+      <Button 
+        className='w-full p-3 text-lg font-semibold 
+        min-[1000px]:absolute min-[1000px]:bottom-14 min-[1000px]:w-[1000px]' 
+        type='submit'
+      >
+            Cadastrar imóvel
       </Button>
 
     </form>
