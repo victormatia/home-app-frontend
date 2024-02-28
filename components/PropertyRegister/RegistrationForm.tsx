@@ -111,7 +111,10 @@ export function RegisterForm() {
         <h2 className='text-grayTitle mb-4 text-xl font-medium'>Localização</h2>
         <div className='flex flex-col gap-4'>
           <label htmlFor="address" className='text-grayLabel flex flex-col font-medium'>
-            <h3 className='mb-2 text-base'>Endereço</h3>
+            <h3 className='mb-2 text-base'>
+              Endereço
+              <span className='text-sm text-gray-300'> *</span>
+            </h3>
             <InputRoot>
               <Input
                 type='text'
@@ -124,7 +127,10 @@ export function RegisterForm() {
           </label>
 
           <label htmlFor="number" className='text-grayLabel flex flex-col font-medium'>
-            <h3 className='mb-2 text-base'>Número</h3>
+            <h3 className='mb-2 text-base'>
+              Número
+              <span className='text-sm text-gray-300'> *</span>
+            </h3>
             <InputRoot>
               <Input
                 type='text'
@@ -137,7 +143,10 @@ export function RegisterForm() {
           </label>
 
           <label htmlFor="burgh" className='text-grayLabel flex flex-col font-medium'>
-            <h3 className='mb-2 text-base'>Bairro</h3>
+            <h3 className='mb-2 text-base'>
+              Bairro
+              <span className='text-sm text-gray-300'> *</span>
+            </h3>
             <InputRoot>
               <Input
                 type='text'
@@ -150,7 +159,10 @@ export function RegisterForm() {
           </label>
 
           <label htmlFor="city" className='text-grayLabel flex flex-col font-medium'>
-            <h3 className='mb-2 text-base'>Cidade</h3>
+            <h3 className='mb-2 text-base'>
+              Cidade
+              <span className='text-sm text-gray-300'> *</span>
+            </h3>
             <InputRoot>
               <Input
                 type='text'
@@ -163,7 +175,10 @@ export function RegisterForm() {
           </label>
 
           <label htmlFor="city" className='text-grayLabel flex flex-col font-medium'>
-            <h3 className='mb-2 text-base'>Estado</h3>
+            <h3 className='mb-2 text-base'>
+              Estado
+              <span className='text-sm text-gray-300'> *</span>
+            </h3>
             <InputRoot>
               <Input
                 type='text'
@@ -176,7 +191,10 @@ export function RegisterForm() {
           </label>
 
           <label htmlFor="postalCode" className='text-grayLabel flex flex-col font-medium'>
-            <h3 className='mb-2 text-base'>CEP</h3>
+            <h3 className='mb-2 text-base'>
+              CEP
+              <span className='text-sm text-gray-300'> *</span>
+            </h3>
             <InputRoot>
               <Input
                 type='text'
@@ -218,7 +236,10 @@ export function RegisterForm() {
         <h2 className='text-grayTitle mb-4 text-xl font-medium'>Características do imóvel</h2>
         <div className='flex flex-col gap-4'>
           <label htmlFor="immoblie-type" className='text-grayLabel flex flex-col font-medium'>
-            <h3 className='mb-2 text-base'>Tipo de imóvel</h3>
+            <h3 className='mb-2 text-base'>
+              Tipo de imóvel
+              <span className='text-sm text-gray-300'> *</span>
+            </h3>
             <Controller 
               control={control}
               name='type'
@@ -268,7 +289,10 @@ export function RegisterForm() {
           </label>
           <div className='flex gap-4'>
             <label htmlFor="price" className='text-info font-semibold'>
-              <h3 className='text-grayLabel mb-2 text-base font-medium'>Preço</h3>
+              <h3 className='text-grayLabel mb-2 text-base font-medium'>
+                Preço
+                <span className='text-sm text-gray-300'> *</span>
+              </h3>
               <InputRoot>
                 <InputPrefix className='text-base font-semibold'>
                   R$
@@ -284,7 +308,10 @@ export function RegisterForm() {
             </label>
 
             <label htmlFor="area" className='text-grayLabel flex flex-col font-medium'>
-              <h3 className='text-grayLabel mb-2 text-base'>Área</h3>
+              <h3 className='text-grayLabel mb-2 text-base'>
+                Área
+                <span className='text-sm text-gray-300'> *</span>
+              </h3>
               <InputRoot>
                 <Input
                   type='number'
@@ -495,7 +522,10 @@ export function RegisterForm() {
 
           </div>
           <label htmlFor="description" className='text-grayLabel flex flex-col text-base font-medium'>
-            <h3 className='mb-2'>Descrição</h3>
+            <h3 className='mb-2'>
+              Descrição
+              <span className='text-sm text-gray-300'> *</span>
+            </h3>
             <textarea
               className='outline-primaryBlue rounded-md p-2' id="description"
               cols={30}
@@ -507,6 +537,11 @@ export function RegisterForm() {
           </label>
         </div>
       </div>
+      <span className='text-left text-sm text-gray-400 
+      min-[1000px]:absolute min-[1000px]:bottom-28 min-[1000px]:w-[1000px]'
+      >
+        * campos obrigatórios
+      </span>
       <Button 
         className='w-full p-3 text-lg font-semibold 
         min-[1000px]:absolute min-[1000px]:bottom-14 min-[1000px]:w-[1000px]' 
