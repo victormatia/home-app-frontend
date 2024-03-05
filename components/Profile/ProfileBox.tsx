@@ -1,4 +1,4 @@
-"use client"
+'use client';
 import { resetPassword } from '@/app/api/auth/resetPassword/route';
 import queryClient from '@/tanstack/queryClient';
 import { useMutation, useQuery } from '@tanstack/react-query';
@@ -12,9 +12,9 @@ const ProfileBox: React.FC = () => {
   const [email, setEmail] = useState('');
   const [cpf, setCpf] = useState('');
 
-  const userId = localStorage.getItem('userId')
+  const userId = localStorage.getItem('userId');
 
-  const { data: user, isError } = useQuery({
+  const { isError } = useQuery({
     queryKey: ['user'],
     queryFn: async () => {
       const { data } = await axios.get(`http://localhost:3001/user/${userId}`);
@@ -23,7 +23,7 @@ const ProfileBox: React.FC = () => {
       setCpf(data.cpf);
       return data;
     },
-  })
+  });
   const router = useRouter();
   if(isError) router.push(`/suspended/${userId}`);
 
@@ -31,71 +31,87 @@ const ProfileBox: React.FC = () => {
     mutationFn: () => axios.put(`http://localhost:3001/user/${userId}`, {
       name,
       email,
-      cpf
+      cpf,
     }),
     onSuccess: () => {
-      queryClient.invalidateQueries({queryKey: ['user']})
+      queryClient.invalidateQueries({ queryKey: ['user'] });
       //caso delay usar removeQueries
-    }
-  })
+    },
+  });
 
   const handleEdit = () => {
     setIsEditing(!isEditing);
   };
 
   const handleResetPassword = () => {
+    const passwordReset = {
+      email,
+    };
     // Redirect the user to Auth0's Change Password page
     // loginWithRedirect({ screen_hint: 'resetPassword' });
-    resetPassword()
+    resetPassword(passwordReset);
   };
   
   const handleSave = () => {
-    updateUser.mutate()
-    console.log("salvo")
+    updateUser.mutate();
     setIsEditing(false);
   };
 
   return (
-    <div className='border rounded border-[#DADADA] p-5 text-left md:w-[380px] lg:w-[535px] md:h-[320px] lg:h-[260px] md:pr-20'>
-        <div className='flex justify-between items-start md:w-[340px] lg:w-[495px]'>
-            <div className='mb-3 md:mb-5 lg:mb-3 flex flex-col'>
-                <span className='text-[#ACACAC] text-[12px]'>Nome: </span>
-                {isEditing ? (
-                <input className="rounded-md bg-white shadow-md p-1 w-[280px] text-buttonText" type="text" value={name} onChange={(e) => setName(e.target.value)} />
-                ) : (
-                <span className="p-1">{name}</span>
-                )}
-            </div>
-            <button className='underline text-sm' onClick={isEditing ? handleSave : handleEdit}>
-            {isEditing ? 'Salvar' : 'Editar'}
-            </button>
+    <div className='rounded border border-[#DADADA] p-5 text-left 
+    md:h-[320px] md:w-[380px] md:pr-20 lg:h-[260px] lg:w-[535px]'>
+      <div className='flex items-start justify-between md:w-[340px] lg:w-[495px]'>
+        <div className='mb-3 flex flex-col md:mb-5 lg:mb-3'>
+          <span className='text-[12px] text-[#ACACAC]'>Nome: </span>
+          {isEditing ? (
+            <input 
+              className="text-buttonText w-[280px] rounded-md bg-white p-1 shadow-md" 
+              type="text" 
+              value={name} 
+              onChange={(e) => setName(e.target.value)}
+            />
+          ) : (
+            <span className="p-1">{name}</span>
+          )}
         </div>
-      <div className='mb-3 md:mb-5 lg:mb-3 flex flex-col'>
-        <span className='text-[#ACACAC] text-[12px]'>Email: </span>
-        {isEditing ? (
-                <input className="rounded-md bg-white shadow-md p-1 w-[280px] text-buttonText" type="text" value={email} onChange={(e) => setEmail(e.target.value)} />
-                ) : (
-                <span className="p-1">{email}</span>
-                )}
+        <button className='text-sm underline' onClick={isEditing ? handleSave : handleEdit}>
+          {isEditing ? 'Salvar' : 'Editar'}
+        </button>
       </div>
-      <div className='mb-3 md:mb-5 lg:mb-3 flex flex-col'>
-        <span className='text-[#ACACAC] text-[12px]'>CPF: </span>
+      <div className='mb-3 flex flex-col md:mb-5 lg:mb-3'>
+        <span className='text-[12px] text-[#ACACAC]'>Email: </span>
         {isEditing ? (
-                <input className="rounded-md bg-white shadow-md p-1 w-[280px] text-buttonText" type="text" value={cpf} onChange={(e) => setCpf(e.target.value)} />
-                ) : (
-                <span className="p-1">{cpf}</span>
-                )}
+          <input 
+            className="text-buttonText w-[280px] rounded-md bg-white p-1 shadow-md" 
+            type="text" 
+            value={email} 
+            onChange={(e) => setEmail(e.target.value)} />
+        ) : (
+          <span className="p-1">{email}</span>
+        )}
+      </div>
+      <div className='mb-3 flex flex-col md:mb-5 lg:mb-3'>
+        <span className='text-[12px] text-[#ACACAC]'>CPF: </span>
+        {isEditing ? (
+          <input 
+            className="text-buttonText w-[280px] rounded-md bg-white p-1 shadow-md" 
+            type="text" 
+            value={cpf} 
+            onChange={(e) => setCpf(e.target.value)} />
+        ) : (
+          <span className="p-1">{cpf}</span>
+        )}
       </div>
       <div className='flex flex-col items-start md:w-[340px] lg:w-[495px]'>
-        <span className='text-[#ACACAC] text-[12px]'>Senha: </span>
+        <span className='text-[12px] text-[#ACACAC]'>Senha: </span>
         <div className='flex w-full justify-between'>
           <span className="p-1">**********</span>
           {isEditing ? (
-            <button className='underline p-1 text-sm' onClick={handleResetPassword}>Redefinir senha</button>
-            ) : (
-              ''
-              )}
-          </div>
+            <button className='p-1 text-sm underline' onClick={handleResetPassword}>Redefinir senha</button>
+          ) : (
+            ''
+          )}
+        </div>
       </div>
     </div>
   );
