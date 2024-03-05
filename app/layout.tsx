@@ -2,7 +2,6 @@ import GlobalProvider from '@/context/GlobalProvider';
 import { UserProvider } from '@auth0/nextjs-auth0/client';
 import type { Metadata } from 'next';
 import { Jost } from 'next/font/google';
-import{ Header }from '@/components/Header';
 import { Footer } from '@/components/Footer';
 import './globals.css';
 import Sidebar from '@/components/Sidebar';
@@ -26,12 +25,13 @@ export default function RootLayout({
       <UserProvider>
         <GlobalProvider>
           <html lang="en">
-            <body className={`${jost.className} bg-app min-[700px]:overflow-clip`}>
+            <body className={`${jost.className} bg-grayBase min-[700px]:overflow-clip min-[700px]:grid grid-cols-gridHomeLayout`}>
               <Sidebar />
-              <Header />
-              <MobileFilter />
-              {children}
-              <Footer />
+              <div>
+                <MobileFilter />
+                {children}
+                <Footer />
+              </div>
             </body>
           </html>
         </GlobalProvider>

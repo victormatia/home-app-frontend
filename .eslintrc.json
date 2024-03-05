@@ -1,95 +1,60 @@
 {
-  "extends": ["next/babel", "next/core-web-vitals"],
+  "extends": [
+    "next",
+    "next/core-web-vitals",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:tailwindcss/recommended"
+  ],
   "rules": {
-    "@typescript-eslint/no-misused-promises": 0,
-    "@typescript-eslint/no-floating-promises": 0,
-    "@typescript-eslint/consistent-type-assertions": 0,
-    "@typescript-eslint/strict-boolean-expressions": 0,
-    "@typescript-eslint/no-non-null-assertion": "off",
-    "@typescript-eslint/explicit-function-return-type": 0,
-    // "@typescript-eslint/no-unused-vars": [
-    //     "error",
-    //     {
-    //         "argsIgnorePattern": "^_"
-    //     }
-    // ],
+    "tailwindcss/no-custom-classname": "off",
     "react/react-in-jsx-scope": "off", // remove a obrigatoriedade de importar react no top escope
-    // "no-console": "warn",
+    "no-console": "warn",
     "indent": [
-        "error",
-        2
+      "error",
+      2
     ],
     "linebreak-style": [
-        "error",
-        "unix"
+      "error",
+      "unix"
     ],
     "quotes": [
-        "error",
-        "single"
+      "error",
+      "single"
     ],
     "semi": [
-        "error",
-        "always"
+      "error",
+      "always"
     ],
     "react/jsx-one-expression-per-line": [
-        "error",
-        {
-            "allow": "single-child"
-        }
+      "error",
+      {
+        "allow": "single-child"
+      }
     ],
     "max-len": [
-        "error",
-        {
-            "code": 120,
-            "ignoreComments": true,
-            "ignoreUrls": true
-        }
+      "error",
+      {
+        "code": 120,
+        "ignoreComments": true,
+        "ignoreUrls": true
+      }
     ],
     "no-else-return": [
-        "error"
+      "error"
     ],
     "no-multiple-empty-lines": [
-        "error",
-        {
-            "max": 1
-        }
+      "error",
+      {
+        "max": 1
+      }
     ],
     "comma-dangle": [
-        "error",
-        "always-multiline"
+      "error",
+      "always-multiline"
     ],
     "object-curly-spacing": [
-        "error",
-        "always"
+      "error",
+      "always"
     ]
-    // "import-helpers/order-imports": [ // regra para o plugin "import helpers"
-    //     "warn",
-    //     {
-    //         "newlinesBetween": "always",
-    //         "groups": [
-    //             "/^react/",
-    //             "/^@/pages/",
-    //             "/^@/components/",
-    //             "/^@/types/",
-    //             "/^@/styles/",
-    //             "/^@/utils/",
-    //             [
-    //                 "module"
-    //             ],
-    //             [
-    //                 "/^~//"
-    //             ],
-    //             [
-    //                 "parent",
-    //                 "sibling",
-    //                 "index"
-    //             ]
-    //         ],
-    //         "alphabetize": {
-    //             "order": "asc",
-    //             "ignoreCase": true
-    //         }
-    //     }
-    // ]
-}
+  }
 }

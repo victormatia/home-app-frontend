@@ -9,6 +9,7 @@ import { useContext } from 'react';
 import { FiLogOut } from 'react-icons/fi';
 import Link from 'next/link';
 import globalContext from '@/context/context';
+import { Button } from './Button';
 
 export function Header(){
   const { setToggleOpenFilter } = useContext(globalContext);
@@ -25,13 +26,14 @@ export function Header(){
       </div>
 
       <div>
-        <button 
-          className='flex justify-between items-center text-placeholder min-[700px]:hidden '
+        <Button 
+          variant='ghost'
+          className='flex justify-between items-center text-[#676767] min-[700px]:hidden hover:bg-gray-200'
           onClick={handleOpenFilter}
         >
           <Sliders size={24} className='rotate-90'/>
           Filter
-        </button>
+        </Button>
       </div>
 
       <div className='max-[700px]:hidden justify-self-end pr-3'>
@@ -40,7 +42,7 @@ export function Header(){
             <div className="h-14 w-full  flex items-center justify-center gap-1 bg-grayBase rounded-r-md">
               <div 
                 className='h-6 w-6 border-2 border-[#c3c3c373] rounded-full 
-                border-t-[#2be4a0] animate-spin'
+                border-t-primaryBlue animate-spin'
               />
             </div>
           ) : (
@@ -61,6 +63,7 @@ export function Header(){
                   className="h-full  flex items-center justify-center"
                   navbar
                   data-testid="navbar-menu-mobile">
+              <Link href='/profile' className='hover:bg-black hover:bg-opacity-5 rounded-md p-2 ' data-testid='profilelink'>
                   <NavItem className='flex items-center justify-center gap-2'>
                     <span className='text-lg text-info'>
                       {user.name}
@@ -76,9 +79,12 @@ export function Header(){
                       />
                     </span>
                   </NavItem>
-                  <NavItem id="qsLogoutBtn" className='ml-4'>
-                    <Link href="/api/auth/logout" >
-                      <FiLogOut  className="text-xl text-info"/>
+              </Link>
+                  <NavItem id="qsLogoutBtn" className='ml-4 flex items-center justify-center w-7 h-7 rounded-md hover:bg-black hover:bg-opacity-5'>
+                    <Link onClick={() => {
+                      localStorage.clear()
+                    }} href="/api/auth/logout" data-testid='logoutButton'>
+                      <FiLogOut  className="text-xl"/>
                     </Link>
                   </NavItem>
                 </Nav>

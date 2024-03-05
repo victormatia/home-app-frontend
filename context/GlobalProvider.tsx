@@ -5,7 +5,7 @@ import globalContext from './context';
 import axios from 'axios';
 import { useQuery } from '@tanstack/react-query';
 import { Session } from '@auth0/nextjs-auth0';
-import { TFiltredPropertys, TImmobile, TRankedImmobile } from '@/types';
+import { TFavorite, TFiltredPropertys, TImmobile, TRankedImmobile } from '@/types';
 
 export default function GlobalProvider({ children }: { children: ReactNode }) {
   const [immobiles, setImmobiles] = useState<TImmobile[]>([]);
@@ -14,6 +14,7 @@ export default function GlobalProvider({ children }: { children: ReactNode }) {
   const [currPage, setCurrPage] = useState<string>('home');
   const [toggleOpenFilter, setToggleOpenFilter] = useState<boolean>(false);
   const [propertyCaracteristics, setPropertyCaracteristics] = useState<TFiltredPropertys>({} as TFiltredPropertys);
+
 
   const {} = useQuery({
     queryKey: ['immobiles'],
@@ -30,7 +31,6 @@ export default function GlobalProvider({ children }: { children: ReactNode }) {
     queryKey: ['session'],
     queryFn: async () => {
       const { data } = await axios.get('http://localhost:3000/api/auth/sessionInfos');
-      
       return data;
     },
   });
@@ -48,11 +48,13 @@ export default function GlobalProvider({ children }: { children: ReactNode }) {
 
       axios.post(SIGN_IN_URL, { email: session.user.email })
         .then((response) => {
+          localStorage.setItem('userId', response.data.userId);
           localStorage.setItem('token', response.data.token);
         })
         .catch(() => {
           axios.post(SIGN_UP_URL, userData)
             .then((response) => {
+              localStorage.setItem('userId', response.data.userId);
               localStorage.setItem('token', response.data.token);
             })
             .catch((e) => {
@@ -66,7 +68,10 @@ export default function GlobalProvider({ children }: { children: ReactNode }) {
     immobiles, setImmobiles,
     search, setSearch,
     searchedImmobiles, setSearchedImmobiles,
-    currPage, setCurrPage, toggleOpenFilter, setToggleOpenFilter, propertyCaracteristics, setPropertyCaracteristics,
+    currPage, setCurrPage,
+    toggleOpenFilter, setToggleOpenFilter,
+    propertyCaracteristics, setPropertyCaracteristics,
+   
   }), [immobiles, searchedImmobiles, search, currPage, toggleOpenFilter, propertyCaracteristics]);
   return (
     <globalContext.Provider value={ states }>

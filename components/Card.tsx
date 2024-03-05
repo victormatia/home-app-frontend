@@ -1,16 +1,16 @@
 'use client';
 import { TCard } from '@/types';
-import { BsBookmark, BsBookmarkFill } from 'react-icons/bs';
 import { IoBedOutline } from 'react-icons/io5';
 import { FaCar, FaShower } from 'react-icons/fa';
 import { MdPets } from 'react-icons/md';
-import { useState } from 'react';
 import { useKeenSlider } from 'keen-slider/react';
 import 'keen-slider/keen-slider.min.css';
 import Image from 'next/image';
+import Link from 'next/link';
+import { SaveButton } from './SaveButton';
 
 export function Card({ immobile }: TCard){
-  const [isSaved, setIsSaved] = useState(false);
+
   const { photos } = immobile;
 
   const [sliderRef] = useKeenSlider({
@@ -22,7 +22,7 @@ export function Card({ immobile }: TCard){
 
   return(
     <div className='flex flex-col rounded-md shadow-lg bg-white w-[360px] h-[345px]
-    hover:scale-105 transition-all cursor-pointer p-2
+    min-[700px]:hover:scale-105 transition-all cursor-pointer p-2
     '>
       <figure ref={sliderRef} className="keen-slider">
         {
@@ -51,25 +51,7 @@ export function Card({ immobile }: TCard){
           <h3 className='text-black text-sm font-medium'>
               {`${immobile.type?.type}, ${immobile.address?.city}`}
           </h3>
-          {
-            isSaved === false ? (
-              <button
-                className='text-grayIcon'
-                onClick={() => setIsSaved(true)}
-                data-testid='bookMarkIcon'
-              >
-                <BsBookmark />
-              </button>
-            ): (
-              <button
-                className='text-grayIcon'
-                onClick={() => setIsSaved(false)}
-                data-testid='bookMarkFillIcon'
-              >
-                <BsBookmarkFill />
-              </button>
-            )
-          }
+          <SaveButton immobileId={immobile.id}/>
         </div>
 
         <div className='flex gap-2 pt-2 items-end'>
@@ -109,8 +91,10 @@ export function Card({ immobile }: TCard){
             </div>
           </div>
 
-          <button className='flex  gap-2  w-32 h-10  bg-gradientBlue rounded-md text-white shadow-xl
-          hover:opacity-80 transition-all'>
+          <Link 
+            className='flex gap-2 w-32 h-10 shadow-xl hover:opacity-80 bg-gradientBlue rounded-md text-white transition-all'
+            href={`/immobile/${immobile.id}`}
+          >         
             <span className=' pl-1 pt-1 text-[10px] text-left'>
               Alugar 
               {' '}
@@ -120,7 +104,7 @@ export function Card({ immobile }: TCard){
             <span className='whitespace-nowrap flex-grow mt-3'>
               {`R$ ${Number(immobile.price).toFixed(2)}`} 
             </span>
-          </button>
+          </Link>
         </div>
       </div>
     </div>

@@ -18,8 +18,8 @@ export type TAddress = {
   number: string, 
   apto: string,
   complement: string,
-  createdAt: Date, 
-  updatedAt: Date,
+  createdAt?: Date, 
+  updatedAt?: Date,
 }
 
 export type TType = {
@@ -43,8 +43,8 @@ export type TImmobile = {
   parkingQty: number,
   sqrFootage: number,
   petFriendly: boolean,
-  createdAt: Date,
-  updatedAt: Date
+  createdAt?: Date,
+  updatedAt?: Date
   typeId: string,
   description: string,
   address?: TAddress,
@@ -52,6 +52,12 @@ export type TImmobile = {
   type?: TType,
   photos?: { photo: TPhoto }[]
 }
+
+export type  TFavorite = {
+  userId : string,
+  immobileId: string,
+  immobile: TImmobile
+} 
 
 export type TRankedImmobile = {
   immobileId: string,
@@ -66,13 +72,15 @@ export type TConext = {
   setSearch: Dispatch<SetStateAction<string>>,
   searchedImmobiles: TRankedImmobile[],
   setSearchedImmobiles: Dispatch<SetStateAction<TRankedImmobile[]>>
-  currPage: string,
-  setCurrPage: Dispatch<SetStateAction<string>>
+  currPage: TRoute,
+  setCurrPage: Dispatch<SetStateAction<TRoute>>
   toggleOpenFilter: boolean,
   setToggleOpenFilter: Dispatch<SetStateAction<boolean>>
   propertyCaracteristics: TFiltredPropertys
   setPropertyCaracteristics: Dispatch<SetStateAction<TFiltredPropertys>>
 }
+
+export type TRoute = 'home' | 'saved' | 'advertise' | 'settings'
 
 export type TFiltredPropertys = {
   immobileType: string
@@ -94,5 +102,9 @@ export type TDefaultDiacriticalMapItem = {
 
 export type TCard = {
   immobile: TImmobile,
+}
+
+export type TUser = {
+  favoriteImmobile: TFavorite[]
 }
 
