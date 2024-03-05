@@ -18,12 +18,16 @@ export function SaveButton({ immobileId } : SaveButtonPorps){
   const userId = localStorage.getItem('userId');
   const { user } = useUser();
 
+  const token = localStorage.getItem('token');
+
   const favoriteList  = queryClient.getQueryData<TFavorite[]>(['favorite']);
 
   const saveImmobile = useMutation({
     mutationFn: () => axios.post('http://localhost:3001/immobile/favorite', {
       userId,
       immobileId,
+    }, {
+      headers: { Authorization: token },
     }),
     onSuccess: () => {
       setIsSaved(true);
@@ -36,7 +40,7 @@ export function SaveButton({ immobileId } : SaveButtonPorps){
       data: {
         userId,
         immobileId,
-      }, 
+      }, headers: { Authorization: token },
     }),
     onSuccess: () => {
       setIsSaved(false);
