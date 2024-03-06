@@ -1,14 +1,18 @@
 'use client';
 
 import * as Checkbox from '@radix-ui/react-checkbox';
+import * as Select from '@radix-ui/react-select';
 import Input, { InputPrefix, InputRoot } from '../Input';
 import { useContext, useEffect } from 'react';
 import { Button } from '../Button';
-import { SelectComponent } from '../FIlters/MobileFilter/Select';
+import { ImmobileTypesProps, SelectItem } from '../FIlters/MobileFilter/Select';
 import globalContext from '@/context/context';
-import { Check } from 'phosphor-react';
+import { CaretDown, Check } from 'phosphor-react';
 import { useForm, SubmitHandler, Controller } from 'react-hook-form';
 import * as ToggleGroup from '@radix-ui/react-toggle-group';
+import { useMutation } from '@tanstack/react-query';
+import axios from 'axios';
+import queryClient from '@/tanstack/queryClient';
 
 type TInputs = {
   address: string,
@@ -23,7 +27,11 @@ type TInputs = {
   bathrooms: string,
   parkings: string,
   isFurnished: boolean,
-  description: string
+  description: string,
+  state: string,
+  type: string,
+  apto: string,
+  complement: string
 }
 
 const defaultValues = {
@@ -31,6 +39,7 @@ const defaultValues = {
   number: '',
   burgh: '',
   city: '',
+  state: '',
   postalCode: '',
   price: '',
   area: '',
@@ -40,13 +49,51 @@ const defaultValues = {
   petFriendly: false,
   isFurnished: false,
   description: '',
+  type: '',
+  apto: '',
+  complement: '',
 };
 
 export function RegisterForm() {
   const { register, handleSubmit, reset, control } = useForm({ defaultValues });
+  const userId = localStorage.getItem('userId');
+  const token = localStorage.getItem('token');
+  const typeList  = queryClient.getQueryData<ImmobileTypesProps[]>(['listType']);
+
+  const { mutate } = useMutation({
+    mutationFn: (immobile : TInputs) => axios.post('http://localhost:3001/immobile/create', {
+      ownerId: userId,
+      typeId: immobile.type,
+      price: immobile.price,
+      sqrFootage: Number(immobile.area),
+      description: immobile.description,
+      bathroomsQty: Number(immobile.bathrooms),
+      bedroomsQty:Number(immobile.bedrooms),
+      parkingQty:Number(immobile.parkings),
+      petFriendly: immobile.petFriendly,
+      furnished: immobile.isFurnished,
+      address: {
+        street: immobile.address,
+        burgh: immobile.burgh,
+        city: immobile.city,
+        state: immobile.state,
+        postalCode: immobile.postalCode,
+        number: String(immobile.number),
+        apto: immobile.apto,
+        complement: immobile.complement,
+      },
+    }, 
+    {
+      headers: {
+        Authorization: token,
+      },
+    }
+    ),
+    onSuccess: () => {},
+  });
 
   const registerImmobile: SubmitHandler<TInputs> = (data) => {
-    console.log(data);
+    mutate(data);
     reset();
   };
 
@@ -57,84 +104,195 @@ export function RegisterForm() {
   return (
     <form
       onSubmit={handleSubmit(registerImmobile)}
-      className='flex w-full flex-col gap-8 pb-20
-      min-[700px]:overflow-y-scroll'
+      className=' flex w-full flex-col gap-8 pb-20 min-[700px]:pb-2 min-[1000px]:flex-row
+      min-[1000px]:justify-center'
     >
-      <div>
+      <div className='min-[1000px]:w-[500px]'>
         <h2 className='text-grayTitle mb-4 text-xl font-medium'>Localização</h2>
         <div className='flex flex-col gap-4'>
           <label htmlFor="address" className='text-grayLabel flex flex-col font-medium'>
-            <h3 className='mb-2 text-base'>Endereço</h3>
+            <h3 className='mb-2 text-base'>
+              Endereço
+              <span className='text-sm text-gray-300'> *</span>
+            </h3>
             <InputRoot>
               <Input
                 type='text'
                 id='address'
                 placeholder='Ex.: Rua Perilo Teixeira'
                 {...register('address')}
+                required
               />
             </InputRoot>
           </label>
 
           <label htmlFor="number" className='text-grayLabel flex flex-col font-medium'>
-            <h3 className='mb-2 text-base'>Número</h3>
+            <h3 className='mb-2 text-base'>
+              Número
+              <span className='text-sm text-gray-300'> *</span>
+            </h3>
             <InputRoot>
               <Input
-                type='number'
+                type='text'
                 id='number'
                 placeholder='Ex.: 2223'
-                {...register('number', { valueAsNumber: true })}
+                {...register('number')}
+                required
               />
             </InputRoot>
           </label>
 
           <label htmlFor="burgh" className='text-grayLabel flex flex-col font-medium'>
-            <h3 className='mb-2 text-base'>Bairro</h3>
+            <h3 className='mb-2 text-base'>
+              Bairro
+              <span className='text-sm text-gray-300'> *</span>
+            </h3>
             <InputRoot>
               <Input
                 type='text'
                 id='burgh'
                 placeholder='Ex.: Centro'
                 {...register('burgh')}
+                required
               />
             </InputRoot>
           </label>
 
           <label htmlFor="city" className='text-grayLabel flex flex-col font-medium'>
-            <h3 className='mb-2 text-base'>Cidade</h3>
+            <h3 className='mb-2 text-base'>
+              Cidade
+              <span className='text-sm text-gray-300'> *</span>
+            </h3>
             <InputRoot>
               <Input
                 type='text'
                 id='city'
                 placeholder='Ex.: Itapipoca'
                 {...register('city')}
+                required
+              />
+            </InputRoot>
+          </label>
+
+          <label htmlFor="city" className='text-grayLabel flex flex-col font-medium'>
+            <h3 className='mb-2 text-base'>
+              Estado
+              <span className='text-sm text-gray-300'> *</span>
+            </h3>
+            <InputRoot>
+              <Input
+                type='text'
+                id='state'
+                placeholder='Ex.: Ceará'
+                {...register('state')}
+                required
               />
             </InputRoot>
           </label>
 
           <label htmlFor="postalCode" className='text-grayLabel flex flex-col font-medium'>
-            <h3 className='mb-2 text-base'>CEP</h3>
+            <h3 className='mb-2 text-base'>
+              CEP
+              <span className='text-sm text-gray-300'> *</span>
+            </h3>
             <InputRoot>
               <Input
                 type='text'
                 id='postalCode'
                 placeholder='Ex.: 62500-000'
                 {...register('postalCode')}
+                required
+              />
+            </InputRoot>
+          </label>
+
+          <label htmlFor="apto" className='text-grayLabel flex flex-col font-medium'>
+            <h3 className='mb-2 text-base'>Apartamento</h3>
+            <InputRoot>
+              <Input
+                type='text'
+                id='apto'
+                placeholder='Ex.: 106'
+                {...register('apto')}
+              />
+            </InputRoot>
+          </label>
+
+          <label htmlFor="complement" className='text-grayLabel flex flex-col font-medium'>
+            <h3 className='mb-2 text-base'>Complemento</h3>
+            <InputRoot>
+              <Input
+                type='text'
+                id='complement'
+                placeholder='Ex.: Bloco 1'
+                {...register('complement')}
               />
             </InputRoot>
           </label>
         </div>
       </div>
 
-      <div>
+      <div className='min-[1000px]:w-500px'>
         <h2 className='text-grayTitle mb-4 text-xl font-medium'>Características do imóvel</h2>
         <div className='flex flex-col gap-4'>
           <label htmlFor="immoblie-type" className='text-grayLabel flex flex-col font-medium'>
-            <h3 className='mb-2 text-base'>Tipo de imóvel</h3>
-            <SelectComponent immobliType={() => { }}/>
+            <h3 className='mb-2 text-base'>
+              Tipo de imóvel
+              <span className='text-sm text-gray-300'> *</span>
+            </h3>
+            <Controller 
+              control={control}
+              name='type'
+              render={({ field }) => {
+                return(
+                  <Select.Root
+                    onValueChange={field.onChange}
+                    value={field.value}
+                    required
+                  >
+                    <Select.Trigger 
+                      className='focus-within:border-primaryBlue inline-flex h-[32px]
+                      items-center justify-between
+                      rounded-md bg-[#FFF] px-3 shadow-sm outline-none focus-within:ring-1 min-[700px]:w-full'
+                    >
+                      <Select.Value placeholder="Selecione o típo de imóvel" />
+                      <Select.Icon >
+                        <CaretDown size={17} />
+                      </Select.Icon >
+                    </Select.Trigger>
+
+                    <Select.Portal>
+                      <Select.Content 
+                        side='bottom'
+                        position='popper'
+                        sideOffset={8}
+                        className='z-30 w-[--radix-select-trigger-width] overflow-hidden rounded-md bg-white'
+                      >
+                        <Select.Viewport className='px-2 py-3'>
+                          <Select.Group>
+                            {typeList?.map(({ type, id } : ImmobileTypesProps) => {
+                              return(
+                                <SelectItem key={type} value={id}>
+                                  {type.charAt(0).toUpperCase() + type.slice(1)}
+                                </SelectItem>
+                              );
+                            })} 
+                          </Select.Group>
+                        </Select.Viewport>
+                      </Select.Content>
+                    </Select.Portal>
+                  </Select.Root>
+                );
+              }}
+            />
+
           </label>
           <div className='flex gap-4'>
             <label htmlFor="price" className='text-info font-semibold'>
-              <h3 className='text-grayLabel mb-2 text-base font-medium'>Preço</h3>
+              <h3 className='text-grayLabel mb-2 text-base font-medium'>
+                Preço
+                <span className='text-sm text-gray-300'> *</span>
+              </h3>
               <InputRoot>
                 <InputPrefix className='text-base font-semibold'>
                   R$
@@ -143,18 +301,23 @@ export function RegisterForm() {
                   type='number'
                   id='price'
                   placeholder='Ex.: 550.00'
+                  required
                   {...register('price', { valueAsNumber: true })}
                 />
               </InputRoot>
             </label>
 
             <label htmlFor="area" className='text-grayLabel flex flex-col font-medium'>
-              <h3 className='text-grayLabel mb-2 text-base'>Área</h3>
+              <h3 className='text-grayLabel mb-2 text-base'>
+                Área
+                <span className='text-sm text-gray-300'> *</span>
+              </h3>
               <InputRoot>
                 <Input
                   type='number'
                   id='area'
                   placeholder='Ex.: 120'
+                  required
                   {...register('area', { valueAsNumber: true })}
                 />
                 <InputPrefix className='text-base font-semibold'>
@@ -359,20 +522,32 @@ export function RegisterForm() {
 
           </div>
           <label htmlFor="description" className='text-grayLabel flex flex-col text-base font-medium'>
-            <h3 className='mb-2'>Descrição</h3>
+            <h3 className='mb-2'>
+              Descrição
+              <span className='text-sm text-gray-300'> *</span>
+            </h3>
             <textarea
               className='outline-primaryBlue rounded-md p-2' id="description"
               cols={30}
               rows={10}
               placeholder='Ex.: Um apartamento espaçoso com boa localização... '
               {...register('description')}
+              required
             />
           </label>
         </div>
       </div>
-
-      <Button className='w-full p-3 text-lg font-semibold' type='submit'>
-        Cadastrar imóvel
+      <span className='text-left text-sm text-gray-400 
+      min-[1000px]:absolute min-[1000px]:bottom-28 min-[1000px]:w-[1000px]'
+      >
+        * campos obrigatórios
+      </span>
+      <Button 
+        className='w-full p-3 text-lg font-semibold 
+        min-[1000px]:absolute min-[1000px]:bottom-14 min-[1000px]:w-[1000px]' 
+        type='submit'
+      >
+            Cadastrar imóvel
       </Button>
 
     </form>
